@@ -7,8 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>Audiocad</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-	<link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/tooplate-style.css' %}">
 	<link rel="stylesheet" href="{% static 'css/lst/style.css' %}">
 
@@ -62,19 +62,22 @@
 		</div>
 
 		<div class="container">
+
 			<div class="tm-search-form-container">
-				<form action="index.html" method="GET" class="form-inline tm-search-form">
-					<div class="text-uppercase tm-new-release">New Release</div>
-					<div class="form-group tm-search-box">
-						<input type="text" name="keyword" class="form-control tm-search-input"
-							placeholder="Type your keyword ...">
-						<input type="submit" value="Search" class="form-control tm-search-submit">
-					</div>
-					<div class="form-group tm-advanced-box">
-						<a href="#" class="tm-text-white">Go Advanced ...</a>
-					</div>
-				</form>
-			</div>
+                <form action="index.html" method="GET" class="form-inline tm-search-form">
+                    <div class="tm-new-release">Autocad<i class="fa-solid fa-music ml-2"></i></div>
+                    <div class="form-group tm-search-box">
+                        <input type="text" name="keyword" class="form-control tm-search-input"
+                            placeholder="Type your keyword ...">
+                        <button type="submit" class="form-control tm-search-submit">
+                            <i class="fa-solid fa-magnifying-glass font-weight-bold mr-2"></i>
+                        </button>
+                    </div>
+                    <div class="form-group tm-advanced-box">
+                        <a href="#" class="tm-text-white">Go Advanced ...</a>
+                    </div>
+                </form>
+            </div>
 
 			<section>
 				{% for i in audio %}
@@ -82,7 +85,7 @@
 
 					<li style="--i: 1" class="li">
 						<h3 id="h3">
-							<a href="#"> {{i.Name}} - {{i.Album_or_Film}}({{i.Year}})</a>
+							<a href="#">{{i.Name}} - {{i.Album_or_Film}}({{i.Year}})</a>
 						</h3>
 
 						<p class="p">Language:- {{i.Language}}</p>
@@ -155,6 +158,9 @@
 
 	<!-- load JS -->
 	<script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+	<!-- endinject -->
+    <!-- Plugin js for this page-->
 	<script>
 
 		$(function () {

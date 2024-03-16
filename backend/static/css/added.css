@@ -1,12 +1,31 @@
-.hidden{
+.hidden {
     visibility: hidden;
 }
 
-.edit-audio-value{
-    margin-left: 320px; 
+.edit-audio-value {
+    margin-left: 320px;
     margin-top: -40px;
 }
 
-.edit-audio-btn{
+.edit-audio-btn {
     margin-top: 50px;
+}
+
+.form-sample-img {
+    width: 120px;
+    height: 100px;
+    border-radius: 10%;
+}
+
+.p-font {
+    font-size: 0.791rem;
+}
+
+.p-img {
+    margin-left: 130px;
+    margin-top: -60px
+}
+
+audio {
+    width: 355px;
 }

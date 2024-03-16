@@ -1,4 +1,7 @@
 from django.shortcuts import render, redirect
+from django.core.files.storage import FileSystemStorage
+from django.utils.datastructures import MultiValueDictKeyError
+from django.contrib import messages
 from backend.models import LanguageDb, SongsDb, GenreDb
 
 def backindex(request):
@@ -45,14 +48,24 @@ def disp_genre(request):
     context = {'genre': genre}
     return render(request, 'genre/disp_genre.html', context)
 
+def edit_genre(request, genreId):
+    genre = GenreDb.objects.get(id=genreId)
+    context = {'genre': genre}
+    return render(request, 'genre/editgenre.html', context)
+
+def update_genre(request, genreId):
+    if request.method == 'POST':
+        gnNm = request.POST.get('EditGenName')
+        gnSt = request.POST.get('EditGenSbtl')
+        GenreDb.objects.filter(id=genreId).update(Genre_Name=gnNm, Genre_Subtitle=gnSt)
+        return redirect(disp_genre)
 
 def delete_genre(request, genreId):
     genre = GenreDb.objects.filter(id=genreId)
     genre.delete()
+    messages.success(request, 'Genre deleted successfully')
     return redirect(disp_genre)
     
-
-
 # ==================== AUDIO =====================================================================
 
 def addaudio(request):
@@ -87,6 +100,30 @@ def editaudio(request, audioId):
     audio = SongsDb.objects.get(id=audioId)
     context = {'lang': lang, 'genre': genre, 'audio': audio}
     return render(request, 'audio/edit_audio.html', context)
+
+def updateaudio(request, audioId):
+    if request.method == "POST":
+        AdNm = request.POST.get('EditAudName')
+        AdLg = request.POST.get('EditAudLang')
+        AdGr = request.POST.get('EditAudGenre')
+        AdYr = request.POST.get('EditAudYear')
+        AdAr = request.POST.get('EditAudArtist')
+        AdAm = request.POST.get('EditAudAlbum')
+        try:
+            AuFl = request.FILES['EditAudFile']
+            file1 = FileSystemStorage().save(AuFl.name, AuFl)
+            Imfl = request.FILES['EditImgfile']
+            file2 = FileSystemStorage().save(Imfl.name, Imfl)
+        except MultiValueDictKeyError:
+            file1 = SongsDb.objects.get(id=audioId).Audio_File
+            file2 = SongsDb.objects.get(id=audioId).Img_File
+        SongsDb.objects.filter(id=audioId).update(Name=AdNm, Language=AdLg, Genre=AdGr, Year=AdYr, Artists=AdAr, 
+                Album_or_Film=AdAm, Audio_File=file1, Img_File=file2)
+        return redirect(displayaudio)
+
+
+         
+        
 
 def audiodelete(request, audioId):
     audio = SongsDb.objects.filter(id=audioId)

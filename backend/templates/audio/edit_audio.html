@@ -15,20 +15,21 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Add Audio Files</h4>
+                <h4 class="card-title">Edit Audio Files</h4>
 
-                <form class="forms-sample" action="{% url 'saveaudio' %}" method="POST" enctype="multipart/form-data">
+                <form class="forms-sample" action="{% url 'updateaudio' audioId=audio.id %}" method="POST"
+                    enctype="multipart/form-data">
                     {% csrf_token %}
 
                     <div class="form-group">
                         <label>Audio Name</label>
-                        <input type="text" class="form-control" value="{{audio.Name}}" placeholder="Audio name"
-                            name="audioname">
+                        <input type="text" name="EditAudName" value="{{audio.Name}}" class="form-control"
+                            placeholder="Edit Audio Name">
                     </div>
 
                     <div class="form-group">
-                        <label>Audio Genre</label>
-                        <select name="audiogenre" class="form-control">
+                        <label>Edit Audio Genre</label>
+                        <select name="EditAudGenre" class="form-control">
                             <option value="{{audio.Genre}}">{{audio.Genre}}</option>
                             {% for i in genre %}
                             <option value="{{i.Genre_Name}}">{{i.Genre_Name}}</option>
@@ -37,8 +38,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Audio Language</label>
-                        <select name="audiolanguage" class="form-control">
+                        <label>Edit Audio Language</label>
+                        <select name="EditAudLang" class="form-control">
                             <option value="{{audio.Language}}">{{audio.Language}}</option>
                             {% for i in lang %}
                             <option value="{{i.Language_Name}}">{{i.Language_Name}}</option>
@@ -47,27 +48,69 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Audio File</label>
-                        <input type="file" class="form-control" name="audiofile">
-                        <audio src="{{audio.Audio_File.url}}" controls class="mt-3"></audio>
-                        <p class="edit-audio-value">/{{audio.Audio_File}}</p>
+                        <label>Artists</label>
+                        <input type="text" name="EditAudArtist" value="{{audio.Artists}}" class="form-control"
+                            placeholder="Artists">
                     </div>
 
-                    <div class="form-group edit-audio-btn">
-                        <button type="submit" class="btn btn-primary mr-2">
-                            <span>Submit</span>
-                        </button>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Edit Release Year</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="EditAudYear" value="{{audio.Year}}" class="form-control"
+                                        placeholder="Year">
+                                </div>
+                            </div>
+                        </div>
 
-                        <button class="btn btn-dark">
-                            <span>Cancel</span>
-                        </button>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Edit Album/Movie</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="EditAudAlbum" value="{{audio.Album_or_Film}}"
+                                        class="form-control" placeholder="Album or Movie">
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Edit Audio File</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control mb-2" name="EditAudFile">
+                                    <audio controls controlslist="nodownload">
+                                        <source src="{{audio.Audio_File.url}}" type="audio/mp3">
+                                    </audio>
+                                    <p class="p-font">/{{audio.Audio_File}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Edit Image File</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control mb-2" name="EditImgfile">
+                                    <img src="{{audio.Img_File.url}}" alt="Image" class="form-sample-img">
+                                    <p class="p-font p-img">/{{audio.Img_File}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary mr-2"><span>Update</span></button>
+                        <button class="btn btn-dark"><span>Cancel</span></button>
+                    </div>
                 </form>
 
             </div>
         </div>
     </div>
+
 </body>
 
 </html>

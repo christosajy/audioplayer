@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+{% extends 'index.html' %}
+{% block content %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Edit Genre</h4>
+
+                <form class="forms-sample" action="{% url 'update_genre' genreId=genre.id %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label>Edit Genre Name</label>
+                        <input type="text" name="EditGenName" value="{{genre.Genre_Name}}" class="form-control"
+                            placeholder="Edit Genre Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Edit Genre Subtitle</label>
+                        <input type="text" name="EditGenSbtl" value="{{genre.Genre_Subtitle}}" class="form-control"
+                            placeholder="Edit Genre Subtitle">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary mr-2"><span>Submit</span></button>
+                        <button class="btn btn-dark"><span>Cancel</span></button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+{% endblock %}

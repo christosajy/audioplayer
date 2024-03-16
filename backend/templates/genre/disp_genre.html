@@ -28,7 +28,7 @@
                             <td>{{i.Genre_Name}}</td>
                             <td>{{i.Genre_Subtitle}}</td>
                             <td>
-                                <form action="">
+                                <form action="{% url 'edit_genre' genreId=i.id %}">
                                     <button type="submit" class="btn btn-success">
                                         <span>Edit</span>
                                     </button>
