@@ -1,0 +1,12 @@
+.hidden{
+    visibility: hidden;
+}
+
+.edit-audio-value{
+    margin-left: 320px; 
+    margin-top: -40px;
+}
+
+.edit-audio-btn{
+    margin-top: 50px;
+}

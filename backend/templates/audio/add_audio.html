@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+{% extends 'index.html' %}
+{% block content %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Add Audio Files</h4>
+
+                <form class="forms-sample" action="{% url 'saveaudio' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label>Audio Name</label>
+                        <input type="text" class="form-control" placeholder="Audio name" name="AudName">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Audio Genre</label>
+                        <select name="AudGenre" class="form-control">
+                            <option value="Select">Select Genre</option>
+                            {% for i in genre %}
+                            <option value="{{i.Genre_Name}}">{{i.Genre_Name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Audio Language</label>
+                        <select name="AudLang" class="form-control">
+                            <option value="Select">Select Language</option>
+                            {% for i in lang %}
+                            <option value="{{i.Language_Name}}">{{i.Language_Name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Artists</label>
+                        <input type="text" class="form-control" placeholder="Artists" name="AudArtist">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Release Year</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="AudYear" placeholder="Year">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Album/Movie</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="AudAlbum" placeholder="Album or Movie">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Audio File</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control" name="AudFile">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Image File</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control" name="Imgfile">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary mr-2"><span>Submit</span></button>
+                        <button class="btn btn-dark"><span>Cancel</span></button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+{% endblock %}

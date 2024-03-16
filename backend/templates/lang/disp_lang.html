@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Display Language</h4>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Language Name</th>
+                            <th>Language Subtitle</th>
+                            <th>Language Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in lang %}
+                        <tr>
+                            <td>{{i.Language_Name}}</td>
+                            <td>{{i.Language_Subtitle}}</td>
+                            <td>
+                                <img src="{{i.Language_Image.url}}" alt="image">
+                            </td>
+                            <td>
+                                <form action="">
+                                    <button type="submit" class="btn btn-success">
+                                        <span>Edit</span>
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="{% url 'deletelang' langId=i.id %}">
+                                    <button type="submit" class="btn btn-danger">
+                                        <span>Delete</span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+{% endblock %}
