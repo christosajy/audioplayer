@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from backend.models import LanguageDb, GenreDb, SongsDb
+from backend.models import LanguageDb, GenreDb, SongsDb, CombinedDb
 
 def frontindex(request):
     genre = GenreDb.objects.all()
@@ -13,10 +13,10 @@ def frontabout(request):
 def frontcontact(request):
     return render(request, 'contact.html')
 
-def audiolist(request, sng_flt):
-    audio = SongsDb.objects.filter(Language=sng_flt)
-    context = {'audio': audio}
-    return render(request, 'lst/index.html', context)
+def CombinationFiltered(request, cmb_flt):
+    comb = CombinedDb.objects.filter(Com_Language=cmb_flt)
+    context = {'comb': comb}
+    return render(request, 'comb_filtered.html', context)
 
 def player(request):
     return render(request, 'aud/index.html')

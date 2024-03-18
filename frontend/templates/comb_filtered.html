@@ -36,7 +36,7 @@
 
     <div class="tm-main">
 
-        <div class="tm-welcome-section">
+        <div class="tm-welcome-section" style="max-height: 150px; min-height: 150px;">
             <div class="container tm-navbar-container">
                 <div class="row">
                     <div class="col-xl-12">
@@ -59,15 +59,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="container text-right tm-welcome-container">
-                <div class="tm-welcome">
-                    <i class="fas tm-fa-big fa-music tm-fa-mb-big"></i>
-                    <h1 class="text-uppercase mb-3 tm-site-name">Audiocad</h1>
-                    <p class="tm-site-description">Home</p>
-                </div>
-            </div>
-
         </div>
 
         <div class="container">
@@ -80,7 +71,6 @@
                             placeholder="Type your keyword ...">
                         <button type="submit" class="form-control tm-search-submit">
                             <i class="fa-solid fa-magnifying-glass font-weight-bold mr-2"></i>
-                            <!-- <span class="text-uppercase">Search</span> -->
                         </button>
                     </div>
                     <div class="form-group tm-advanced-box">
@@ -89,37 +79,26 @@
                 </form>
             </div>
 
-            {% block content %}
-
-            <div class="row tm-albums-container grid">
-                {% for i in lang %}
-                <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
-                    <figure class="effect-sadie">
-                        <h6 class="text-center font-weight-bold">
-                            <span>{{i.Language_Name}}</span>
-                        </h6>
-                        <img src="{{i.Language_Image.url}}" alt="Image" class="img-fluid">
-                        <figcaption>
-                            <h2>
-                                <a href="{% url 'CombinationFiltered' cmb_flt=i.Language_Name %}"
-                                    class="text-white">{{i.Language_Name}}</a>
-                            </h2>
-                            <p>{{i.Language_Subtitle}}</p>
-                        </figcaption>
-                    </figure>
-                </div>
-                {% endfor %}
-            </div>
-
-            {% endblock %}
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="tm-tag-line">
-                        <h2 class="tm-tag-line-title">Music is your powerful energy.</h2>
+            <section>
+                <div class="row tm-albums-container grid">
+                    {% for i in comb %}
+                    <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
+                        <figure class="effect-sadie">
+                            <h6 class="text-center font-weight-bold">
+                                <span>{{i.Com_Language}}</span><span class="ml-1">{{i.Com_Genre}}</span>
+                            </h6>
+                            <img src="{{i.Com_Img_File.url}}" alt="Image" class="img-fluid">
+                            <figcaption>
+                                <h2>
+                                    <a href="#" class="text-white">{{i.Com_Genre}}</a>
+                                </h2>
+                                <p>{{i.Com_Language}}</p>
+                            </figcaption>
+                        </figure>
                     </div>
+                    {% endfor %}
                 </div>
-            </div>
+            </section>
 
             <div class="row tm-mb-big tm-subscribe-row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 tm-bg-gray tm-subscribe-form">
@@ -174,6 +153,8 @@
     <!-- load JS -->
     <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page-->
     <script>
 
         $(function () {
@@ -184,7 +165,6 @@
             $('.tm-current-year').text(new Date().getFullYear());
         });
     </script>
-
 </body>
 
 </html>

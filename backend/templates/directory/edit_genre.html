@@ -17,7 +17,7 @@
             <div class="card-body">
                 <h4 class="card-title">Edit Genre</h4>
 
-                <form class="forms-sample" action="{% url 'update_genre' genreId=genre.id %}" method="POST" enctype="multipart/form-data">
+                <form class="forms-sample" action="{% url 'UpdateGenre' genreId=genre.id %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
 
                     <div class="form-group">

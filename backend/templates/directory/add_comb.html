@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+{% extends 'index.html' %}
+{% block content %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Combine Language & Genre</h4>
+
+                    <form class="forms-sample" action="{% url 'SaveCombination' %}" method="POST"
+                        enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label>Select Language</label>
+                            <select name="CombLang" class="form-control" required>
+                                <option value="Select">Select</option>
+                                {% for i in lang %}
+                                <option value="{{i.Language_Name}}">{{i.Language_Name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Select Genre</label>
+                            <select name="CombGen" class="form-control" required>
+                                <option value="Select">Select</option>
+                                {% for i in genre %}
+                                <option value="{{i.Genre_Name}}">{{i.Genre_Name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Combination Image</label>
+                            <input type="file" class="form-control" name="CombImg">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mr-2"><span>Submit</span></button>
+                        <button class="btn btn-dark"><span>Cancel</span></button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+{% endblock %}

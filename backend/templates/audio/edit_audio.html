@@ -17,7 +17,7 @@
             <div class="card-body">
                 <h4 class="card-title">Edit Audio Files</h4>
 
-                <form class="forms-sample" action="{% url 'updateaudio' audioId=audio.id %}" method="POST"
+                <form class="forms-sample" action="{% url 'UpdateAudio' audioId=audio.id %}" method="POST"
                     enctype="multipart/form-data">
                     {% csrf_token %}
 

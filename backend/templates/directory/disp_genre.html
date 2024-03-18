@@ -12,34 +12,30 @@
 <body>
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Display Language</h4>
+            <h4 class="card-title">Display Genre</h4>
 
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Language Name</th>
-                            <th>Language Subtitle</th>
-                            <th>Language Image</th>
+                            <th>Genre Name</th>
+                            <th>Genre Subtitle</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for i in lang %}
+                        {% for i in genre %}
                         <tr>
-                            <td>{{i.Language_Name}}</td>
-                            <td>{{i.Language_Subtitle}}</td>
+                            <td>{{i.Genre_Name}}</td>
+                            <td>{{i.Genre_Subtitle}}</td>
                             <td>
-                                <img src="{{i.Language_Image.url}}" alt="image">
-                            </td>
-                            <td>
-                                <form action="">
+                                <form action="{% url 'EditGenre' genreId=i.id %}">
                                     <button type="submit" class="btn btn-success">
                                         <span>Edit</span>
                                     </button>
                                 </form>
                             </td>
                             <td>
-                                <form action="{% url 'deletelang' langId=i.id %}">
+                                <form action="{% url 'DeleteGenre' genreId=i.id %}">
                                     <button type="submit" class="btn btn-danger">
                                         <span>Delete</span>
                                     </button>
@@ -52,7 +48,7 @@
             </div>
         </div>
     </div>
-
+ 
 </body>
 
 </html>

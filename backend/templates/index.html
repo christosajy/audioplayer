@@ -175,92 +175,81 @@
 
         <div class="container-fluid page-body-wrapper">
 
-            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <nav class="sidebar sidebar-offcanvas" id="sidebar" style="width: 260px;">
                 <ul class="nav">
-
                     <li class="nav-item">
 
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
                             aria-controls="ui-basic">
-                            <i class="fa-solid fa-language"></i>
-                            <span class="menu-title ml-3">Language</span>
+                            <i class="typcn typcn-document-text menu-icon"></i>
+                            <span class="menu-title">Language & Genre</span>
                             <i class="menu-arrow"></i>
                         </a>
 
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'addlang' %}">
-                                        <span>Add Language</span>
+                                    <a class="nav-link" href="{% url 'AddLanguageAndGenre' %}">
+                                        <span>Add Language & Genre</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'displaylang' %}">
+                                    <a class="nav-link" href="{% url 'DisplayLanguage' %}">
                                         <span>Display Language</span>
                                     </a>
                                 </li>
-                            </ul>
-                        </div>
-
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"
-                            aria-controls="form-elements">
-                            <i class="fa-solid fa-file-audio"></i>
-                            <span class="menu-title ml-3 pl-1">Audio Files</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="form-elements">
-                            <ul class="nav flex-column sub-menu">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'addaudio' %}">
-                                        <span>Add Audio</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'displayaudio' %}">
-                                        <span>Display Audio</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false"
-                            aria-controls="charts">
-                            <i class="fa-solid fa-compact-disc"></i>
-                            <span class="menu-title ml-3 pl-1">Genre</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="charts">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'add_genre' %}">
-                                        <span>Add Genre</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'disp_genre' %}">
+                                    <a class="nav-link" href="{% url 'DisplayGenre' %}">
                                         <span>Display Genre</span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
+
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false"
                             aria-controls="tables">
                             <i class="typcn typcn-th-small-outline menu-icon"></i>
-                            <span class="menu-title">Tables</span>
+                            <span class="menu-title">Set Combination</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="tables">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">Basic
-                                        table</a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'AddCombination' %}">
+                                        <span>Add Combination</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'DisplayCombination' %}">
+                                        <span>Dispaly Combination</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"
+                            aria-controls="form-elements">
+                            <i class="typcn typcn-chart-pie-outline menu-icon"></i>
+                            <span class="menu-title">Audio Files</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="form-elements">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'AddAudio' %}">
+                                        <span>Add Audio</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'DisplayAudio' %}">
+                                        <span>Display Audio</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>
