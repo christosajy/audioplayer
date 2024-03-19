@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Display Genre-Sub Genre Combination</h4>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Genre</th>
+                            <th>Sub Genre</th>
+                            <th>Image File</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in subcom %}
+                        <tr>
+                            <td>{{i.Sub_Com_Genre}}</td>
+                            <td>{{i.Sub_Com_Res_SubGenre}}</td>
+                            <td>
+                                <img src="{{i.Sub_Com_Img_File.url}}" alt="Image">
+                            </td>
+                            <td>
+                                <form action="">
+                                    <button type="submit" class="btn btn-success">
+                                        <span>Edit</span>
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="{% url 'DeleteSubCombination' subId=i.id %}">
+                                    <button type="submit" class="btn btn-danger" style="margin-left: -110px;">
+                                        <span>Delete</span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+ 
+</body>
+
+</html>
+{% endblock %}

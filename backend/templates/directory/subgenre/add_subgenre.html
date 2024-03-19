@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+{% extends 'index.html' %}
+{% block content %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Add Sub Genre</h4>
+
+                    <form class="forms-sample" action="{% url 'SaveSubGenre' %}" method="POST"
+                        enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label>Pick a Respective Genre</label>
+                            <select name="SubResGen" class="form-control" required>
+                                <option value="Select">Select</option>
+                                {% for i in genre %}
+                                <option value="{{i.Genre_Name}}">{{i.Genre_Name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Add Sub-Genre Name</label>
+                            <input type="text" class="form-control" placeholder="Genre Name" name="SubGenName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Add Sub-Genre Subtitle</label>
+                            <input type="text" class="form-control" value="-" name="SubGenSbtl"
+                                placeholder="Genre Subtitle" required>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary mr-2"><span>Submit</span></button>
+                            <button class="btn btn-dark"><span>Cancel</span></button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+{% endblock %}

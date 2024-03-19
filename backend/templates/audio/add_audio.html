@@ -36,6 +36,16 @@
                     </div>
 
                     <div class="form-group">
+                        <label>Audio Sub-Genre</label>
+                        <select name="AudSbGnr" class="form-control" required>
+                            <option value="Select">Select Sub-Genre</option>
+                            {% for i in subgenre %}
+                            <option value="{{i.Sub_Genre_Name}}">{{i.Sub_Genre_Name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label>Audio Language</label>
                         <select name="AudLang" class="form-control" required>
                             <option value="Select">Select Language</option>

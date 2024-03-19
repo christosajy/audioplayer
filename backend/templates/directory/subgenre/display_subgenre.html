@@ -10,32 +10,47 @@
 </head>
 
 <body>
+    <div class="card mb-1">
+        <div class="card-body">
+            <form action="index.html" method="GET" class="forms-sample">
+                <div class="form-group mb-0">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-magnifying-glass mr-2"></i><span>Search</span>
+                    </button>
+                    <input type="text" name="keyword" class="form-control display-search-box"
+                        placeholder="Type your keyword ...">
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Display Genre</h4>
+            <h4 class="card-title">Display Sub Genre</h4>
 
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Genre Name</th>
-                            <th>Genre Subtitle</th>
+                            <th>Sub Genre Name</th>
+                            <th>Respective Sub Genre</th>
+                            <th>Sub Genre Subtitle</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for i in genre %}
+                        {% for i in subgen %}
                         <tr>
-                            <td>{{i.Genre_Name}}</td>
-                            <td>{{i.Genre_Subtitle}}</td>
+                            <td>{{i.Sub_Genre_Name}}</td>
+                            <td>{{i.Res_Sub_Genre}}</td>
+                            <td>{{i.Sub_Genre_Sbtl}}</td>
                             <td>
-                                <form action="{% url 'EditGenre' genreId=i.id %}">
+                                <form action="">
                                     <button type="submit" class="btn btn-success">
                                         <span>Edit</span>
                                     </button>
                                 </form>
                             </td>
                             <td>
-                                <form action="{% url 'DeleteGenre' genreId=i.id %}">
+                                <form action="{% url 'DeleteSubGenre' subId=i.id %}">
                                     <button type="submit" class="btn btn-danger">
                                         <span>Delete</span>
                                     </button>
@@ -48,7 +63,7 @@
             </div>
         </div>
     </div>
- 
+
 </body>
 
 </html>

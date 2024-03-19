@@ -38,6 +38,16 @@
                     </div>
 
                     <div class="form-group">
+                        <label>Edit Audio Sub-Genre</label>
+                        <select name="EditAudSbGnr" class="form-control">
+                            <option value="{{audio.Sub_Genre}}">{{audio.Sub_Genre}}</option>
+                            {% for i in subgenre %}
+                            <option value="{{i.Sub_Genre_Name}}">{{i.Sub_Genre_Name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label>Edit Audio Language</label>
                         <select name="EditAudLang" class="form-control">
                             <option value="{{audio.Language}}">{{audio.Language}}</option>

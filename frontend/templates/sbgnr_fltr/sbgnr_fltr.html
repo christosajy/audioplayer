@@ -71,6 +71,7 @@
                             placeholder="Type your keyword ...">
                         <button type="submit" class="form-control tm-search-submit">
                             <i class="fa-solid fa-magnifying-glass font-weight-bold mr-2"></i>
+                            <span class="text-capitalize">Search</span>
                         </button>
                     </div>
                     <div class="form-group tm-advanced-box">
@@ -81,18 +82,20 @@
 
             <section>
                 <div class="row tm-albums-container grid">
-                    {% for i in comb %}
+                    {% for i in subgenre %}
                     <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
                         <figure class="effect-sadie">
                             <h6 class="text-center font-weight-bold">
-                                <span>{{i.Com_Language}}</span><span class="ml-1">{{i.Com_Genre}}</span>
+                                <span>{{i.Sub_Com_Res_SubGenre}}</span>
                             </h6>
-                            <img src="{{i.Com_Img_File.url}}" alt="Image" class="img-fluid">
+                            <img src="{{i.Sub_Com_Img_File.url}}" alt="Image" class="img-fluid">
                             <figcaption>
                                 <h2>
-                                    <a href="#" class="text-white">{{i.Com_Genre}}</a>
+                                    <a href="{% url 'AudioListFiltered' aud_flt=i.Sub_Com_Res_SubGenre %}">
+                                        <span class="text-white">{{i.Sub_Com_Res_SubGenre}}</span>
+                                    </a>
                                 </h2>
-                                <p>{{i.Com_Language}}</p>
+                                <p>{{i.Sub_Com_Genre}}</p>
                             </figcaption>
                         </figure>
                     </div>

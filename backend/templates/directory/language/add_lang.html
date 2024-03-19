@@ -13,8 +13,7 @@
 
 <body>
     <div class="row">
-        <!-- LANGUAGE SECTION -->
-        <div class="col-md-6 grid-margin stretch-card">
+        <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Add Language</h4>
@@ -40,41 +39,6 @@
 
                         <button type="submit" class="btn btn-primary mr-2"><span>Submit</span></button>
                         <button class="btn btn-dark"><span>Cancel</span></button>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-
-        <!-- GENRE SECTION  -->
-        <div class="col-md-6 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Add Genre</h4>
-
-                    <form class="forms-sample" action="{% url 'SaveGenre' %}" method="POST"
-                        enctype="multipart/form-data">
-                        {% csrf_token %}
-
-                        <div class="form-group">
-                            <label>Genre Name</label>
-                            <input type="text" class="form-control" placeholder="Genre Name" name="genName" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Genre Subtitle</label>
-                            <input type="text" class="form-control" name="genSbtl" placeholder="Genre Subtitle">
-                        </div>
-
-                        <div class="form-group hidden">
-                            <label>Image</label>
-                            <input type="file" class="form-control" name="">
-                        </div>
-
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary mr-2"><span>Submit</span></button>
-                            <button class="btn btn-dark"><span>Cancel</span></button>
-                        </div>
                     </form>
 
                 </div>

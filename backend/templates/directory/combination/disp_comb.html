@@ -10,26 +10,39 @@
 </head>
 
 <body>
+    <div class="card mb-1">
+        <div class="card-body">
+            <form action="index.html" method="GET" class="forms-sample">
+                <div class="form-group mb-0">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-magnifying-glass mr-2"></i><span>Search</span>
+                    </button>
+                    <input type="text" name="keyword" class="form-control display-search-box"
+                        placeholder="Type your keyword ...">
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Display Language</h4>
+            <h4 class="card-title">Display Language-Genre Combinations</h4>
 
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Language Name</th>
-                            <th>Language Subtitle</th>
-                            <th>Language Image</th>
+                            <th>Language</th>
+                            <th>Genre</th>
+                            <th>Image File</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for i in lang %}
+                        {% for i in comb %}
                         <tr>
-                            <td>{{i.Language_Name}}</td>
-                            <td>{{i.Language_Subtitle}}</td>
+                            <td>{{i.Com_Language}}</td>
+                            <td>{{i.Com_Genre}}</td>
                             <td>
-                                <img src="{{i.Language_Image.url}}" alt="image">
+                                <img src="{{i.Com_Img_File.url}}" alt="Image">
                             </td>
                             <td>
                                 <form action="">
@@ -39,8 +52,8 @@
                                 </form>
                             </td>
                             <td>
-                                <form action="{% url 'DeleteLanguage' langId=i.id %}">
-                                    <button type="submit" class="btn btn-danger">
+                                <form action="{% url 'DeleteCombination' combId=i.id %}">
+                                    <button type="submit" class="btn btn-danger" style="margin-left: -110px;">
                                         <span>Delete</span>
                                     </button>
                                 </form>

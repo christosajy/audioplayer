@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="card mb-1">
+        <div class="card-body">
+            <form action="index.html" method="GET" class="forms-sample">
+                <div class="form-group mb-0">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-magnifying-glass mr-2"></i><span>Search</span>
+                    </button>
+                    <input type="text" name="keyword" class="form-control display-search-box"
+                        placeholder="Type your keyword ...">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Display Genre</h4>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Genre Name</th>
+                            <th>Genre Subtitle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in genre %}
+                        <tr>
+                            <td>{{i.Genre_Name}}</td>
+                            <td>{{i.Genre_Subtitle}}</td>
+                            <td>
+                                <form action="{% url 'EditGenre' genreId=i.id %}">
+                                    <button type="submit" class="btn btn-success">
+                                        <span>Edit</span>
+                                    </button>
+                                </form>
+                            </td>
+                            <td class="">
+                                <form action="{% url 'DeleteGenre' genreId=i.id %}">
+                                    <button type="submit" class="btn btn-danger" style="margin-left: -140px;">
+                                        <span>Delete</span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+{% endblock %}

@@ -175,27 +175,47 @@
 
         <div class="container-fluid page-body-wrapper">
 
-            <nav class="sidebar sidebar-offcanvas" id="sidebar" style="width: 260px;">
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
-                    <li class="nav-item">
 
+                    <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
                             aria-controls="ui-basic">
                             <i class="typcn typcn-document-text menu-icon"></i>
-                            <span class="menu-title">Language & Genre</span>
+                            <span class="menu-title">Language</span>
                             <i class="menu-arrow"></i>
                         </a>
 
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'AddLanguageAndGenre' %}">
-                                        <span>Add Language & Genre</span>
+                                    <a class="nav-link" href="{% url 'AddLanguage' %}">
+                                        <span>Add Language</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'DisplayLanguage' %}">
                                         <span>Display Language</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#ui-basics" aria-expanded="false"
+                            aria-controls="ui-basic">
+                            <i class="typcn typcn-document-text menu-icon"></i>
+                            <span class="menu-title">Main Genre</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+
+                        <div class="collapse" id="ui-basics">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'AddGenre' %}">
+                                        <span>Add Genre</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -205,14 +225,36 @@
                                 </li>
                             </ul>
                         </div>
+                    </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false"
+                            aria-controls="icons">
+                            <i class="typcn typcn-document-text menu-icon"></i>
+                            <span class="menu-title">Sub Genre</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="icons">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'AddSubGenre' %}">
+                                        <span>Add Sub Genre</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'DisplaySubGenre' %}">
+                                        <span>Display Sub Genre</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false"
                             aria-controls="tables">
-                            <i class="typcn typcn-th-small-outline menu-icon"></i>
-                            <span class="menu-title">Set Combination</span>
+                            <i class="typcn typcn-document-text menu-icon"></i>
+                            <span class="menu-title">Combination</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="tables">
@@ -224,7 +266,12 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'DisplayCombination' %}">
-                                        <span>Dispaly Combination</span>
+                                        <span>Dispaly Genre</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'DisplaySubCombination' %}">
+                                        <span>Dispaly Sub Genre</span>
                                     </a>
                                 </li>
                             </ul>
@@ -234,7 +281,7 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"
                             aria-controls="form-elements">
-                            <i class="typcn typcn-chart-pie-outline menu-icon"></i>
+                            <i class="typcn typcn-document-text menu-icon"></i>
                             <span class="menu-title">Audio Files</span>
                             <i class="menu-arrow"></i>
                         </a>
@@ -250,20 +297,6 @@
                                         <span>Display Audio</span>
                                     </a>
                                 </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false"
-                            aria-controls="icons">
-                            <i class="typcn typcn-compass menu-icon"></i>
-                            <span class="menu-title">Icons</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="icons">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">Mdi icons</a></li>
                             </ul>
                         </div>
                     </li>

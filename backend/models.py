@@ -10,6 +10,7 @@ class SongsDb(models.Model):
     Name = models.CharField(max_length=255, null=True, blank=True)
     Language = models.CharField(max_length=255, null=True, blank=True)
     Genre = models.CharField(max_length=255, null=True, blank=True)
+    Sub_Genre = models.CharField(max_length=255, null=True, blank=True)
     Year = models.CharField(max_length=255, null=True, blank=True)
     Artists = models.CharField(max_length=255, null=True, blank=True)
     Album_or_Film = models.CharField(max_length=255, null=True, blank=True)
@@ -21,8 +22,17 @@ class GenreDb(models.Model):
     Genre_Name = models.CharField(max_length=255, null=True, blank=True)
     Genre_Subtitle = models.CharField(max_length=255, null=True, blank=True)
 
+class SubGenreDb(models.Model):
+    Sub_Genre_Name = models.CharField(max_length=255, null=True, blank=True)
+    Res_Sub_Genre = models.CharField(max_length=255, null=True, blank=True)
+    Sub_Genre_Sbtl = models.CharField(max_length=255, null=True, blank=True)
+
 class CombinedDb(models.Model):
     Com_Language = models.CharField(max_length=255, null=True, blank=True)
     Com_Genre = models.CharField(max_length=255, null=True, blank=True)
-    Com_Subtitle = models.CharField(max_length=255, null=True, blank=True)
     Com_Img_File = models.ImageField(upload_to='combine', null=True, blank=True)
+
+class SubCombinedDb(models.Model):
+    Sub_Com_Genre = models.CharField(max_length=255, null=True, blank=True)
+    Sub_Com_Res_SubGenre = models.CharField(max_length=255, null=True, blank=True)
+    Sub_Com_Img_File = models.ImageField(upload_to='subcomb', null=True, blank=True)
