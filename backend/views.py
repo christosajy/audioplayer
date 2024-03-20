@@ -21,6 +21,11 @@ def SaveLanguage(request):
     
 def DisplayLanguage(request):
     lang = LanguageDb.objects.all()
+    if request.method == 'GET':
+        str = request.GET.get('keyword')
+        if str != None:
+            lang = LanguageDb.objects.filter(Language_Name__icontains=str)
+    
     context = {'lang': lang}
     return render(request, 'directory/language/disp_lang.html', context)
 

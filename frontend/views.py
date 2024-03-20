@@ -13,7 +13,7 @@ def frontabout(request):
 def frontcontact(request):
     return render(request, 'contact.html')
 
-def CombinationFiltered(request, cmb_flt):
+def GenreFiltered(request, cmb_flt):
     comb = CombinedDb.objects.filter(Com_Language=cmb_flt)
     context = {'comb': comb}
     return render(request, 'gnr_fltr/gnr_fltr.html', context)
@@ -26,8 +26,10 @@ def SubGenreFiltered(request, sub_flt):
 def AudioListFiltered(request, aud_flt):
     audio = SongsDb.objects.filter(Sub_Genre=aud_flt)
     context = {'audio': audio}
-    return render(request, 'audiolist/audiolist.html', context)
+    return render(request, 'list_fltr/list_fltr.html', context)
 
-def player(request):
-    return render(request, 'aud/index.html')
+def SongFiltered(request, song_flt):
+    song = SongsDb.objects.filter(Name=song_flt)
+    context = {'song': song}
+    return render(request, 'song_fltr/song_fltr.html', context)
 

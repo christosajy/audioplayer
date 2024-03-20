@@ -6,16 +6,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Audio player</title>
-  <link rel="stylesheet" href="{% static 'css/aud/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/song_fltr/style.css' %}">
 </head>
 <body>
   <div class="player">
+    {% for i in song %}
     <div class="imgBx">
-      <img src="https://i.ibb.co/Ntw2mgR/luka-chhuppi.png" alt="Luka Chuppi">
+      <img src="{{i.Img_File.url}}" alt="Luka Chuppi">
     </div>
-    <audio controls>
-      <source src="http://shaury.com/luka-chuppi-duniyaa.mp3" type="audio/mp3">
+    <audio controls controlslist="nodownload">
+      <source src="{{i.Audio_File.url}}" type="audio/mp3">
     </audio>
+    {% endfor %}
   </div>
 </body>
 </html>

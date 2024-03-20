@@ -22,7 +22,7 @@ a {
 a:hover,
 a:focus,
 a.active {
-    color: #ffbf00;
+    color: #FFBF00;
     text-decoration: none;
 }
 
@@ -164,8 +164,8 @@ a.active {
 .tm-search-submit {
     padding: 10px 35px;
     background: #000000;
-    color: #ffbf00;
-    border: 1px solid #ffbf00;
+    color: #FFBF00;
+    border: 1px solid #FFBF00;
     border-radius: 0;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -192,10 +192,11 @@ a.active {
 }
 
 .tm-new-release {
-    background-color: #D6688F;
+    background-color: #FFBF00;
+    /* background-color: #D6688F; */
     background-repeat: no-repeat;
     background-size: cover;
-    color: #ffff;
+    color: #000;
     text-transform: uppercase;
     height: 100%;
     border-top-left-radius: 10px;
@@ -332,12 +333,20 @@ figure.effect-sadie:hover p {
     color: #fff;
 }
 
+.tm-text-black {
+    color: #000;
+}
+
 .tm-text-blue {
     color: #6e9ece;
 }
 
-.tm-text-blue-dark {
-    color: #006699;
+.tm-text-red {
+    color: #EE0000;
+}
+
+.tm-text-yellow {
+    color: #FFBF00;
 }
 
 .tm-text-pink {
@@ -437,26 +446,30 @@ figure.effect-sadie:hover p {
     width: 510px;
     margin-bottom: 25px;
     border-radius: 0;
-    border-color: #D6688F;
+    border-color: #FFBF00;
     padding: 13px 15px;
 }
 
 .form-control.tm-subscribe-input:focus {
-    border-color: #df6f98;
+    border-color: #000000;
 }
 
 .tm-subscribe-btn {
-    border: none;
+    border: 2px solid #FFBF00;
+    color: #FFFFFF;
     padding: 12px 40px;
     font-size: 1.2rem;
     font-weight: 300;
     cursor: pointer;
     transition: all 0.3s ease;
+    background-color: #FFBF00;
 }
 
 .tm-subscribe-btn:hover,
 .tm-subscribe-focus {
-    background-color: #ffbf00;
+    background-color: #FFFFFF;
+    color: #000000;
+    border: 2px solid #000000;
 }
 
 .tm-subscribe-img {

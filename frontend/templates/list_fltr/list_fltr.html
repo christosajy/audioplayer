@@ -36,7 +36,7 @@
 
 	<div class="tm-main">
 
-		<div class="tm-welcome-section" style="max-height: 150px; min-height: 150px;">
+		<div class="tm-welcome-section" id="tm-welcome-section">
 			<div class="container tm-navbar-container">
 				<div class="row">
 					<div class="col-xl-12">
@@ -63,21 +63,21 @@
 
 		<div class="container">
 
-			<div class="tm-search-form-container">
-                <form action="index.html" method="GET" class="form-inline tm-search-form">
-                    <div class="tm-new-release">Autocad<i class="fa-solid fa-music ml-2"></i></div>
-                    <div class="form-group tm-search-box">
-                        <input type="text" name="keyword" class="form-control tm-search-input"
-                            placeholder="Type your keyword ...">
-                        <button type="submit" class="form-control tm-search-submit">
-                            <i class="fa-solid fa-magnifying-glass font-weight-bold mr-2"></i>
-                        </button>
-                    </div>
-                    <div class="form-group tm-advanced-box">
-                        <a href="#" class="tm-text-white">Go Advanced ...</a>
-                    </div>
-                </form>
-            </div>
+			<div class="tm-search-form-container" style="margin-bottom: 5rem;">
+				<form action="index.html" method="GET" class="form-inline tm-search-form">
+					<div class="tm-new-release">Autocad<i class="fa-solid fa-music ml-2"></i></div>
+					<div class="form-group tm-search-box">
+						<input type="text" name="keyword" class="form-control tm-search-input"
+							placeholder="Type your keyword ...">
+						<button type="submit" class="form-control tm-search-submit">
+							<i class="fa-solid fa-magnifying-glass font-weight-bold mr-2"></i>
+						</button>
+					</div>
+					<div class="form-group tm-advanced-box">
+						<a href="#" class="tm-text-white">Go Advanced ...</a>
+					</div>
+				</form>
+			</div>
 
 			<section>
 				{% for i in audio %}
@@ -85,20 +85,23 @@
 
 					<li class="li">
 						<h3 id="h3">
-							<a href="#">{{i.Name}} - {{i.Album_or_Film}}</a>
+							<a href="{% url 'SongFiltered' song_flt=i.Name %}">
+								<span>{{i.Name}} - {{i.Album_or_Film}}</span>
+							</a>
 						</h3>
+						<p class="p">Artists: {{i.Artists}}</p>
 
-						<p class="p">Language:- {{i.Language}}</p>
-						<p class="p">Year:- {{i.Year}}</p>
-						<p class="p">Artists:- {{i.Artists}}</p>
-						
-						<a href="#">
-							<img src="{{i.Img_File.url}}" class="img">
-						</a>
+						<div>
+							<a href="#"><img src="{{i.Img_File.url}}" class="img"></a>
+							<p class="p">Language: {{i.Language}}</p>
+							<p class="p">Topic: {{i.Genre}} - {{i.Sub_Genre}}</p>
+							<p class="p">Year: {{i.Year}}</p>
 
-						<audio class="audio mt-3" controls controlslist="nodownload">
-							<source src="{{i.Audio_File.url}}" type="audio/mp3">
-						</audio>
+							<audio class="audio mt-3" controls controlslist="nodownload">
+								<source src="{{i.Audio_File.url}}" type="audio/mp3">
+							</audio>
+						</div>
+
 					</li>
 
 				</ol>
@@ -159,7 +162,7 @@
 	<script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
 	<!-- endinject -->
-    <!-- Plugin js for this page-->
+	<!-- Plugin js for this page-->
 	<script>
 
 		$(function () {
