@@ -64,14 +64,13 @@
         <div class="container">
 
             <div class="tm-search-form-container">
-                <form action="index.html" method="GET" class="form-inline tm-search-form">
-                    <div class="tm-new-release">Autocad<i class="fa-solid fa-music ml-2"></i></div>
+                <form action="" method="GET" class="form-inline tm-search-form">
+                    <div class="tm-new-release">Audiocad<i class="fa-solid fa-music ml-2"></i></div>
                     <div class="form-group tm-search-box">
-                        <input type="text" name="keyword" class="form-control tm-search-input"
+                        <input type="text" name="keyword" class="form-control tm-search-input" autocomplete="off"
                             placeholder="Type your keyword ...">
                         <button type="submit" class="form-control tm-search-submit">
-                            <i class="fa-solid fa-magnifying-glass font-weight-bold mr-2"></i>
-                            <span class="text-capitalize">Search</span>
+                            <i class="fa-solid fa-magnifying-glass font-weight-bold mr-2"></i><span>Search</span>
                         </button>
                     </div>
                     <div class="form-group tm-advanced-box">
@@ -86,7 +85,7 @@
                     <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
                         <figure class="effect-sadie">
                             <h6 class="text-center font-weight-bold">
-                                <span>{{i.Com_Language}}</span><span class="ml-1">{{i.Com_Genre}}</span>
+                                <span>{{i.Com_Language}} - {{i.Com_Genre}}</span>
                             </h6>
                             <img src="{{i.Com_Img_File.url}}" alt="Image" class="img-fluid">
                             <figcaption>
@@ -99,6 +98,8 @@
                             </figcaption>
                         </figure>
                     </div>
+                    {% empty %}
+                    <span class="text-danger empty-record">No Genres Found.</span>
                     {% endfor %}
                 </div>
             </section>

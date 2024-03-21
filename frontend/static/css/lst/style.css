@@ -114,3 +114,8 @@
     max-height: 150px; 
     min-height: 150px;
 }
+
+.empty-record {
+    font-size: 1.3rem;
+    margin-left: 40%;
+}

@@ -12,7 +12,7 @@ body {
     font-size: 17px;
     font-weight: 300;
     color: #444444;
-    overflow-x: hidden;
+    overflow-x: hidden;  
 }
 
 a {
@@ -22,7 +22,7 @@ a {
 a:hover,
 a:focus,
 a.active {
-    color: #FFBF00;
+    color: #FF8F00;
     text-decoration: none;
 }
 
@@ -32,8 +32,7 @@ a.active {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* background-color: #E7A7C0; */
-    background-image: url('../img/m1.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/yellow.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -83,7 +82,6 @@ a.active {
 .tm-search-form-container {
     border-radius: 15px;
     border: 4px solid white;
-    /* background-color: #b35e6c; */
     background-color: #000;
     margin-top: -54px;
     -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
@@ -164,8 +162,8 @@ a.active {
 .tm-search-submit {
     padding: 10px 35px;
     background: #000000;
-    color: #FFBF00;
-    border: 1px solid #FFBF00;
+    color: #FF8F00;
+    border: 1px solid #FF8F00;
     border-radius: 0;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -192,12 +190,10 @@ a.active {
 }
 
 .tm-new-release {
-    background-color: #FFBF00;
-    /* background-color: #D6688F; */
+    background-color: #FF8F00;
     background-repeat: no-repeat;
     background-size: cover;
     color: #000;
-    text-transform: uppercase;
     height: 100%;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -346,7 +342,7 @@ figure.effect-sadie:hover p {
 }
 
 .tm-text-yellow {
-    color: #FFBF00;
+    color: #FF8F00;
 }
 
 .tm-text-pink {
@@ -446,7 +442,7 @@ figure.effect-sadie:hover p {
     width: 510px;
     margin-bottom: 25px;
     border-radius: 0;
-    border-color: #FFBF00;
+    border-color: #FF8F00;
     padding: 13px 15px;
 }
 
@@ -455,14 +451,14 @@ figure.effect-sadie:hover p {
 }
 
 .tm-subscribe-btn {
-    border: 2px solid #FFBF00;
+    border: 2px solid #FF8F00;
     color: #FFFFFF;
     padding: 12px 40px;
     font-size: 1.2rem;
     font-weight: 300;
     cursor: pointer;
     transition: all 0.3s ease;
-    background-color: #FFBF00;
+    background-color: #FF8F00;
 }
 
 .tm-subscribe-btn:hover,

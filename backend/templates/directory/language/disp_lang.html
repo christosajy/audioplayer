@@ -18,7 +18,7 @@
                         <i class="fa-solid fa-magnifying-glass mr-2"></i><span>Search</span>
                     </button>
                     <input type="text" name="keyword" class="form-control display-search-box" autocomplete="off"
-                        placeholder="Enter keyword to Search . . .">
+                        placeholder="Type your keyword ...">
                 </div>
             </form>
         </div>
@@ -45,7 +45,7 @@
                                 <img src="{{i.Language_Image.url}}" alt="image">
                             </td>
                             <td>
-                                <form action="">
+                                <form action="{% url 'EditLanguage' langId=i.id %}">
                                     <button type="submit" class="btn btn-success">
                                         <span>Edit</span>
                                     </button>
@@ -61,7 +61,7 @@
                         </tr>
 
                         {% empty %}
-                        <span class="text-center text-danger">No Records Found</span>
+                        <span class="text-danger">No Records Found</span>
                         
                         {% endfor %}
                     </tbody>

@@ -29,6 +29,23 @@ def DisplayLanguage(request):
     context = {'lang': lang}
     return render(request, 'directory/language/disp_lang.html', context)
 
+def EditLanguage(request, langId):
+    lang = LanguageDb.objects.get(id=langId)
+    context = {'lang': lang}
+    return render(request, 'directory/language/edit_lang.html', context)
+
+def UpdateLanguage(request, langId):
+    if request.method == 'POST':
+        lgNm = request.POST.get('langName')
+        lgSt = request.POST.get('langSubt')
+        try:
+            lgIm = request.FILES['langImg']
+            file=FileSystemStorage().save(lgIm.name, lgIm)
+        except MultiValueDictKeyError:
+            file = LanguageDb.objects.get(id=langId).Language_Image
+        LanguageDb.objects.filter(id=langId).update(Language_Name=lgNm, Language_Subtitle=lgSt, Language_Image=file)
+        return redirect(DisplayLanguage)
+
 def DeleteLanguage(request, langId):
     lang = LanguageDb.objects.filter(id=langId)
     lang.delete()
@@ -50,6 +67,10 @@ def SaveGenre(request):
 
 def DisplayGenre(request):
     genre = GenreDb.objects.all()
+    if request.method == 'GET':
+        str = request.GET.get('keyword')
+        if str != None:
+            genre = GenreDb.objects.filter(Genre_Name__icontains=str)
     context = {'genre': genre}
     return render(request, 'directory/genre/disp_genre.html', context)
 
@@ -89,6 +110,10 @@ def SaveSubGenre(request):
     
 def DisplaySubGenre(request):
     subgen =SubGenreDb.objects.all()
+    if request.method == 'GET':
+        str = request.GET.get('keyword')
+        if str != None:
+            subgen =SubGenreDb.objects.filter(Sub_Genre_Name__icontains=str)
     context = {'subgen': subgen}
     return render(request, 'directory/subgenre/display_subgenre.html', context)
 
@@ -117,6 +142,10 @@ def SaveCombination(request):
 
 def DisplayCombination(request):
     comb = CombinedDb.objects.all()
+    if request.method == 'GET':
+        str = request.GET.get('keyword')
+        if str != None:
+            comb = CombinedDb.objects.filter(Com_Genre__icontains=str) 
     context = {'comb': comb}
     return render(request, 'directory/combination/disp_comb.html', context)
 
@@ -131,6 +160,10 @@ def SaveSubCombination(request):
     
 def DisplaySubCombination(request):
     subcom = SubCombinedDb.objects.all()
+    if request.method == 'GET':
+        str = request.GET.get('keyword')
+        if str != None:
+            subcom = SubCombinedDb.objects.filter(Sub_Com_Res_SubGenre__icontains=str)
     context = {'subcom': subcom}
     return render(request, 'directory/combination/disp_subcomb.html', context)
 
@@ -172,6 +205,10 @@ def SaveAudio(request):
 
 def DisplayAudio(request):
     audio = SongsDb.objects.all()
+    if request.method == 'GET':
+        str = request.GET.get('keyword')
+        if str != None:
+            audio = SongsDb.objects.filter(Name__icontains=str)
     context = {'audio': audio}
     return render(request, 'audio/disp_audio.html', context)
 

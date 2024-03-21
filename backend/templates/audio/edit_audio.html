@@ -94,7 +94,7 @@
                                     <audio controls controlslist="nodownload">
                                         <source src="{{audio.Audio_File.url}}" type="audio/mp3">
                                     </audio>
-                                    <p class="p-font">/{{audio.Audio_File}}</p>
+                                    <p class="p-font font-weight-bold">Selected path : /{{audio.Audio_File}}</p>
                                 </div>
                             </div>
                         </div>
@@ -104,8 +104,8 @@
                                 <label class="col-sm-3 col-form-label">Edit Image File</label>
                                 <div class="col-sm-9">
                                     <input type="file" class="form-control mb-2" name="EditImgfile">
+                                    <p class="p-font font-weight-bold">Selected path : /{{audio.Img_File}}</p>
                                     <img src="{{audio.Img_File.url}}" alt="Image" class="form-sample-img">
-                                    <p class="p-font p-img">/{{audio.Img_File}}</p>
                                 </div>
                             </div>
                         </div>

@@ -6,6 +6,8 @@ urlpatterns = [
     path('Add-Language/', views.AddLanguage, name='AddLanguage'),
     path('Save-Language/', views.SaveLanguage, name='SaveLanguage'),
     path('Display-Language/', views.DisplayLanguage, name='DisplayLanguage'),
+    path('Edit-Language/<int:langId>/', views.EditLanguage, name='EditLanguage'),
+    path('Update-Language/<int:langId>/', views.UpdateLanguage, name='UpdateLanguage'),
     path('Delete-Language/<int:langId>/', views.DeleteLanguage, name='DeleteLanguage'),
 
     path('Add-Genre/', views.AddGenre, name='AddGenre'),
