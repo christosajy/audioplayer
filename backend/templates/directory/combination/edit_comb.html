@@ -16,16 +16,16 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Combine Language & Genre</h4>
+                    <h4 class="card-title">Edit Language & Genre</h4>
 
-                    <form class="forms-sample" action="{% url 'SaveCombination' %}" method="POST"
+                    <form class="forms-sample" action="{% url 'UpdateCombination' combId=comb.id %}" method="POST"
                         enctype="multipart/form-data">
                         {% csrf_token %}
 
                         <div class="form-group">
-                            <label>Select Language</label>
-                            <select name="CombLang" class="form-control" required>
-                                <option value="Select">Select</option>
+                            <label>Edit Selected Language</label>
+                            <select name="CombLang" class="form-control">
+                                <option value="{{comb.Com_Language}}">{{comb.Com_Language}}</option>
                                 {% for i in lang %}
                                 <option value="{{i.Language_Name}}">{{i.Language_Name}}</option>
                                 {% endfor %}
@@ -33,9 +33,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Select Genre</label>
-                            <select name="CombGen" class="form-control" required>
-                                <option value="Select">Select</option>
+                            <label>Edit Selected Genre</label>
+                            <select name="CombGen" class="form-control">
+                                <option value="{{comb.Com_Genre}}">{{comb.Com_Genre}}</option>
                                 {% for i in genre %}
                                 <option value="{{i.Genre_Name}}">{{i.Genre_Name}}</option>
                                 {% endfor %}
@@ -43,8 +43,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Combination Image</label>
+                            <label>Edit Combination Image</label>
                             <input type="file" class="form-control" name="CombImg">
+                            <p class="p-font mt-2 font-weight-bold">Selected Path : /{{comb.Com_Img_File}}</p>
+                            <img src="{{comb.Com_Img_File.url}}" alt="Image" class="form-sample-img mt-2">
                         </div>
 
                         <button type="submit" class="btn btn-primary mr-2"><span>Submit</span></button>

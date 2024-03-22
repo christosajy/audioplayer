@@ -16,15 +16,16 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Add Sub Genre</h4>
+                    <h4 class="card-title">Combine Genre & Subgenre</h4>
 
-                    <form class="forms-sample" action="{% url 'SaveSubGenre' %}" method="POST"
+                    <form class="forms-sample" action="{% url 'SaveSubCombination' %}" method="POST"
                         enctype="multipart/form-data">
                         {% csrf_token %}
 
+                        
                         <div class="form-group">
-                            <label>Pick a Respective Genre</label>
-                            <select name="SubResGen" class="form-control" required>
+                            <label>Select Genre</label>
+                            <select name="SubCombGen" class="form-control" required>
                                 <option value="Select">Select</option>
                                 {% for i in genre %}
                                 <option value="{{i.Genre_Name}}">{{i.Genre_Name}}</option>
@@ -33,14 +34,22 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Add Sub-Genre Name</label>
-                            <input type="text" class="form-control" placeholder="Genre Name" name="SubGenName" required>
+                            <label>Select Sub Genre</label>
+                            <select name="SubCombRes" class="form-control" required>
+                                <option value="Select">Select</option>
+                                {% for i in subgen %}
+                                <option value="{{i.Sub_Genre_Name}}">{{i.Sub_Genre_Name}}</option>
+                                {% endfor %}
+                            </select>
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary mr-2"><span>Submit</span></button>
-                            <button class="btn btn-dark"><span>Cancel</span></button>
+                            <label>Combination Image</label>
+                            <input type="file" class="form-control" name="SubCombImg">
                         </div>
+
+                        <button type="submit" class="btn btn-primary mr-2"><span>Submit</span></button>
+                        <button class="btn btn-dark"><span>Cancel</span></button>
                     </form>
 
                 </div>

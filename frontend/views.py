@@ -10,12 +10,6 @@ def frontindex(request):
     context = {'lang': lang}
     return render(request, 'home.html', context)
 
-def frontabout(request):
-    return render(request, 'directory/about.html')
-
-def frontcontact(request):
-    return render(request, 'directory/contact.html')
-
 def GenreFiltered(request, cmb_flt):
     comb = CombinedDb.objects.filter(Com_Language=cmb_flt)
     if request.method == 'GET':
@@ -23,7 +17,7 @@ def GenreFiltered(request, cmb_flt):
         if str != None:
             comb = CombinedDb.objects.filter(Com_Genre__icontains=str)
     context = {'comb': comb}
-    return render(request, 'gnr_fltr/gnr_fltr.html', context)
+    return render(request, 'directory/gnr_fltr.html', context)
     
 def SubGenreFiltered(request, sub_flt):
     subgenre = SubCombinedDb.objects.filter(Sub_Com_Genre=sub_flt)
@@ -32,7 +26,7 @@ def SubGenreFiltered(request, sub_flt):
         if str != None:
             subgenre = SubCombinedDb.objects.filter(Sub_Com_Res_SubGenre__icontains=str)
     context = {'subgenre': subgenre}
-    return render(request, 'sbgnr_fltr/sbgnr_fltr.html', context)
+    return render(request, 'directory/sbgnr_fltr.html', context)
 
 def AudioListFiltered(request, aud_flt):
     audio = SongsDb.objects.filter(Sub_Genre=aud_flt)
@@ -41,10 +35,18 @@ def AudioListFiltered(request, aud_flt):
         if str != None:
             audio = SongsDb.objects.filter(Name__icontains=str)
     context = {'audio': audio}
-    return render(request, 'list_fltr/list_fltr.html', context)
+    return render(request, 'directory/list_fltr.html', context)
 
 def SongFiltered(request, song_flt):
     song = SongsDb.objects.filter(Name=song_flt)
     context = {'song': song}
-    return render(request, 'song_fltr/song_fltr.html', context)
+    return render(request, 'directory/song_fltr.html', context)
 
+
+# ========================= PROFILE-PAGE ===========================================================
+
+def frontabout(request):
+    return render(request, 'main/profile.html')
+
+def LoginPage(request):
+    return render(request, 'profile/login.html')

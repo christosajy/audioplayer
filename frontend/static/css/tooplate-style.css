@@ -22,7 +22,7 @@ a {
 a:hover,
 a:focus,
 a.active {
-    color: #FF8F00;
+    color: #FFFF00;
     text-decoration: none;
 }
 
@@ -162,8 +162,8 @@ a.active {
 .tm-search-submit {
     padding: 10px 35px;
     background: #000000;
-    color: #FF8F00;
-    border: 1px solid #FF8F00;
+    color: #FFFF00;
+    border: 1px solid #FFFF00;
     border-radius: 0;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -190,7 +190,7 @@ a.active {
 }
 
 .tm-new-release {
-    background-color: #FF8F00;
+    background-color: #FFFF00;
     background-repeat: no-repeat;
     background-size: cover;
     color: #000;
@@ -249,9 +249,10 @@ figure.effect-sadie figcaption::before {
 }
 
 figure.effect-sadie h2 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     padding: 1.2rem;
     position: absolute;
+    font-weight: bold;
     bottom: 10%;
     left: 0;
     width: 100%;
@@ -274,7 +275,7 @@ figure.effect-sadie p {
     left: 0;
     padding: 1.2rem;
     margin-bottom: 0;
-    width: 100%;
+    width: 80%;
     opacity: 0;
     -webkit-transform: translate3d(0, 10px, 0);
     transform: translate3d(0, 10px, 0);
@@ -316,6 +317,14 @@ figure.effect-sadie:hover p {
     text-align: center;
 }
 
+.tm-head-genre {
+    top: 80%;
+}
+
+.tm-head-subgenre {
+    top: 70%;
+}
+
 .tm-font-300 {
     font-weight: 300;
 }
@@ -342,7 +351,7 @@ figure.effect-sadie:hover p {
 }
 
 .tm-text-yellow {
-    color: #FF8F00;
+    color: #FFFF00;
 }
 
 .tm-text-pink {
@@ -442,7 +451,7 @@ figure.effect-sadie:hover p {
     width: 510px;
     margin-bottom: 25px;
     border-radius: 0;
-    border-color: #FF8F00;
+    border-color: #FF0000;
     padding: 13px 15px;
 }
 
@@ -451,21 +460,21 @@ figure.effect-sadie:hover p {
 }
 
 .tm-subscribe-btn {
-    border: 2px solid #FF8F00;
+    border: 2px solid #FF0000;
     color: #FFFFFF;
     padding: 12px 40px;
     font-size: 1.2rem;
     font-weight: 300;
     cursor: pointer;
     transition: all 0.3s ease;
-    background-color: #FF8F00;
+    background-color: #FF0000;
 }
 
 .tm-subscribe-btn:hover,
 .tm-subscribe-focus {
-    background-color: #FFFFFF;
-    color: #000000;
-    border: 2px solid #000000;
+    background-color: #000000;
+    color: #FFFFFF;
+    border: 1px solid #000000;
 }
 
 .tm-subscribe-img {
@@ -894,7 +903,7 @@ iframe {
     }
 
     figure.effect-sadie h2 {
-        bottom: 10%;
+        bottom: 7%;
     }
 
     .tm-radio-label:last-child {

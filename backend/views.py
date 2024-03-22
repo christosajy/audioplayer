@@ -60,8 +60,7 @@ def AddGenre(request):
 def SaveGenre(request):
     if request.method == 'POST':
         gnNm = request.POST.get('genName')
-        gnSt = request.POST.get('genSbtl')
-        obj = GenreDb(Genre_Name=gnNm, Genre_Subtitle=gnSt)
+        obj = GenreDb(Genre_Name=gnNm)
         obj.save()
         return redirect(AddGenre)
 
@@ -73,18 +72,6 @@ def DisplayGenre(request):
             genre = GenreDb.objects.filter(Genre_Name__icontains=str)
     context = {'genre': genre}
     return render(request, 'directory/genre/disp_genre.html', context)
-
-def EditGenre(request, genreId):
-    genre = GenreDb.objects.get(id=genreId)
-    context = {'genre': genre}
-    return render(request, 'directory/genre/edit_genre.html', context)
-
-def UpdateGenre(request, genreId):
-    if request.method == 'POST':
-        gnNm = request.POST.get('EditGenName')
-        gnSt = request.POST.get('EditGenSbtl')
-        GenreDb.objects.filter(id=genreId).update(Genre_Name=gnNm, Genre_Subtitle=gnSt)
-        return redirect(DisplayGenre)
 
 def DeleteGenre(request, genreId):
     genre = GenreDb.objects.filter(id=genreId)
@@ -103,8 +90,7 @@ def SaveSubGenre(request):
     if request.method == 'POST':
         SbGn = request.POST.get('SubGenName')
         SbRs = request.POST.get('SubResGen')
-        SbSl = request.POST.get('SubGenSbtl')
-        obj = SubGenreDb(Sub_Genre_Name=SbGn,Res_Sub_Genre=SbRs,Sub_Genre_Sbtl=SbSl)
+        obj = SubGenreDb(Sub_Genre_Name=SbGn,Res_Sub_Genre=SbRs)
         obj.save()
         return redirect(AddSubGenre)
     
@@ -117,6 +103,19 @@ def DisplaySubGenre(request):
     context = {'subgen': subgen}
     return render(request, 'directory/subgenre/display_subgenre.html', context)
 
+def EditSubGenre(request, subId):
+    subgen =SubGenreDb.objects.get(id=subId)
+    genre = GenreDb.objects.all()
+    context = {'subgen': subgen, 'genre': genre}
+    return render(request, 'directory/subgenre/edit_subgenre.html', context)
+
+def UpdateSubGenre(request, subId):
+    if request.method == 'POST':
+        SbGn = request.POST.get('SubGenName')
+        SbRs = request.POST.get('SubResGen')
+        SubGenreDb.objects.filter(id=subId).update(Sub_Genre_Name=SbGn,Res_Sub_Genre=SbRs)
+        return redirect(DisplaySubGenre)
+ 
 def DeleteSubGenre(request, subId):
     subgen =SubGenreDb.objects.filter(id=subId)
     subgen.delete()
@@ -149,6 +148,41 @@ def DisplayCombination(request):
     context = {'comb': comb}
     return render(request, 'directory/combination/disp_comb.html', context)
 
+def EditCombination(request, combId):
+    genre = GenreDb.objects.all()
+    lang = LanguageDb.objects.all()
+    subgen =SubGenreDb.objects.all()
+    comb = CombinedDb.objects.get(id=combId)
+    context = {'lang': lang, 'genre': genre, 'subgen': subgen, 'comb': comb}
+    return render(request, 'directory/combination/edit_comb.html', context)
+
+def UpdateCombination(request, combId):
+    if request.method == 'POST':
+        cbLg = request.POST.get('CombLang')
+        cbGn = request.POST.get('CombGen')
+        try:
+            cbIm = request.FILES['CombImg']
+            file=FileSystemStorage().save(cbIm.name, cbIm)
+        except MultiValueDictKeyError:
+            file = CombinedDb.objects.get(id=combId).Com_Img_File
+        CombinedDb.objects.filter(id=combId).update(Com_Language=cbLg, Com_Genre=cbGn, Com_Img_File=file)
+        return redirect(DisplayCombination)
+
+def DeleteCombination(request, combId):
+    comb = CombinedDb.objects.filter(id=combId)
+    comb.delete()
+    return redirect(DisplayCombination)
+
+
+#######################################################################################################
+
+def AddSubCombination(request):
+    genre = GenreDb.objects.all()
+    lang = LanguageDb.objects.all()
+    subgen =SubGenreDb.objects.all()
+    context = {'lang': lang, 'genre': genre, 'subgen': subgen}
+    return render(request, 'directory/subcombination/add_subcomb.html', context)
+
 def SaveSubCombination(request):
     if request.method == 'POST':
         Sbcb = request.POST.get('SubCombGen')
@@ -165,12 +199,28 @@ def DisplaySubCombination(request):
         if str != None:
             subcom = SubCombinedDb.objects.filter(Sub_Com_Res_SubGenre__icontains=str)
     context = {'subcom': subcom}
-    return render(request, 'directory/combination/disp_subcomb.html', context)
+    return render(request, 'directory/subcombination/disp_subcomb.html', context)
 
-def DeleteCombination(request, combId):
-    comb = CombinedDb.objects.filter(id=combId)
-    comb.delete()
-    return redirect(DisplayCombination)
+def EditSubCombination(request, subId):
+    genre = GenreDb.objects.all()
+    lang = LanguageDb.objects.all()
+    subgen =SubGenreDb.objects.all()
+    subcom = SubCombinedDb.objects.get(id=subId)
+    context = {'lang': lang, 'genre': genre, 'subgen': subgen, 'subcom': subcom}
+    return render(request, 'directory/subcombination/edit_subcomb.html', context)
+
+def UpdateSubCombination(request, subId):
+    if request.method == 'POST':
+        Sbcb = request.POST.get('SubCombGen')
+        SbGn = request.POST.get('SubCombRes')
+        try:
+            SbIm = request.FILES['SubCombImg']
+            file=FileSystemStorage().save(SbIm.name, SbIm)
+        except MultiValueDictKeyError:
+            file = SubCombinedDb.objects.get(id=subId).Sub_Com_Img_File
+        SubCombinedDb.objects.filter(id=subId).update(Sub_Com_Genre=Sbcb, Sub_Com_Res_SubGenre=SbGn, 
+            Sub_Com_Img_File=file)
+        return redirect(DisplaySubCombination)
 
 def DeleteSubCombination(request, subId):
     subcom = SubCombinedDb.objects.filter(id=subId)

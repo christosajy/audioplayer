@@ -33,7 +33,6 @@
                         <tr>
                             <th>Sub Genre Name</th>
                             <th>Related Genre</th>
-                            <th>Sub Genre Subtitle</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,9 +40,8 @@
                         <tr>
                             <td>{{i.Sub_Genre_Name}}</td>
                             <td>{{i.Res_Sub_Genre}}</td>
-                            <td>{{i.Sub_Genre_Sbtl}}</td>
                             <td>
-                                <form action="">
+                                <form action="{% url 'EditSubGenre' subId=i.id %}">
                                     <button type="submit" class="btn btn-success">
                                         <span>Edit</span>
                                     </button>
@@ -51,7 +49,7 @@
                             </td>
                             <td>
                                 <form action="{% url 'DeleteSubGenre' subId=i.id %}">
-                                    <button type="submit" class="btn btn-danger" style="margin-left: -60px;">
+                                    <button type="submit" class="btn btn-danger">
                                         <span>Delete</span>
                                     </button>
                                 </form>

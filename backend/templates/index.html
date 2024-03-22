@@ -174,7 +174,6 @@
         </nav>
 
         <div class="container-fluid page-body-wrapper">
-
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
 
@@ -250,91 +249,6 @@
                         </div>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false"
-                            aria-controls="tables">
-                            <i class="typcn typcn-document-text menu-icon"></i>
-                            <span class="menu-title">Combination</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="tables">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'AddCombination' %}">
-                                        <span>Add Combination</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'DisplayCombination' %}">
-                                        <span>Dispaly Cmbntn</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'DisplaySubCombination' %}">
-                                        <span>Dispaly SubCmbntn</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"
-                            aria-controls="form-elements">
-                            <i class="typcn typcn-document-text menu-icon"></i>
-                            <span class="menu-title">Audio Files</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="form-elements">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'AddAudio' %}">
-                                        <span>Add Audio</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'DisplayAudio' %}">
-                                        <span>Display Audio</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false"
-                            aria-controls="auth">
-                            <i class="typcn typcn-user-add-outline menu-icon"></i>
-                            <span class="menu-title">User Pages</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="auth">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a>
-                                </li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register
-                                    </a></li>
-                            </ul>
-                        </div>
-                    </li> -->
-
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false"
-                            aria-controls="error">
-                            <i class="typcn typcn-globe-outline menu-icon"></i>
-                            <span class="menu-title">Error pages</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="error">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a>
-                                </li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li> -->
-
                 </ul>
             </nav>
 
@@ -344,96 +258,116 @@
                     {% block content %}
 
                     <div class="row">
-                        <div class="col-xl-6 grid-margin stretch-card flex-column">
-                            <h5 class="mb-2 text-titlecase mb-4">Status statistics</h5>
+                        <div class="col-xl-12 grid-margin stretch-card flex-column">
+                            <h5 class="mb-2 text-titlecase mb-4">
+                                <span class="text-uppercase">Audiocad</span>
+                                <i class="fa-solid fa-music mr-3"></i>
+                                <span>- Admin Control Panel</span>
+                            </h5>
                             <div class="row">
+
+                                <div class="col-md-3 grid-margin stretch-card">
+                                    <div class="card">
+                                        <h5 class="text-center mt-3 p-2 font-weight-bold">Combination</h5>
+                                        <div class="text-center">
+                                            <span class="text-uppercase font-weight-bold text-primary">Language</span>
+                                            <i class="fa-solid fa-repeat"></i>
+                                            <span class="text-uppercase font-weight-bold text-primary">Genre</span>
+                                        </div>
+                                        <div class="card-body d-flex flex-column justify-content-between">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <div>
+                                                    <p class="mb-2 text-black text-uppercase">Insert</p>
+                                                    <h4 class="mb-0 text-center">
+                                                        <a href="{% url 'AddCombination' %}">
+                                                            <i class="fa-solid fa-cart-plus text-primary"></i>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                
+                                                <div>
+                                                    <p class="mb-2 text-black text-uppercase">Display</p>
+                                                    <h5 class="mb-0 text-center">
+                                                        <a href="{% url 'DisplayCombination' %}">
+                                                            <i class="fa-solid fa-display text-primary"></i>
+                                                        </a>
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-md-6 grid-margin stretch-card">
                                     <div class="card">
+                                        <h5 class="text-center mt-3 p-2 font-weight-bold">
+                                            <span>Audio File Inserter</span>
+                                        </h5>
+                                        <div class="text-center">
+                                            <span class="text-uppercase font-weight-bold text-primary">Audio</span>
+                                            <i class="fa-solid fa-headphones"></i>
+                                            <span class="text-uppercase font-weight-bold text-primary">Files</span>
+                                        </div>
                                         <div class="card-body d-flex flex-column justify-content-between">
-                                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                                <p class="mb-0 text-muted">Transactions</p>
-                                                <p class="mb-0 text-muted">+1.37%</p>
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <div>
+                                                    <p class="mb-2 text-black text-uppercase">Insert</p>
+                                                    <h4 class="mb-0 text-center">
+                                                        <a href="{% url 'AddAudio' %}">
+                                                            <i class="fa-solid fa-cart-plus text-primary"></i>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                
+                                                <div>
+                                                    <p class="mb-2 text-black text-uppercase">Display</p>
+                                                    <h5 class="mb-0 text-center">
+                                                        <a href="{% url 'DisplayAudio' %}">
+                                                            <i class="fa-solid fa-display text-primary"></i>
+                                                        </a>
+                                                    </h5>
+                                                </div>
                                             </div>
-                                            <h4>1352</h4>
-                                            <canvas id="transactions-chart" class="mt-auto" height="65"></canvas>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 grid-margin stretch-card">
+
+                                <div class="col-md-3 grid-margin stretch-card">
                                     <div class="card">
+                                        <h5 class="text-center mt-3 p-2 font-weight-bold">Sub-Combination</h5>
+                                        <div class="text-center">
+                                            <span class="text-uppercase font-weight-bold text-primary">Genre</span>
+                                            <i class="fa-solid fa-repeat"></i>
+                                            <span class="text-uppercase font-weight-bold text-primary">Subgenre</span>
+                                        </div>
                                         <div class="card-body d-flex flex-column justify-content-between">
-                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
                                                 <div>
-                                                    <p class="mb-2 text-muted">Sales</p>
-                                                    <h6 class="mb-0">563</h6>
+                                                    <p class="mb-2 text-black text-uppercase">Insert</p>
+                                                    <h4 class="mb-0 text-center">
+                                                        <a href="{% url 'AddSubCombination' %}">
+                                                            <i class="fa-solid fa-cart-plus text-primary"></i>
+                                                        </a>
+                                                    </h4>
                                                 </div>
+                                                
                                                 <div>
-                                                    <p class="mb-2 text-muted">Orders</p>
-                                                    <h6 class="mb-0">720</h6>
-                                                </div>
-                                                <div>
-                                                    <p class="mb-2 text-muted">Revenue</p>
-                                                    <h6 class="mb-0">5900</h6>
+                                                    <p class="mb-2 text-black text-uppercase">Display</p>
+                                                    <h5 class="mb-0 text-center">
+                                                        <a href="{% url 'DisplaySubCombination' %}">
+                                                            <i class="fa-solid fa-display text-primary"></i>
+                                                        </a>
+                                                    </h5>
                                                 </div>
                                             </div>
-                                            <canvas id="sales-chart-a" class="mt-auto" height="65"></canvas>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row h-100">
-                                <div class="col-md-6 stretch-card grid-margin grid-margin-md-0">
-                                    <div class="card">
-                                        <div class="card-body d-flex flex-column justify-content-between">
-                                            <p class="text-muted">Sales Analytics</p>
-                                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                                <h3 class="mb-">27632</h3>
-                                                <h3 class="mb-">78%</h3>
-                                            </div>
-                                            <canvas id="sales-chart-b" class="mt-auto" height="38"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 stretch-card">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="row h-100">
-                                                <div class="col-6 d-flex flex-column justify-content-between">
-                                                    <p class="text-muted">CPU</p>
-                                                    <h4>55%</h4>
-                                                    <canvas id="cpu-chart" class="mt-auto"></canvas>
-                                                </div>
-                                                <div class="col-6 d-flex flex-column justify-content-between">
-                                                    <p class="text-muted">Memory</p>
-                                                    <h4>123,65</h4>
-                                                    <canvas id="memory-chart" class="mt-auto"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
+                            
                         </div>
-                        <div class="col-xl-6 grid-margin stretch-card flex-column">
-                            <h5 class="mb-2 text-titlecase mb-4">Income statistics</h5>
-                            <div class="row h-100">
-                                <div class="col-md-12 stretch-card">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="d-flex justify-content-between align-items-start flex-wrap">
-                                                <div>
-                                                    <p class="mb-3">Monthly Increase</p>
-                                                    <h3>67842</h3>
-                                                </div>
-                                                <div id="income-chart-legend" class="d-flex flex-wrap mt-1 mt-md-0">
-                                                </div>
-                                            </div>
-                                            <canvas id="income-chart"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
 
                     {% endblock %}

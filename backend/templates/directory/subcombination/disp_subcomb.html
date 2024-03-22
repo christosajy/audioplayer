@@ -45,7 +45,7 @@
                                 <img src="{{i.Sub_Com_Img_File.url}}" alt="Image">
                             </td>
                             <td>
-                                <form action="">
+                                <form action="{% url 'EditSubCombination' subId=i.id %}">
                                     <button type="submit" class="btn btn-success">
                                         <span>Edit</span>
                                     </button>
@@ -53,7 +53,7 @@
                             </td>
                             <td>
                                 <form action="{% url 'DeleteSubCombination' subId=i.id %}">
-                                    <button type="submit" class="btn btn-danger" style="margin-left: -110px;">
+                                    <button type="submit" class="btn btn-danger">
                                         <span>Delete</span>
                                     </button>
                                 </form>

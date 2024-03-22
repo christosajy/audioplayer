@@ -16,25 +16,25 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Add Sub Genre</h4>
+                    <h4 class="card-title">Edit Sub Genre</h4>
 
-                    <form class="forms-sample" action="{% url 'SaveSubGenre' %}" method="POST"
+                    <form class="forms-sample" action="{% url 'UpdateSubGenre' subId=subgen.id %}" method="POST"
                         enctype="multipart/form-data">
                         {% csrf_token %}
 
                         <div class="form-group">
-                            <label>Pick a Respective Genre</label>
-                            <select name="SubResGen" class="form-control" required>
-                                <option value="Select">Select</option>
+                            <label>Edit Sub-Genre Name</label>
+                            <input type="text" class="form-control" value="{{subgen.Sub_Genre_Name}}" placeholder="Genre Name" name="SubGenName">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Edit Selected Respective Genre</label>
+                            <select name="SubResGen" class="form-control">
+                                <option value="{{subgen.Res_Sub_Genre}}">{{subgen.Res_Sub_Genre}}</option>
                                 {% for i in genre %}
                                 <option value="{{i.Genre_Name}}">{{i.Genre_Name}}</option>
                                 {% endfor %}
                             </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Add Sub-Genre Name</label>
-                            <input type="text" class="form-control" placeholder="Genre Name" name="SubGenName" required>
                         </div>
 
                         <div class="form-group">
