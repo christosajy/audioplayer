@@ -10,4 +10,8 @@ urlpatterns = [
     path('Single-Songs-Filtered/<song_flt>/', views.SongFiltered, name='SongFiltered'),
     # Login-Page 
     path('Login-Page/', views.LoginPage, name='LoginPage'),
+    path('Login-User/', views.LoginUser, name='LoginUser'),
+    path('Logout-User/', views.LogoutUser, name='LogoutUser'),
+    path('Signup-Page/', views.SignupPage, name='SignupPage'),
+    path('Save-User/', views.SaveUser, name='SaveUser'),
 ]

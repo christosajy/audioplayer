@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from backend.models import LanguageDb, CombinedDb, SubCombinedDb, SongsDb
+from frontend.models import UsersDb
+from django.contrib import messages
+
+########################### HOME #############################################################################
 
 def frontindex(request):
     lang = LanguageDb.objects.all()
@@ -43,10 +47,48 @@ def SongFiltered(request, song_flt):
     return render(request, 'directory/song_fltr.html', context)
 
 
-# ========================= PROFILE-PAGE ===========================================================
+###################################### PROFILE-PAGE ########################################################
 
 def frontabout(request):
-    return render(request, 'main/profile.html')
+    return render(request, 'main/my_profile.html')
 
 def LoginPage(request):
-    return render(request, 'profile/login.html')
+    return render(request, 'forms/login.html')
+
+def LoginUser(request):
+    if request.method == 'POST':
+        un = request.POST.get('uname')
+        ps = request.POST.get('pass')
+        if UsersDb.objects.filter(Username=un, Password=ps).exists():
+            # Setting Session
+            request.session['Username'] = un
+            request.session['Password'] = ps
+            messages.success(request, 'Login Successful. Welcome Home')
+            return redirect(frontindex)
+        else:
+            messages.warning(request, 'User not found. Create new?')
+            return redirect(LoginPage)
+
+def LogoutUser(request):
+    del request.session['Username']
+    del request.session['Password']
+    messages.success(request, 'User Logout Successfull')
+    return redirect(frontindex)
+
+def SignupPage(request):
+    return render(request, 'forms/signup.html')
+
+def SaveUser(request):
+    if request.method == 'POST':
+        nm = request.POST.get('name')
+        em = request.POST.get('email')
+        un = request.POST.get('uname')
+        ps = request.POST.get('pass')
+        if UsersDb.objects.filter(Email=em, Username=un).exists():
+            messages.error(request, 'User already Exists')
+            return redirect(SignupPage)
+        else:
+            obj = UsersDb(Name=nm, Email=em, Username=un, Password=ps)
+            obj.save()
+            messages.success(request, 'User Signup Successfull')
+            return redirect(SignupPage)

@@ -5,10 +5,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>PolluxUI Admin</title>
+    <title>Login</title>
     <link rel="stylesheet" href="{% static 'vendors/typicons/typicons.css' %}">
     <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css' %}">
     <link rel="stylesheet" href="{% static 'css/vertical-layout-light/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/added.css' %}">
     <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
 </head>
 
@@ -24,22 +25,24 @@
                                 <img src="{% static 'images/logo-dark.svg' %}" alt="logo">
                             </div>
                             <h4>Hello! let's get started</h4>
-                            <h6 class="font-weight-light">Sign in to continue.</h6>
+                            <h6 class="font-weight-light mb-3">Login to continue.</h6>
 
-                            <form class="pt-3">
+                            <form action="{% url 'LoginUser' %}" method="POST">
+                                {% csrf_token %}
+
                                 <div class="form-group">
-                                    <input type="email" name="email" class="form-control form-control-lg"
-                                        placeholder="Username">
+                                    <input type="text" name="uname" class="form-control form-control-lg"
+                                        placeholder="Username" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="passwword" name="pass" class="form-control form-control-lg"
-                                        placeholder="Password">
+                                    <input type="password" name="pass" class="form-control form-control-lg"
+                                        placeholder="Password" required>
                                 </div>
 
                                 <div class="mt-3">
-                                    <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
-                                        <span>LOGIN</span>
+                                    <button class="btn btn-block btn-info btn-lg font-weight-medium auth-form-btn">
+                                        <span class="font-weight-bold">LOGIN</span>
                                     </button>
                                 </div>
 
@@ -53,9 +56,9 @@
                                     <a href="#" class="auth-link text-black">Forgot password?</a>
                                 </div>
 
-                                <div class="text-center mt-4 font-weight-light">
+                                <div class="text-left mt-4 font-weight-light">
                                     <span> Don't have an account?</span>
-                                    <a href="register.html" class="text-primary">Create</a>
+                                    <a href="{% url 'SignupPage' %}" class="text-primary">Create</a>
                                 </div>
                             </form>
                         </div>
@@ -66,13 +69,38 @@
         </div>
     </div>
 
-
     <script src="{% static 'vendors/js/vendor.bundle.base.js' %}"></script>
     <script src="{% static 'js/off-canvas.js' %}"></script>
     <script src="{% static 'js/hoverable-collapse.js' %}"></script>
     <script src="{% static 'js/template.js' %}"></script>
     <script src="{% static 'js/settings.js' %}"></script>
     <script src="{% static 'js/todolist.js' %}"></script>
+    <!-- JQuery  -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% if messages %}
+    {% for i in messages %}
+    {% if i.tags == 'success' %}
+    <script>
+        swal('{{i}}', '', 'success')
+    </script>
+    {% elif i.tags == 'warning' %}
+    <script>
+        swal('{{i}}', '', 'warning')
+    </script>
+    {% elif i.tags == 'error' %}
+    <script>
+        swal('{{i}}', '', 'error')
+    </script>
+    {% else %}
+    <script>
+        swal('{{i}}', '', 'info')
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
 
 </body>
 

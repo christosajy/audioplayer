@@ -50,9 +50,15 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    {% if request.session.Username %}
                                     <a href="{% url 'frontabout' %}" class="nav-link tm-nav-link tm-text-white">
-                                        <i class="fa-solid fa-user"></i>
+                                        <i class="fa-solid fa-user mr-2"></i><span>{{request.session.Username}}</span>
                                     </a>
+                                    {% else %}
+                                    <a href="{% url 'LoginPage' %}" class="nav-link tm-nav-link tm-text-white">
+                                        <i class="fa-solid fa-user mr-2"></i><span>join</span>
+                                    </a>
+                                    {% endif %}
                                 </li>
                             </ul>
                         </nav>
@@ -123,15 +129,13 @@
 
             <div class="row tm-mb-big tm-subscribe-row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 tm-bg-gray tm-subscribe-form">
-                    <h3 class="tm-text-red font-weight-bold tm-mb-30">Subscribe our updates!</h3>
+                    <h3 class="text-primary font-weight-bold tm-mb-30">Subscribe our updates!</h3>
                     <p class="tm-mb-30">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
                         Curae; Morbi semper, ligula et pretium porttitor, leo orci accumsan ligula.</p>
                     <form action="index.html" method="POST">
                         <div class="form-group mb-0">
                             <input type="text" class="form-control tm-subscribe-input" placeholder="Your Email">
-                            <button type="submit" class="d-block ml-auto tm-subscribe-btn">
-                                <span class="font-weight-bold">Submit</span>
-                            </button>
+                            <button type="submit" class="d-block ml-auto tm-subscribe-btn">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -175,6 +179,8 @@
     <!-- static JS -->
     <script src="{% static 'js/script.js' %}"></script>
     <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
     <script>
 
@@ -186,6 +192,28 @@
             $('.tm-current-year').text(new Date().getFullYear());
         });
     </script>
+
+    {% if messages %}
+    {% for i in messages %}
+    {% if i.tags == 'success' %}
+    <script>
+        swal('{{i}}', '', 'success')
+    </script>
+    {% elif i.tags == 'warning' %}
+    <script>
+        swal('{{i}}', '', 'warning')
+    </script>
+    {% elif i.tags == 'error' %}
+    <script>
+        swal('{{i}}', '', 'error')
+    </script>
+    {% else %}
+    <script>
+        swal('{{i}}', '', 'info')
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
 
 </body>
 

@@ -42,4 +42,7 @@ urlpatterns = [
     path('Edit-Audio/<int:audioId>/', views.EditAudio, name='EditAudio'),
     path('Update-Audio/<int:audioId>/', views.UpdateAudio, name='UpdateAudio'),
     path('Delete-Audio/<int:audioId>/', views.DeleteAudio, name='DeleteAudio'),
+
+    path('View-User/', views.ViewUser, name='ViewUser'),
+    path('Remove-User/<int:userId>/', views.RemoveUser, name='RemoveUser'),
 ]

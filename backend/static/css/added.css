@@ -35,3 +35,15 @@ audio {
     margin-top: -45px;
     width: 855px;
 }
+
+.text-blue {
+    color: #007BFF;
+}
+
+#nav-info {
+    background-color: #007BFF;
+}
+
+.flex-down {
+    border-bottom: 4px solid #007BFF;
+}

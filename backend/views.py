@@ -3,6 +3,7 @@ from django.core.files.storage import FileSystemStorage
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib import messages
 from backend.models import LanguageDb, SongsDb, GenreDb, CombinedDb, SubGenreDb, SubCombinedDb
+from frontend.models import UsersDb
 
 def backindex(request):
     return render(request, 'index.html')
@@ -121,7 +122,8 @@ def DeleteSubGenre(request, subId):
     subgen.delete()
     return redirect(DisplaySubGenre)
 
-# ==================== COMBINED SECTION =================================================================
+
+######################## COMBINED SECTION ##############################################################
 
 def AddCombination(request):
     genre = GenreDb.objects.all()
@@ -228,7 +230,7 @@ def DeleteSubCombination(request, subId):
     return redirect(DisplaySubCombination)
 
 
-# ==================== AUDIO =====================================================================
+################################# AUDIO #######################################################################
 
 def AddAudio(request):
     lang = LanguageDb.objects.all()
@@ -295,3 +297,16 @@ def DeleteAudio(request, audioId):
     audio = SongsDb.objects.filter(id=audioId)
     audio.delete()
     return redirect(DisplayAudio)
+
+############################### USERS ################################################################
+
+def ViewUser(request):
+    user = UsersDb.objects.all()
+    context = {'user': user}
+    return render(request, 'directory/users/view_user.html', context)
+
+def RemoveUser(request, userId):
+    user = UsersDb.objects.filter(id=userId)
+    user.delete()
+    messages.success(request, 'User Removal Successfull')
+    return redirect(ViewUser)

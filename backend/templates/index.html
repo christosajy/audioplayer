@@ -16,8 +16,8 @@
 
 <body>
     <div class="container-scroller">
-        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-            <div class="navbar-brand-wrapper d-flex justify-content-center">
+        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row flex-down">
+            <div class="navbar-brand-wrapper d-flex justify-content-center" id="nav-info">
                 <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
                     <a class="navbar-brand brand-logo" href="{% url 'backindex' %}">
                         <img src="{% static 'images/logo.svg' %}" alt="logo" />
@@ -43,11 +43,11 @@
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                             aria-labelledby="profileDropdown">
                             <a class="dropdown-item">
-                                <i class="typcn typcn-cog-outline text-primary"></i>
+                                <i class="typcn typcn-cog-outline text-info"></i>
                                 Settings
                             </a>
                             <a class="dropdown-item">
-                                <i class="typcn typcn-eject text-primary"></i>
+                                <i class="typcn typcn-eject text-info"></i>
                                 Logout
                             </a>
                         </div>
@@ -249,6 +249,24 @@
                         </div>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#icon-1" aria-expanded="false"
+                            aria-controls="icons">
+                            <i class="typcn typcn-document-text menu-icon"></i>
+                            <span class="menu-title">Users</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="icon-1">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'ViewUser' %}">
+                                        <span>Display Users</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
                 </ul>
             </nav>
 
@@ -270,9 +288,9 @@
                                     <div class="card">
                                         <h5 class="text-center mt-3 p-2 font-weight-bold">Combination</h5>
                                         <div class="text-center">
-                                            <span class="text-uppercase font-weight-bold text-primary">Language</span>
+                                            <span class="text-uppercase font-weight-bold text-info">Language</span>
                                             <i class="fa-solid fa-repeat"></i>
-                                            <span class="text-uppercase font-weight-bold text-primary">Genre</span>
+                                            <span class="text-uppercase font-weight-bold text-info">Genre</span>
                                         </div>
                                         <div class="card-body d-flex flex-column justify-content-between">
                                             <div class="d-flex justify-content-between align-items-center mb-1">
@@ -280,7 +298,7 @@
                                                     <p class="mb-2 text-black text-uppercase">Insert</p>
                                                     <h4 class="mb-0 text-center">
                                                         <a href="{% url 'AddCombination' %}">
-                                                            <i class="fa-solid fa-cart-plus text-primary"></i>
+                                                            <i class="fa-solid fa-cart-plus text-info"></i>
                                                         </a>
                                                     </h4>
                                                 </div>
@@ -289,7 +307,7 @@
                                                     <p class="mb-2 text-black text-uppercase">Display</p>
                                                     <h5 class="mb-0 text-center">
                                                         <a href="{% url 'DisplayCombination' %}">
-                                                            <i class="fa-solid fa-display text-primary"></i>
+                                                            <i class="fa-solid fa-display text-info"></i>
                                                         </a>
                                                     </h5>
                                                 </div>
@@ -304,9 +322,9 @@
                                             <span>Audio File Inserter</span>
                                         </h5>
                                         <div class="text-center">
-                                            <span class="text-uppercase font-weight-bold text-primary">Audio</span>
+                                            <span class="text-uppercase font-weight-bold text-info">Audio</span>
                                             <i class="fa-solid fa-headphones"></i>
-                                            <span class="text-uppercase font-weight-bold text-primary">Files</span>
+                                            <span class="text-uppercase font-weight-bold text-info">Files</span>
                                         </div>
                                         <div class="card-body d-flex flex-column justify-content-between">
                                             <div class="d-flex justify-content-between align-items-center mb-1">
@@ -314,7 +332,7 @@
                                                     <p class="mb-2 text-black text-uppercase">Insert</p>
                                                     <h4 class="mb-0 text-center">
                                                         <a href="{% url 'AddAudio' %}">
-                                                            <i class="fa-solid fa-cart-plus text-primary"></i>
+                                                            <i class="fa-solid fa-cart-plus text-info"></i>
                                                         </a>
                                                     </h4>
                                                 </div>
@@ -323,7 +341,7 @@
                                                     <p class="mb-2 text-black text-uppercase">Display</p>
                                                     <h5 class="mb-0 text-center">
                                                         <a href="{% url 'DisplayAudio' %}">
-                                                            <i class="fa-solid fa-display text-primary"></i>
+                                                            <i class="fa-solid fa-display text-info"></i>
                                                         </a>
                                                     </h5>
                                                 </div>
@@ -336,9 +354,9 @@
                                     <div class="card">
                                         <h5 class="text-center mt-3 p-2 font-weight-bold">Sub-Combination</h5>
                                         <div class="text-center">
-                                            <span class="text-uppercase font-weight-bold text-primary">Genre</span>
+                                            <span class="text-uppercase font-weight-bold text-info">Genre</span>
                                             <i class="fa-solid fa-repeat"></i>
-                                            <span class="text-uppercase font-weight-bold text-primary">Subgenre</span>
+                                            <span class="text-uppercase font-weight-bold text-info">Subgenre</span>
                                         </div>
                                         <div class="card-body d-flex flex-column justify-content-between">
                                             <div class="d-flex justify-content-between align-items-center mb-1">
@@ -346,7 +364,7 @@
                                                     <p class="mb-2 text-black text-uppercase">Insert</p>
                                                     <h4 class="mb-0 text-center">
                                                         <a href="{% url 'AddSubCombination' %}">
-                                                            <i class="fa-solid fa-cart-plus text-primary"></i>
+                                                            <i class="fa-solid fa-cart-plus text-info"></i>
                                                         </a>
                                                     </h4>
                                                 </div>
@@ -355,7 +373,7 @@
                                                     <p class="mb-2 text-black text-uppercase">Display</p>
                                                     <h5 class="mb-0 text-center">
                                                         <a href="{% url 'DisplaySubCombination' %}">
-                                                            <i class="fa-solid fa-display text-primary"></i>
+                                                            <i class="fa-solid fa-display text-info"></i>
                                                         </a>
                                                     </h5>
                                                 </div>
