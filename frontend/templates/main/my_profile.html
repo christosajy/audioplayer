@@ -49,14 +49,14 @@
                                         <i class="fa-solid fa-house"></i>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item active">
                                     {% if request.session.Username %}
                                     <a href="{% url 'frontabout' %}" class="nav-link tm-nav-link tm-text-white active">
-                                        <i class="fa-solid fa-user mr-2"></i><span>{{request.session.Username}}</span>
+                                        <i class="fa-solid fa-user"></i>
                                     </a>
                                     {% else %}
                                     <a href="{% url 'LoginPage' %}" class="nav-link tm-nav-link tm-text-white">
-                                        <i class="fa-solid fa-user mr-2"></i><span>join</span>
+                                        <i class="fa-solid fa-user-plus"></i>
                                     </a>
                                     {% endif %}
                                 </li>
@@ -72,16 +72,15 @@
             <div class="row tm-about-row tm-mb-medium load-box">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 
-                    <div class="my-5">
-                        <a href="{% url 'LoginPage' %}" class="btn btn-primary" role="button">Login</a>
-                        <a href="{% url 'LogoutUser' %}" class="btn btn-primary ml-3" role="button">Logout</a>
-                    </div>
-                    
 
-                    <div class="embed-responsive embed-responsive-21by9">
+                    <a href="{% url 'LogoutUser' %}" class="btn btn-primary ml-3" role="button">Logout</a>
+
+
+
+                    <!-- <div class="embed-responsive embed-responsive-21by9">
                         <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/EreZNkWzBAw?rel=0"
                             allowfullscreen></iframe>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 

@@ -52,11 +52,11 @@
                                 <li class="nav-item">
                                     {% if request.session.Username %}
                                     <a href="{% url 'frontabout' %}" class="nav-link tm-nav-link tm-text-white">
-                                        <i class="fa-solid fa-user mr-2"></i><span>{{request.session.Username}}</span>
+                                        <i class="fa-solid fa-user"></i>
                                     </a>
                                     {% else %}
                                     <a href="{% url 'LoginPage' %}" class="nav-link tm-nav-link tm-text-white">
-                                        <i class="fa-solid fa-user mr-2"></i><span>join</span>
+                                        <i class="fa-solid fa-user-plus"></i>
                                     </a>
                                     {% endif %}
                                 </li>
@@ -93,7 +93,7 @@
                         </button>
                     </div>
                     <div class="form-group tm-advanced-box">
-                        <a href="#" class="tm-text-white">Go Advanced ...</a>
+                        <a href="https://www.google.com" class="tm-text-white">Go Advanced ...</a>
                     </div>
                 </form>
             </div>
