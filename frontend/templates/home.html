@@ -49,17 +49,22 @@
                                         <i class="fa-solid fa-house"></i>
                                     </a>
                                 </li>
+                                {% if request.session.Username %}
                                 <li class="nav-item">
-                                    {% if request.session.Username %}
-                                    <a href="{% url 'frontabout' %}" class="nav-link tm-nav-link tm-text-white">
-                                        <i class="fa-solid fa-user"></i>
+                                    <a href="{% url 'frontabout' user_flt=request.session.Username %}"
+                                        class="nav-link tm-nav-link tm-text-white">
+                                        <img src="{{user.Profile.url}}" class="nav-img">
+                                        <!-- <i class="fa-solid fa-user"></i> -->
                                     </a>
-                                    {% else %}
+                                </li>
+
+                                {% else %}
+                                <li class="nav-item">
                                     <a href="{% url 'LoginPage' %}" class="nav-link tm-nav-link tm-text-white">
                                         <i class="fa-solid fa-user-plus"></i>
                                     </a>
-                                    {% endif %}
                                 </li>
+                                {% endif %}
                             </ul>
                         </nav>
                     </div>

@@ -3,7 +3,7 @@ from frontend import views
 
 urlpatterns = [
     path('HomePage/', views.frontindex, name='frontindex'),
-    path('My-Profile/', views.frontabout, name='frontabout'),
+    path('My-Profile/<user_flt>/', views.frontabout, name='frontabout'),
     path('Genre-Filtered/<cmb_flt>/', views.GenreFiltered, name='GenreFiltered'),
     path('Sub-Genre-Filtered/<sub_flt>/', views.SubGenreFiltered, name='SubGenreFiltered'),
     path('Sub-Genre-Songs-Filtered/<aud_flt>/', views.AudioListFiltered, name='AudioListFiltered'),
@@ -14,4 +14,5 @@ urlpatterns = [
     path('Logout-User/', views.LogoutUser, name='LogoutUser'),
     path('Signup-Page/', views.SignupPage, name='SignupPage'),
     path('Save-User/', views.SaveUser, name='SaveUser'),
+    path('Update-User/<user_flt>/', views.UpdateUser, name='UpdateUser'),
 ]

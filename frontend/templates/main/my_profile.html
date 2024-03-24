@@ -49,17 +49,24 @@
                                         <i class="fa-solid fa-house"></i>
                                     </a>
                                 </li>
-                                <li class="nav-item active">
-                                    {% if request.session.Username %}
-                                    <a href="{% url 'frontabout' %}" class="nav-link tm-nav-link tm-text-white active">
-                                        <i class="fa-solid fa-user"></i>
+                                {% if request.session.Username %}
+                                <li class="nav-item">
+                                    <a href="{% url 'frontabout' user_flt=request.session.Username %}"
+                                        class="nav-link tm-nav-link tm-text-white active">
+                                        <img src="{{user.Profile.url}}" class="nav-img">
+                                        <!-- <i class="fa-solid fa-user"></i> -->
                                     </a>
-                                    {% else %}
+                                </li>
+                                {% else %}
+                                <li class="nav-item">
                                     <a href="{% url 'LoginPage' %}" class="nav-link tm-nav-link tm-text-white">
                                         <i class="fa-solid fa-user-plus"></i>
                                     </a>
-                                    {% endif %}
                                 </li>
+                                <li class="nav-item">
+                                    <img src="{% static 'img/nouser.jpg' %}" class="nav-img">
+                                </li>
+                                {% endif %}
                             </ul>
                         </nav>
                     </div>
@@ -73,14 +80,137 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 
 
-                    <a href="{% url 'LogoutUser' %}" class="btn btn-primary ml-3" role="button">Logout</a>
+                    <div class="container">
+                        <div class="main-body">
+
+                            <div class="row gutters-sm">
+
+                                {% if request.session.Username %}
+                                <div class="col-md-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-column align-items-center text-center py-3">
+
+                                                <img src="{{user.Profile.url}}" class="profile-circle">
+
+                                                <div class="mt-3">
+                                                    <h4 class="text-uppercase font-weight-bold">{{user.Name}}</h4>
+                                                    <p class="text-secondary mb-1">@{{user.Username}}</p>
+                                                    <p class="text-muted font-size-sm">{{user.Email}}</p>
+
+                                                    <div class="mt-3">
+                                                        <a href="{% url 'LogoutUser' %}" class="btn btn-outline-primary"
+                                                            role="button">
+                                                            <span>Logout</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% else %}
+                                <div class="col-md-4 mb-3 no-user-col">
+                                    <div class="card" id="card-box">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-column align-items-center text-center py-3">
+
+                                                <img src="{% static 'img/nouser.jpg' %}" class="no-profile-circle">
+
+                                                <div class="mt-3">
+                                                    <h4 class="text-capitalize">No User</h4>
+
+                                                    <div class="mt-3">
+                                                        <a href="{% url 'LoginPage' %}" class="btn btn-outline-primary"
+                                                            role="button">
+                                                            <span>Login or Sign Up</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
 
 
+                                {% if request.session.Username %}
+                                <div class="col-md-8">
+                                    <div class="card mb-3">
 
-                    <!-- <div class="embed-responsive embed-responsive-21by9">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/EreZNkWzBAw?rel=0"
-                            allowfullscreen></iframe>
-                    </div> -->
+                                        <form action="{% url 'UpdateUser' user_flt=request.session.Username %}"
+                                            method="post" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <div class="card-body">
+                                                <div class="row row-box">
+                                                    <div class="col-sm-3">
+                                                        <h6 class="h6">Name</h6>
+                                                    </div>
+                                                    <div class="col-sm-9 text-secondary">
+                                                        <input type="text" name="name" value="{{user.Name}}"
+                                                            class="form-input">
+                                                    </div>
+                                                </div>
+                                                <hr class="hidden">
+
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <h6 class="h6">Email</h6>
+                                                    </div>
+                                                    <div class="col-sm-9 text-secondary">
+                                                        <input type="email" name="email" value="{{user.Email}}"
+                                                            class="form-input">
+                                                    </div>
+                                                </div>
+                                                <hr class="hidden">
+
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <h6 class="h6">Username</h6>
+                                                    </div>
+                                                    <div class="col-sm-9 text-secondary">
+                                                        <input type="text" name="uname" value="{{user.Username}}"
+                                                            class="form-input">
+                                                    </div>
+                                                </div>
+                                                <hr class="hidden">
+
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <h6 class="h6">Password</h6>
+                                                    </div>
+                                                    <div class="col-sm-9 text-secondary">
+                                                        <input type="password" name="pass" value="{{user.Password}}"
+                                                            class="form-input">
+                                                    </div>
+                                                </div>
+                                                <hr class="hidden">
+
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <h6 class="h6">Profile Image</h6>
+                                                    </div>
+                                                    <div class="col-sm-9 text-secondary">
+                                                        <input type="file" name="img" class="form-input">
+                                                    </div>
+                                                </div>
+
+                                                <div class="button-row mt-3">
+                                                    <button class="btn btn-primary mr-2" type="submit">Update</button>
+                                                    <button class="btn btn-danger mr-2" type="reset">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -120,9 +250,11 @@
     <!-- static JS -->
     <script src="{% static 'js/script.js' %}"></script>
     <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
 
+    <script>
         $(function () {
 
             if (renderPage) {
@@ -131,8 +263,30 @@
 
             $('.tm-current-year').text(new Date().getFullYear());
         });
-
     </script>
+
+    {% if messages %}
+    {% for i in messages %}
+    {% if i.tags == 'success' %}
+    <script>
+        swal('{{i}}', '', 'success')
+    </script>
+    {% elif i.tags == 'warning' %}
+    <script>
+        swal('{{i}}', '', 'warning')
+    </script>
+    {% elif i.tags == 'error' %}
+    <script>
+        swal('{{i}}', '', 'error')
+    </script>
+    {% else %}
+    <script>
+        swal('{{i}}', '', 'info')
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
 </body>
 
 </html>

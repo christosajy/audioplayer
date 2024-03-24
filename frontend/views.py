@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from backend.models import LanguageDb, CombinedDb, SubCombinedDb, SongsDb
 from frontend.models import UsersDb
 from django.contrib import messages
+from django.core.files.storage import FileSystemStorage
+from django.utils.datastructures import MultiValueDictKeyError
 
 ########################### HOME #############################################################################
 
@@ -49,8 +51,10 @@ def SongFiltered(request, song_flt):
 
 ###################################### PROFILE-PAGE ########################################################
 
-def frontabout(request):
-    return render(request, 'main/my_profile.html')
+def frontabout(request, user_flt):
+    user = UsersDb.objects.filter(Username=user_flt).first()
+    context = {'user': user}
+    return render(request, 'main/my_profile.html', context)
 
 def LoginPage(request):
     return render(request, 'forms/login.html')
@@ -60,7 +64,7 @@ def LoginUser(request):
         un = request.POST.get('uname')
         ps = request.POST.get('pass')
         if UsersDb.objects.filter(Username=un, Password=ps).exists():
-            # Setting Session
+            # SETTING-UP-SESSION
             request.session['Username'] = un
             request.session['Password'] = ps
             messages.success(request, 'Login Successful. Welcome Home')
@@ -92,3 +96,21 @@ def SaveUser(request):
             obj.save()
             messages.success(request, 'User Signup Successfull')
             return redirect(SignupPage)
+
+def UpdateUser(request, user_flt):
+    if request.method == 'POST':
+        nm = request.POST.get('name')
+        em = request.POST.get('email')
+        un = request.POST.get('uname')
+        ps = request.POST.get('pass')
+        try:
+            im = request.FILES['img']
+            file = FileSystemStorage().save(im.name,im)
+        except MultiValueDictKeyError:
+            file = UsersDb.objects.get(Username=user_flt).Profile
+        UsersDb.objects.filter(Username=user_flt).update(Name=nm, Email=em, Username=un, Password=ps, Profile=file)
+        # DELETING-SESSION-FOR-RESTARTING-WEBSITE-FOR-CHANGES-TO-TAKE-EFFECT
+        del request.session['Username']
+        del request.session['Password']
+        messages.success(request, 'Data Updated Successfully. User Logged off. Re-Login again.')
+        return redirect(frontindex)
