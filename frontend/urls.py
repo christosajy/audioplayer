@@ -2,17 +2,18 @@ from django.urls import path
 from frontend import views
 
 urlpatterns = [
-    path('HomePage/', views.frontindex, name='frontindex'),
-    path('My-Profile/<user_flt>/', views.frontabout, name='frontabout'),
-    path('Genre-Filtered/<cmb_flt>/', views.GenreFiltered, name='GenreFiltered'),
-    path('Sub-Genre-Filtered/<sub_flt>/', views.SubGenreFiltered, name='SubGenreFiltered'),
-    path('Sub-Genre-Songs-Filtered/<aud_flt>/', views.AudioListFiltered, name='AudioListFiltered'),
-    path('Single-Songs-Filtered/<song_flt>/', views.SongFiltered, name='SongFiltered'),
+    path('Home/', views.frontindex, name='frontindex'),
+    path('My_Profile/<user_flt>/', views.frontabout, name='frontabout'),
+    path('Genre_Filtered/<cmb_flt>/', views.GenreFiltered, name='GenreFiltered'),
+    path('Sub_Genre_Filtered/<sub_flt>/', views.SubGenreFiltered, name='SubGenreFiltered'),
+    path('Sub_Genre_Songs_Filtered/<aud_flt>/', views.AudioListFiltered, name='AudioListFiltered'),
+    path('Single_Songs_Filtered/<song_flt>/', views.SongFiltered, name='SongFiltered'),
     # Login-Page 
-    path('Login-Page/', views.LoginPage, name='LoginPage'),
-    path('Login-User/', views.LoginUser, name='LoginUser'),
-    path('Logout-User/', views.LogoutUser, name='LogoutUser'),
-    path('Signup-Page/', views.SignupPage, name='SignupPage'),
-    path('Save-User/', views.SaveUser, name='SaveUser'),
-    path('Update-User/<user_flt>/', views.UpdateUser, name='UpdateUser'),
+    path('Login_Page/', views.LoginPage, name='LoginPage'),
+    path('Login_User/', views.LoginUser, name='LoginUser'),
+    path('Logout_User/', views.LogoutUser, name='LogoutUser'),
+    path('Signup_Page/', views.SignupPage, name='SignupPage'),
+    path('Save_User/', views.SaveUser, name='SaveUser'),
+    path('Update_User/<user_flt>/', views.UpdateUser, name='UpdateUser'),
+
 ]

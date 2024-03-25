@@ -4,6 +4,7 @@ from frontend.models import UsersDb
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 from django.utils.datastructures import MultiValueDictKeyError
+from django.urls import reverse
 
 ########################### HOME #############################################################################
 
@@ -47,6 +48,11 @@ def SongFiltered(request, song_flt):
     song = SongsDb.objects.filter(Name=song_flt)
     context = {'song': song}
     return render(request, 'directory/song_fltr.html', context)
+
+def BacktoAudioListFiltered(request):
+    filter_parameters = request.POST
+    previous_page_url =reverse("AudioListFiltered") + "?" + filter_parameters.urlencode()
+    return redirect(previous_page_url)
 
 
 ###################################### PROFILE-PAGE ########################################################

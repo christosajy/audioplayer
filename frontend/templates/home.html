@@ -53,11 +53,9 @@
                                 <li class="nav-item">
                                     <a href="{% url 'frontabout' user_flt=request.session.Username %}"
                                         class="nav-link tm-nav-link tm-text-white">
-                                        <img src="{{user.Profile.url}}" class="nav-img">
-                                        <!-- <i class="fa-solid fa-user"></i> -->
+                                        <i class="fa-solid fa-user"></i>
                                     </a>
                                 </li>
-
                                 {% else %}
                                 <li class="nav-item">
                                     <a href="{% url 'LoginPage' %}" class="nav-link tm-nav-link tm-text-white">

@@ -8,12 +8,11 @@
 
 	<title>Audiocad</title>
 	<!-- load CSS  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- static CSS -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/tooplate-style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/lst/style.css' %}">
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+	<!-- static CSS -->
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/tooplate-style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/lst/style.css' %}">
 
 	<script>
 		var renderPage = true;
@@ -44,17 +43,26 @@
 					<div class="col-xl-12">
 						<nav class="navbar navbar-expand-sm">
 							<ul class="navbar-nav ml-auto">
-                                <li class="nav-item active">
-                                    <a href="{% url 'frontindex' %}" class="nav-link tm-nav-link tm-text-white">
-                                        <i class="fa-solid fa-house"></i>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{% url 'frontabout' %}" class="nav-link tm-nav-link tm-text-white">
-                                        <i class="fa-solid fa-user"></i>
-                                    </a>
-                                </li>
-                            </ul>
+								<li class="nav-item active">
+									<a href="{% url 'frontindex' %}" class="nav-link tm-nav-link tm-text-white active">
+										<i class="fa-solid fa-house"></i>
+									</a>
+								</li>
+								{% if request.session.Username %}
+								<li class="nav-item">
+									<a href="{% url 'frontabout' user_flt=request.session.Username %}"
+										class="nav-link tm-nav-link tm-text-white">
+										<i class="fa-solid fa-user"></i>
+									</a>
+								</li>
+								{% else %}
+								<li class="nav-item">
+									<a href="{% url 'LoginPage' %}" class="nav-link tm-nav-link tm-text-white">
+										<i class="fa-solid fa-user-plus"></i>
+									</a>
+								</li>
+								{% endif %}
+							</ul>
 						</nav>
 					</div>
 				</div>
@@ -66,9 +74,9 @@
 			<div class="tm-search-form-container" style="margin-bottom: 5rem;">
 				<form action="" method="GET" class="form-inline tm-search-form">
 					<div class="tm-new-release">
-                        <span class="font-weight-bold text-uppercase">Audiocad</span>
-                        <i class="fa-solid fa-music ml-2"></i>
-                    </div>
+						<span class="font-weight-bold text-uppercase">Audiocad</span>
+						<i class="fa-solid fa-music ml-2"></i>
+					</div>
 					<div class="form-group tm-search-box">
 						<input type="text" name="keyword" class="form-control tm-search-input" autocomplete="off"
 							placeholder="Type your keyword ...">
@@ -82,19 +90,32 @@
 				</form>
 			</div>
 
+			<div class="song-card">
+				<div class="card-body">
+					<div class="details-box">
+						<button type="submit" class="btn btn btn-light" id="more">
+							<span class="font-weight-normal">More details</span>
+							<i class="fa-solid fa-caret-down"></i>
+						</button>
+						<button type="submit" class="btn btn btn-light ml-2" id="less">
+							<span class="font-weight-normal">Less details</span>
+							<i class="fa-solid fa-caret-up"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+
 			<section>
 				{% for i in audio %}
 				<ol role="list" class="ol">
 
 					<li class="li">
 						<h3 id="h3">
-							<a href="{% url 'SongFiltered' song_flt=i.Name %}">
-								<span>{{i.Name}} - {{i.Album_or_Film}}</span>
-							</a>
+							<a href="{% url 'SongFiltered' song_flt=i.Name %}">{{i.Name}} - {{i.Album_or_Film}}</a>
 						</h3>
 						<p class="p">Artists: {{i.Artists}}</p>
 
-						<div>
+						<div class="extra-details">
 							<a href="#"><img src="{{i.Img_File.url}}" class="img"></a>
 							<p class="p">Language: {{i.Language}}</p>
 							<p class="p">Topic: {{i.Genre}} - {{i.Sub_Genre}}</p>
@@ -111,8 +132,10 @@
 				{% empty %}
 				<span class="text-danger empty-record">No Songs Found.</span>
 				{% endfor %}
-				
+
 			</section>
+			<button class="btn btn-info" onclick="goBack()">Previous Page</button>
+			<button class="btn btn-info" onclick="goNext()">Next Page</button>
 
 			<div class="row tm-mb-big tm-subscribe-row">
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 tm-bg-gray tm-subscribe-form">
@@ -178,7 +201,29 @@
 
 			$('.tm-current-year').text(new Date().getFullYear());
 		});
+
+		$(document).ready(function () {
+
+			$(".extra-details").hide(); $("#less").hide()
+
+			$("#more").click(function () {
+				$(".extra-details").show(); $("#less").show(); $("#more").hide()
+			})
+
+			$("#less").click(function () {
+				$(".extra-details").hide(); $("#less").hide(); $("#more").show()
+			})
+		})
+
+		function goBack() {
+			window.history.back();
+		}
+		
+		function goNext() {
+			window.history.forward();
+		}
 	</script>
+
 </body>
 
 </html>

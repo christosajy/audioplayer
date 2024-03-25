@@ -1,23 +1,47 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Audiocad</title>
+  <!-- load CSS  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- static CSS -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/tooplate-style.css' %}">
   <link rel="stylesheet" href="{% static 'css/song_fltr/style.css' %}">
 </head>
-<body>
-  <div class="player">
+
+<body id="back-box">
+  <div class="main-box">
     {% for i in song %}
-    <div class="imgBx">
-      <img src="{{i.Img_File.url}}" alt="Luka Chuppi">
+    <div class="img-flex">
+      <img src="{{i.Img_File.url}}">
     </div>
     <audio controls controlslist="nodownload">
       <source src="{{i.Audio_File.url}}" type="audio/mp3">
     </audio>
+    <button class="btn btn-info" onclick="goBack()">Previous Page</button>
     {% endfor %}
   </div>
+
+  <!-- static JS -->
+  <script src="{% static 'js/script.js' %}"></script>
+  <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+
+    function goNext() {
+      window.history.forward();
+    }
+  </script>
+
 </body>
+
 </html>

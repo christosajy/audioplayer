@@ -179,10 +179,10 @@ body {
     box-shadow: none !important;
 }
 
-.form-input{
+.form-input {
     height: 2.85rem;
     padding: 10px;
-    width : 100%;
+    width: 100%;
     color: #495057;
     background-color: #ffffff;
     background-clip: padding-box;
@@ -226,8 +226,23 @@ body {
 }
 
 .nav-img {
-    border-radius: 100%; 
-    margin-left: -30px;
-    width: 28px;
-    height: 28px;
+    margin-top: -5px;
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+}
+
+.song-card {
+    height: 50px;
+    width: 187vh;
+    margin-left: 40px;
+    margin-top: -50px;
+    margin-bottom: 20px;
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+.details-box {
+    float: right;
+    margin-right: -1rem;
 }
