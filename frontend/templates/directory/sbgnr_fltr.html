@@ -115,6 +115,20 @@
                 </div>
             </section>
 
+            <div class="bottom-card">
+                <div class="card-body card-button">
+                    <button class="btn btn-light" onclick="goBack()">
+                        <i class="fa-solid fa-angles-left text-blue"></i>
+                    </button>
+                    <button class="btn btn-light hidden" onclick="">
+                        <i class="fa-solid fa-house text-blue"></i>
+                    </button>
+                    <button class="btn btn-light" onclick="goNext()">
+                        <i class="fa-solid fa-angles-right text-blue"></i>
+                    </button>
+                </div>
+            </div>
+
             <div class="row tm-mb-big tm-subscribe-row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 tm-bg-gray tm-subscribe-form">
                     <h3 class="text-primary tm-mb-30">Subscribe our updates!</h3>
@@ -179,6 +193,14 @@
 
             $('.tm-current-year').text(new Date().getFullYear());
         });
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function goNext() {
+            window.history.forward();
+        }
     </script>
 </body>
 

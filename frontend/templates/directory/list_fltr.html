@@ -90,7 +90,7 @@
 				</form>
 			</div>
 
-			<div class="song-card">
+			<div class="top-card">
 				<div class="card-body">
 					<div class="details-box">
 						<button type="submit" class="btn btn btn-light" id="more">
@@ -134,8 +134,20 @@
 				{% endfor %}
 
 			</section>
-			<button class="btn btn-info" onclick="goBack()">Previous Page</button>
-			<button class="btn btn-info" onclick="goNext()">Next Page</button>
+
+			<div class="bottom-card">
+				<div class="card-body card-button">
+					<button class="btn btn-light" onclick="goBack()">
+						<i class="fa-solid fa-angles-left text-blue"></i>
+					</button>
+					<button class="btn btn-light hidden" onclick="">
+						<i class="fa-solid fa-house text-blue"></i>
+					</button>
+					<button class="btn btn-light" onclick="goNext()">
+						<i class="fa-solid fa-angles-right text-blue"></i>
+					</button>
+				</div>
+			</div>
 
 			<div class="row tm-mb-big tm-subscribe-row">
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 tm-bg-gray tm-subscribe-form">
@@ -218,7 +230,7 @@
 		function goBack() {
 			window.history.back();
 		}
-		
+
 		function goNext() {
 			window.history.forward();
 		}
