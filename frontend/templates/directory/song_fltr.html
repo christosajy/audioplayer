@@ -4,44 +4,53 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Audiocad</title>
+  <title>Document</title>
+  <title>Audiocad Interface</title>
   <!-- load CSS  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <!-- static CSS -->
-  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'css/tooplate-style.css' %}">
-  <link rel="stylesheet" href="{% static 'css/song_fltr/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/sng_fltr/style.css' %}">
+
+  <!-- <script src="https://kit.fontawesome.com/cf3180ba46.js" crossorigin="anonymous"></script> -->
 </head>
 
-<body id="back-box">
-  <div class="main-box">
+<body>
+  <div class="container">
     {% for i in song %}
-    <div class="img-flex">
-      <img src="{{i.Img_File.url}}">
+    <div class="music-player">
+      <nav>
+        <div class="circle">
+          <i class="fa-solid fa-angle-left"></i>
+        </div>
+        <div class="circle">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+      </nav>
+
+      <img src="{{i.Img_File.url}}" class="song-img">
+      <h1>{{i.Name}}</h1>
+      <p>{{i.Artists}}</p>
+
+      <audio id="song">
+        <source src="{{i.Audio_File.url}}" type="audio/mpeg">
+      </audio>
+      <input type="range" value="0" id="progress">
+
+      <div class="controls">
+        <div><i class="fa-solid fa-backward"></i></div>
+        <div onclick="playPause()"><i class="fa-solid fa-play" id="ctrl-icon"></i></div>
+        <div><i class="fa-solid fa-forward"></i></div>
+
+      </div>
+
     </div>
-    <audio controls controlslist="nodownload">
-      <source src="{{i.Audio_File.url}}" type="audio/mp3">
-    </audio>
-    <button class="btn btn-info" onclick="goBack()">Previous Page</button>
     {% endfor %}
   </div>
 
-  <!-- static JS -->
   <script src="{% static 'js/script.js' %}"></script>
   <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
-
-  <script>
-    function goBack() {
-      window.history.back();
-    }
-
-    function goNext() {
-      window.history.forward();
-    }
-  </script>
-
+  <script src="{% static 'js/sng_fltr/scripts.js' %}"></script>
 </body>
 
 </html>
