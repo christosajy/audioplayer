@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Audiocad Interface</title>
+    <!-- load CSS  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- static CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tooplate-style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/lst/style.css' %}">
+
+    <script>
+        var renderPage = true;
+
+        if (navigator.userAgent.indexOf('MSIE') !== -1
+            || navigator.appVersion.indexOf('Trident/') > 0) {
+
+            alert("Please view this in a modern browser such as Chrome or Microsoft Edge.");
+            renderPage = false;
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Loader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+
+    <div class="tm-main">
+
+        <div class="tm-welcome-section half-navbar-top">
+            <div class="container tm-navbar-container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <nav class="navbar navbar-expand-sm">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <a href="{% url 'frontindex' %}" class="nav-link tm-nav-link tm-text-white">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                {% if request.session.Username %}
+                                <li class="nav-item">
+                                    <a href="{% url 'ShowPlaylist' user_flt=request.session.Username %}"
+                                        class="nav-link tm-nav-link tm-text-white">
+                                        <i class="fa-solid fa-radio"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{% url 'frontabout' user_flt=request.session.Username %}"
+                                        class="nav-link tm-nav-link tm-text-white active">
+                                        <i class="fa-solid fa-user"></i>
+                                    </a>
+                                </li>
+                                {% else %}
+                                <li class="nav-item">
+                                    <a href="{% url 'LoginPage' %}" class="nav-link tm-nav-link tm-text-white">
+                                        <i class="fa-solid fa-user-plus"></i>
+                                    </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container">
+            <div class="row tm-about-row tm-mb-medium load-box">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+                    <div class="container">
+                        <div class="main-body">
+
+                            <div class="row gutters-sm">
+                                {% if request.session.Username %}
+                                <div class="col-md-12">
+                                    <div class="card mb-3 profile-head">
+                                        <span>View and Update User Profile details</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-column align-items-center text-center py-3">
+
+                                                <img src="{{user.Profile.url}}" class="profile-circle">
+
+                                                <div class="mt-3">
+                                                    <p class="text-secondary mb-1">@{{user.Username}}</p>
+                                                    <h4 class="text-uppercase font-weight-bold">{{user.Name}}</h4>
+                                                    <p class="text-muted font-size-sm">{{user.Email}}</p>
+
+                                                    <div class="mt-3">
+                                                        <button class="btn btn-dark" onclick="goBack()">
+                                                            <i class="fa-solid fa-angles-left"></i>
+                                                            <span>Back</span>
+                                                        </button>
+                                                        <a href="{% url 'LogoutUser' %}" class="btn btn-dark"
+                                                            role="button">
+                                                            <span>Logout</span>
+                                                            <i class="fa-solid fa-right-from-bracket"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% else %}
+                                <div class="col-md-4 mb-3 no-user-col">
+                                    <div class="card" id="card-box">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-column align-items-center text-center py-3">
+
+                                                <img src="{% static 'img/nouser.jpg' %}" class="no-profile-circle">
+
+                                                <div class="mt-3">
+                                                    <h4 class="text-capitalize">No User</h4>
+
+                                                    <div class="mt-3">
+                                                        <a href="{% url 'LoginPage' %}" class="btn btn-outline-primary"
+                                                            role="button">
+                                                            <span>Login or Sign Up</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+
+
+                                {% if request.session.Username %}
+                                <div class="col-md-8">
+                                    <div class="card mb-3">
+
+                                        <form action="{% url 'UpdateUser' user_flt=request.session.Username %}"
+                                            method="post" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <div class="card-body">
+                                                <div class="row row-box">
+                                                    <div class="col-sm-3">
+                                                        <h6 class="h6">Name</h6>
+                                                    </div>
+                                                    <div class="col-sm-9 text-secondary">
+                                                        <input type="text" name="name" value="{{user.Name}}"
+                                                            class="form-input">
+                                                    </div>
+                                                </div>
+                                                <hr class="hidden">
+
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <h6 class="h6">Email</h6>
+                                                    </div>
+                                                    <div class="col-sm-9 text-secondary">
+                                                        <input type="email" name="email" value="{{user.Email}}"
+                                                            class="form-input">
+                                                    </div>
+                                                </div>
+                                                <hr class="hidden">
+
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <h6 class="h6">Username</h6>
+                                                    </div>
+                                                    <div class="col-sm-9 text-secondary">
+                                                        <input type="text" name="uname" value="{{user.Username}}"
+                                                            class="form-input">
+                                                    </div>
+                                                </div>
+                                                <hr class="hidden">
+
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <h6 class="h6">Password</h6>
+                                                    </div>
+                                                    <div class="col-sm-9 text-secondary">
+                                                        <input type="password" name="pass" value="{{user.Password}}"
+                                                            class="form-input">
+                                                    </div>
+                                                </div>
+                                                <hr class="hidden">
+
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <h6 class="h6">Profile Image</h6>
+                                                    </div>
+                                                    <div class="col-sm-9 text-secondary">
+                                                        <input type="file" name="img" class="form-input">
+                                                    </div>
+                                                </div>
+
+                                                <div class="button-row mt-3">
+                                                    <button class="btn btn-primary mr-2" type="submit">Update</button>
+                                                    <button class="btn btn-danger mr-2" type="reset">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Bottom links -->
+            <div class="row tm-about-row tm-mb-medium">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 mb-4">
+                    <h4 class="mb-4 tm-font-300">Latest Albums</h4>
+                    <a href="#" class="tm-text-blue-dark d-block mb-2">Sed fringilla consectetur</a>
+                    <a href="#" class="tm-text-blue-dark d-block mb-2">Mauris porta nisl quis</a>
+                    <a href="#" class="tm-text-blue-dark d-block mb-2">Quisque maximus quam nec</a>
+                    <a href="#" class="tm-text-blue-dark d-block">Class aptent taciti sociosqu ad</a>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 mb-4">
+                    <h4 class="mb-4 tm-font-300">Our Pages</h4>
+                    <a href="#" class="tm-text-blue-dark d-block mb-2">Nam dapibus imperdiet</a>
+                    <a href="#" class="tm-text-blue-dark d-block mb-2">Primis in faucibus orci</a>
+                    <a href="#" class="tm-text-blue-dark d-block mb-2">Sed interdum blandit dictum</a>
+                    <a href="#" class="tm-text-blue-dark d-block">Donec non blandit nisl</a>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                    <h4 class="mb-4 tm-font-300">Quick Links</h4>
+                    <a href="#" class="tm-text-blue-dark d-block mb-2">Nullam scelerisque mauris</a>
+                    <a href="#" class="tm-text-blue-dark d-block mb-2">Vivamus tristique enim non orci</a>
+                    <a href="#" class="tm-text-blue-dark d-block mb-2">Luctus et ultrices posuere</a>
+                    <a href="#" class="tm-text-blue-dark d-block">Cubilia Curae</a>
+                </div>
+            </div>
+            <footer class="row tm-about-row">
+                <div class="col-xl-12">
+                    <p class="text-center p-4">Copyright &copy; <span class="tm-current-year">2018</span> Your Company
+                        Name - Web Design: <a href="http://tooplate.com" class="tm-text-gray">Tooplate</a></p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- static JS -->
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+
+    <script>
+        $(function () {
+
+            if (renderPage) {
+                $('body').addClass('loaded');
+            }
+
+            $('.tm-current-year').text(new Date().getFullYear());
+        });
+
+        function goBack() {
+            window.history.back();
+        }
+
+    </script>
+
+    {% if messages %}
+    {% for i in messages %}
+    {% if i.tags == 'success' %}
+    <script>
+        swal('{{i}}', '', 'success')
+    </script>
+    {% elif i.tags == 'warning' %}
+    <script>
+        swal('{{i}}', '', 'warning')
+    </script>
+    {% elif i.tags == 'error' %}
+    <script>
+        swal('{{i}}', '', 'error')
+    </script>
+    {% else %}
+    <script>
+        swal('{{i}}', '', 'info')
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+</body>
+
+</html>

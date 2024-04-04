@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audiocad Interface</title>
+  <!-- load CSS  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- static CSS -->
+  <link rel="stylesheet" href="{% static 'css/sng_fltr/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/tooplate-style.css' %}">
+</head>
+
+<body>
+
+  <div class="tm-welcome-section hero">
+    {% for i in song %}
+    <div class="music">
+      <img src="{{i.Image.url}}">
+      <div class="info">
+        <form action="{% url 'AddtoPlaylist' %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <h1>{{i.Name}}</h1>
+          <p>{{i.Film}}({{i.Year}}) - Starring {{i.Artist}} 
+            <a href="#" id="more" class="amor"> more</a><a href="#" id="less" class="amor"> less</a>
+          </p>
+          <p id="extra">{{i.Extra}}</p>
+
+          <audio id="song">
+            <source src="{{i.Audio.url}}" type="audio/mpeg">
+          </audio>
+
+          <input type="range" value="0" id="progress">
+
+          <div class="controls">
+            <div onclick="fastBkwd(10)"><i class="fa-solid fa-backward"></i></div>
+            <div onclick="playPause()"><i class="fa-solid fa-play" id="ctrlIcn"></i></div>
+            <div onclick="fastFwd(10)"><i class="fa-solid fa-forward"></i></div>
+          </div>
+
+          <div class="aux-controls">
+            <div onclick="audioMute()"><i class="fa-solid fa-volume-high" id="volIcn"></i></div>
+            <div><input type="range" value="50" min="0" max="99" id="vol" onchange="volCtrl()"></div>
+            <div onclick="audioStop()"><i class="fa-solid fa-stop"></i></div>
+            {% if request.session.Username %}
+            <div><button type="submit"><i class="fa-solid fa-folder-plus"></i></button></div>
+            {% endif %}
+            <div onclick="goBack()"><i class="fa-solid fa-angles-left"></i></div>
+
+          </div>
+          {% if request.session.Username %}
+          <input type="hidden" name="user" value="{{request.session.Username}}">
+          <input type="hidden" name="song" value="{{i.Name}}">
+          <input type="hidden" name="artist" value="{{i.Artist}}">
+          {% endif %}
+        </form>
+
+      </div>
+
+    </div>
+    {% endfor %}
+  </div>
+
+  <script src="{% static 'js/script.js' %}"></script>
+  <script src="{% static 'js/sng_fltr/scripts.js' %}"></script>
+  <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      $("#extra").hide(); $("#less").hide(); $("#more").show();
+
+      $("#more").click(function(){
+        $("#extra").show(); $("#less").show(); $("#more").hide();
+      })
+
+      $("#less").click(function(){
+        $("#extra").hide(); $("#less").hide(); $("#more").show();
+      })
+    })
+  </script>
+
+  {% if messages %}
+  {% for i in messages %}
+  {% if i.tags == 'success' %}
+  <script>
+    swal('{{i}}', '', 'success')
+  </script>
+  {% elif i.tags == 'warning' %}
+  <script>
+    swal('{{i}}', '', 'warning')
+  </script>
+  {% elif i.tags == 'error' %}
+  <script>
+    swal('{{i}}', '', 'error')
+  </script>
+  {% else %}
+  <script>
+    swal('{{i}}', '', 'info')
+  </script>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+</body>
+
+</html>

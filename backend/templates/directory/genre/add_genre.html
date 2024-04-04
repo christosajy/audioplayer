@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+{% extends 'index.html' %}
+{% block content %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Add Genre</h4>
+
+                    <form class="forms-sample" action="{% url 'SaveGenre' %}" method="POST"
+                        enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label>Select Language</label>
+                            <select name="lang" class="form-control" id="select" onchange="updateSelect()" required>
+                                <option value="Select">Select</option>
+                                {% for i in lang %}
+                                <option value="{{i.Lang_Name}}">{{i.Lang_Name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Genre Name</label>
+                            <input type="text" name="genre" id="input" class="form-control" placeholder="Genre"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Genre Image</label>
+                            <input type="file" class="form-control" name="image" required>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary mr-2"><span>Submit</span></button>
+                            <button class="btn btn-dark"><span>Cancel</span></button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateSelect() {
+            var select = document.getElementById("select").value;
+            var input = document.getElementById("input").value = select;
+        }
+
+    </script>
+</body>
+
+</html>
+{% endblock %}

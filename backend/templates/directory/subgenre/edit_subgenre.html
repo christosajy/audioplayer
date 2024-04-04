@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+{% extends 'index.html' %}
+{% block content %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Edit Sub Genre</h4>
+
+                    <form class="forms-sample" action="{% url 'UpdateSubGenre' subId=subgen.id %}" method="POST"
+                        enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label>Edit Selected Respective Genre</label>
+                            <select name="genre" class="form-control">
+                                <option value="{{subgen.GenreName}}">{{subgen.GenreName}}</option>
+                                <option value="__________________">__________________</option>
+                                {% for i in genre %}
+                                <option value="{{i.GenreName}}">{{i.GenreName}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Edit Subgenre</label>
+                            <input type="text" class="form-control" value="{{subgen.SubName}}"
+                                placeholder="Genre Name" name="subgenre">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Edit Image</label>
+                            <input type="file" class="form-control" name="image">
+                            <p class="p-font mt-2 font-weight-bold">Selected Path : /{{subgen.SubImg}}</p>
+                            <img src="{{subgen.SubImg.url}}" alt="Image" class="form-sample-img mt-2">
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary mr-2"><span>Submit</span></button>
+                            <button class="btn btn-dark"><span>Cancel</span></button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% if messages %}
+    {% for i in messages %}
+    {% if i.tags == 'success' %}
+    <script>
+        swal('{{i}}', '', 'success')
+    </script>
+    {% elif i.tags == 'warning' %}
+    <script>
+        swal('{{i}}', '', 'warning')
+    </script>
+    {% elif i.tags == 'error' %}
+    <script>
+        swal('{{i}}', '', 'error')
+    </script>
+    {% else %}
+    <script>
+        swal('{{i}}', '', 'info')
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+</body>
+
+</html>
+{% endblock %}

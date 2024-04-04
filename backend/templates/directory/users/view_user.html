@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="card mb-1">
+        <div class="card-body">
+            <form action="" method="GET" class="forms-sample">
+                <div class="form-group mb-0">
+                    <button type="submit" class="btn btn-info">
+                        <i class="fa-solid fa-magnifying-glass mr-2"></i><span>Search</span>
+                    </button>
+                    <input type="text" name="keyword" class="form-control display-search-box" autocomplete="off"
+                        placeholder="Type your keyword ...">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Display Users</h4>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Profile Name</th>
+                            <th>Profile Email</th>
+                            <th>Username</th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in user %}
+                        <tr>
+                            <td>{{i.Name}}</td>
+                            <td>{{i.Email}}</td>
+                            <td>{{i.Username}}</td>
+                            <td>
+                                <img src="{{i.Profile.url}}" alt="Image">
+                            </td>
+                            <!-- <td>{{i.Password}}</td> -->
+                            <td>
+                                <form action="{% url 'RemoveUser' userId=i.id %}">
+                                    <button type="submit" class="btn btn-dark">
+                                        <span>Remove</span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+
+                        {% empty %}
+                        <span class="text-danger">No Records Found</span>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- JQuery  -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% if messages %}
+    {% for i in messages %}
+    {% if i.tags == 'success' %}
+    <script>
+        swal('{{i}}', '', 'success')
+    </script>
+    {% elif i.tags == 'warning' %}
+    <script>
+        swal('{{i}}', '', 'warning')
+    </script>
+    {% elif i.tags == 'error' %}
+    <script>
+        swal('{{i}}', '', 'error')
+    </script>
+    {% else %}
+    <script>
+        swal('{{i}}', '', 'info')
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+</body>
+
+</html>
+{% endblock %}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'vendors/typicons/typicons.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vertical-layout-light/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/added.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
+</head>
+
+<body>
+    <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+            <div class="content-wrapper d-flex align-items-center auth px-0">
+                <div class="row w-100 mx-0">
+                    <div class="col-lg-4 mx-auto">
+
+                        <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                            <div class="brand-logo">
+                                <img src="{% static 'images/logo-dark.svg' %}" alt="logo">
+                            </div>
+                            <h4>Hello! let's get started</h4>
+                            <h6 class="font-weight-light mb-3">Login to continue.</h6>
+
+                            <form action="{% url 'LoginUser' %}" method="POST">
+                                {% csrf_token %}
+
+                                <div class="form-group">
+                                    <input type="text" name="uname" class="form-control form-control-lg"
+                                        placeholder="Username" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="password" name="pass" class="form-control form-control-lg"
+                                        placeholder="Password" required>
+                                </div>
+
+                                <div class="mt-3">
+                                    <button class="btn btn-block btn-info btn-lg font-weight-medium auth-form-btn">
+                                        <span class="font-weight-bold">LOGIN</span>
+                                    </button>
+                                </div>
+
+                                <div class="my-2 d-flex justify-content-between align-items-center">
+                                    <div class="form-check">
+                                        <label class="form-check-label text-muted">
+                                            <input type="checkbox" class="form-check-input">
+                                            Keep me signed in
+                                        </label>
+                                    </div>
+                                    <a href="#" class="auth-link text-black">Forgot password?</a>
+                                </div>
+
+                                <div class="text-left mt-4 font-weight-light">
+                                    <span> Don't have an account?</span>
+                                    <a href="{% url 'SignupPage' %}" class="text-primary">Create</a>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'vendors/js/vendor.bundle.base.js' %}"></script>
+    <script src="{% static 'js/off-canvas.js' %}"></script>
+    <script src="{% static 'js/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'js/template.js' %}"></script>
+    <script src="{% static 'js/settings.js' %}"></script>
+    <script src="{% static 'js/todolist.js' %}"></script>
+    <!-- JQuery  -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% if messages %}
+    {% for i in messages %}
+    {% if i.tags == 'success' %}
+    <script>
+        swal('{{i}}', '', 'success')
+    </script>
+    {% elif i.tags == 'warning' %}
+    <script>
+        swal('{{i}}', '', 'warning')
+    </script>
+    {% elif i.tags == 'error' %}
+    <script>
+        swal('{{i}}', '', 'error')
+    </script>
+    {% else %}
+    <script>
+        swal('{{i}}', '', 'info')
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+</body>
+
+</html>

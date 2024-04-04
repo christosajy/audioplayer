@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+{% extends 'index.html' %}
+{% block content %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Add Sub Genre</h4>
+
+                    <form class="forms-sample" action="{% url 'SaveSubGenre' %}" method="POST"
+                        enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label>Pick a Respective Genre</label>
+                            <select name="genre" class="form-control" id="select" onchange="updateInput()" required>
+                                <option value="Select">Select</option>
+                                {% for i in genre %}
+                                <option value="{{i.GenreName}}">{{i.GenreName}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Add Subgenre Name</label>
+                            <input type="text" class="form-control" name="subgenre" id="input" placeholder="Subgenre"
+                                autocomplete="off" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input type="file" class="form-control" name="image" required>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary mr-2"><span>Submit</span></button>
+                            <button class="btn btn-dark"><span>Cancel</span></button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        function updateInput() {
+            var select = document.getElementById("select").value;
+            var input = document.getElementById("input").value = select;
+        }
+    </script>
+
+    {% if messages %}
+    {% for i in messages %}
+    {% if i.tags == 'success' %}
+    <script>
+        swal('{{i}}', '', 'success')
+    </script>
+    {% elif i.tags == 'warning' %}
+    <script>
+        swal('{{i}}', '', 'warning')
+    </script>
+    {% elif i.tags == 'error' %}
+    <script>
+        swal('{{i}}', '', 'error')
+    </script>
+    {% else %}
+    <script>
+        swal('{{i}}', '', 'info')
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+
+
+</body>
+
+</html>
+{% endblock %}

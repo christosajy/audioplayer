@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+{% extends 'index.html' %}
+{% block content %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Add Audio Files</h4>
+
+                <form class="forms-sample" action="{% url 'SaveAudio' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" placeholder="Name" name="name" autocomplete="off"
+                            required="required">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Language</label>
+                                <div class="col-sm-9">
+                                    <select name="lang" class="form-control" required="required">
+                                        <option value="Select">Select</option>
+                                        {% for i in lang %}
+                                        <option value="{{i.Lang_Name}}">{{i.Lang_Name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Genre</label>
+                                <div class="col-sm-9">
+                                    <select name="genre" class="form-control">
+                                        <option value="Select">Select</option>
+                                        {% for i in genre %}
+                                        <option value="{{i.GenreName}}">{{i.GenreName}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select name="type" class="form-control" required="required">
+                            <option value="Select">Select</option>
+                            {% for i in subgenre %}
+                            <option value="{{i.SubName}}">{{i.SubName}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Artists</label>
+                        <input type="text" class="form-control" placeholder="Artists" name="artist" autocomplete="off"
+                            required="required">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Release Year</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="year" name="year" required="required">
+                                        <option value="Select">Select</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Film</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="film" placeholder="Album or Film"
+                                        autocomplete="off" required="required">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Audio File</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control" name="audio" required="required">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Image File</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control" name="image" required="required">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 col-form-label">Additional Data [Optional]</label>
+                        <textarea name="extra" class="form-control" style="height: 7rem;"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary mr-2"><span>Submit</span></button>
+                        <button class="btn btn-dark"><span>Cancel</span></button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        var currentYear = new Date().getFullYear();
+        var startYear = 1970;
+        for (var i = startYear; i <= currentYear; i++) {
+            var option = document.createElement("option");
+            option.text = i;
+            option.value = i;
+            document.getElementById("year").appendChild(option);
+        }
+    </script>
+
+    {% if messages %}
+    {% for i in messages %}
+    {% if i.tags == 'success' %}
+    <script>
+        swal('{{i}}', '', 'success')
+    </script>
+    {% elif i.tags == 'warning' %}
+    <script>
+        swal('{{i}}', '', 'warning')
+    </script>
+    {% elif i.tags == 'error' %}
+    <script>
+        swal('{{i}}', '', 'error')
+    </script>
+    {% else %}
+    <script>
+        swal('{{i}}', '', 'info')
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+</body>
+
+</html>
+{% endblock %}

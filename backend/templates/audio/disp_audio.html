@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="card mb-1">
+        <div class="card-body">
+            <form action="" method="GET" class="forms-sample">
+                <div class="form-group mb-0">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-magnifying-glass mr-2"></i><span>Search</span>
+                    </button>
+                    <input type="text" name="keyword" class="form-control display-search-box" autocomplete="off"
+                        placeholder="Type your keyword ...">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Display Songs</h4>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Language</th>
+                            <th>Genre</th>
+                            <th>Type</th>
+                            <th>Year</th>
+                            <th>Artists</th>
+                            <th>Album/Film</th>
+                            <th>Audio</th>
+                            <th>Image</th>
+                            <th>Extra Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in audio %}
+                        <tr>
+                            <td>{{i.Name}}</td>
+                            <td>{{i.Language}}</td>
+                            <td>{{i.Genre}}</td>
+                            <td>{{i.Type}}</td>
+                            <td>{{i.Year}}</td>
+                            <td>{{i.Artist}}</td>
+                            <td>{{i.Film}}</td>
+                            <td>
+                                <audio controls controlslist="nodownload">
+                                    <source src="{{i.Audio.url}}" type="audio/mp3">
+                                </audio>
+                            </td>
+                            <td>
+                                <img src="{{i.Image.url}}" alt="Image">
+                            </td>
+                            <td style="white-space: pre-wrap; text-align: justify;">{{i.Extra}}</td>
+                            <td>
+                                <form action="{% url 'EditAudio' audioId=i.id %}">
+                                    <button type="submit" class="btn btn-success">
+                                        <span>Edit</span>
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="{% url 'DeleteAudio' audioId=i.id %}">
+                                    <button type="submit" class="btn btn-danger">
+                                        <span>Delete</span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <span class="text-danger">No Records Found</span>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% if messages %}
+    {% for i in messages %}
+    {% if i.tags == 'success' %}
+    <script>
+        swal('{{i}}', '', 'success')
+    </script>
+    {% elif i.tags == 'warning' %}
+    <script>
+        swal('{{i}}', '', 'warning')
+    </script>
+    {% elif i.tags == 'error' %}
+    <script>
+        swal('{{i}}', '', 'error')
+    </script>
+    {% else %}
+    <script>
+        swal('{{i}}', '', 'info')
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+</body>
+
+</html>
+{% endblock %}

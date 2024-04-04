@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+{% extends 'index.html' %}
+{% block content %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Edit Audio Files</h4>
+
+                <form class="forms-sample" action="{% url 'UpdateAudio' audioId=audio.id %}" method="POST"
+                    enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label>Audio Name</label>
+                        <input type="text" class="form-control" placeholder="Edit Name" name="name"
+                            value="{{audio.Name}}" autocomplete="off">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Language</label>
+                                <div class="col-sm-9">
+                                    <select name="lang" class="form-control">
+                                        <option value="Select">{{audio.Language}}</option>
+                                        <option value="_____________">_____________</option>
+                                        {% for i in lang %}
+                                        <option value="{{i.Lang_Name}}">{{i.Lang_Name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Genre</label>
+                                <div class="col-sm-9">
+                                    <select name="genre" class="form-control">
+                                        <option value="{{audio.Genre}}">{{audio.Genre}}</option>
+                                        <option value="_____________">_____________</option>
+                                        {% for i in genre %}
+                                        <option value="{{i.GenreName}}">{{i.GenreName}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select name="type" class="form-control">
+                            <option value="{{audio.Type}}">{{audio.Type}}</option>
+                            <option value="_____________">_____________</option>
+                            {% for i in subgenre %}
+                            <option value="{{i.SubName}}">{{i.SubName}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Artists</label>
+                        <input type="text" class="form-control" value="{{audio.Artist}}" placeholder="Artists"
+                            name="artist" autocomplete="off">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Release Year</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="year" name="year">
+                                        <option value="{{audio.Year}}">{{audio.Year}}</option>
+                                        <option value="_____________">_____________</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Film</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="film" value="{{audio.Film}}"
+                                        placeholder="Album or Film" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Edit Audio File</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control mb-2" name="audio">
+                                    <audio controls controlslist="nodownload">
+                                        <source src="{{audio.Audio.url}}" type="audio/mp3">
+                                    </audio>
+                                    <p class="p-font font-weight-bold">Selected path : /{{audio.Audio}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Edit Image File</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control mb-2" name="image">
+                                    <p class="p-font font-weight-bold">Selected path : /{{audio.Image}}</p>
+                                    <img src="{{audio.Image.url}}" alt="Image" class="form-sample-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 col-form-label">Additional Data [Optional]</label>
+                        <textarea name="extra" class="form-control text-justify"
+                            style="height: 8rem;">{{audio.Extra}}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary mr-2"><span>Update</span></button>
+                        <button class="btn btn-dark"><span>Cancel</span></button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        var currentYear = new Date().getFullYear();
+        var startYear = 1970;
+        for (var i = startYear; i <= currentYear; i++) {
+            var option = document.createElement("option");
+            option.text = i;
+            option.value = i;
+            document.getElementById("year").appendChild(option);
+        }
+    </script>
+
+    {% if messages %}
+    {% for i in messages %}
+    {% if i.tags == 'success' %}
+    <script>
+        swal('{{i}}', '', 'success')
+    </script>
+    {% elif i.tags == 'warning' %}
+    <script>
+        swal('{{i}}', '', 'warning')
+    </script>
+    {% elif i.tags == 'error' %}
+    <script>
+        swal('{{i}}', '', 'error')
+    </script>
+    {% else %}
+    <script>
+        swal('{{i}}', '', 'info')
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+
+</body>
+
+</html>
+{% endblock %}
