@@ -45,6 +45,13 @@
                                 <img src="{{i.GenreImg.url}}" alt="Image">
                             </td>
                             <td>
+                                <form action="{% url 'EditGenre' genreId=i.id %}">
+                                    <button type="submit" class="btn btn-dark">
+                                        <span>Edit</span>
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
                                 <form action="{% url 'DeleteGenre' genreId=i.id %}">
                                     <button type="submit" class="btn btn-danger">
                                         <span>Delete</span>
@@ -60,7 +67,6 @@
             </div>
         </div>
     </div>
-
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -87,7 +93,6 @@
     {% endif %}
     {% endfor %}
     {% endif %}
-
 
 </body>
 

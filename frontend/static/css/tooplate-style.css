@@ -22,7 +22,7 @@ a {
 a:hover,
 a:focus,
 a.active {
-    color: #007BFF;
+    color: #FFFF00;
     text-decoration: none;
 }
 
@@ -36,7 +36,7 @@ a.active {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    /* background-attachment: fixed; */
+    background-attachment: fixed;
     color: white;
     max-height: 700px;
     min-height: 400px;
@@ -569,6 +569,20 @@ figure.effect-sadie:hover p {
     margin-right: auto;
 }
 
+.footer-row {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../img/m1.jpg');
+    max-width: 1400px;
+}
+
+.footer-row div p {
+    text-align: center;
+    color: #FFFF00;
+}
+
+.footer-row div p a {
+    color: #FFFF00;
+}
+
 .tm-about-text {
     max-width: 560px;
     padding: 0 50px;
@@ -923,7 +937,7 @@ iframe {
     }
 
     figure.effect-sadie h2 {
-        bottom: 7%;
+        top: 70%;
     }
 
     .tm-radio-label:last-child {

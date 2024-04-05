@@ -58,7 +58,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-uppercase">Username</label>
                                             <div class="col-sm-9">
-                                                <input type="text" id="uname" class="form-control"
+                                                <input type="text" id="uname" name="uname" class="form-control"
                                                     placeholder="Username" required>
                                             </div>
                                         </div>
@@ -68,7 +68,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-uppercase">Password</label>
                                             <div class="col-sm-9">
-                                                <input type="password" id="pass" class="form-control"
+                                                <input type="password" id="pass" name="pass" class="form-control"
                                                     placeholder="Password" required>
                                             </div>
                                         </div>
@@ -76,7 +76,7 @@
                                 </div>
 
                                 <div class="mt-3">
-                                    <button class="btn btn-block btn-info btn-lg auth-form-btn">
+                                    <button class="btn btn-block btn-info btn-lg auth-form-btn" onclick="submitForm()">
                                         <span class="font-weight-bold">SIGNUP</span>
                                     </button>
                                 </div>
@@ -107,6 +107,12 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
+
+        function submitForm() {
+            var imgUrl = document.getElementById("realImage").src;
+            document.getElementById("hiddenImage").value = imgUrl;
+        }
+
         function formVald() {
             var x = document.getElementById("uname").value;
             var y = document.getElementById("pass").value;

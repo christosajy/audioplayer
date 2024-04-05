@@ -74,6 +74,7 @@ def SaveGenre(request):
         img = request.FILES['image']
         obj = GenreDb(LangName=lan, GenreName=gnr, GenreImg=img)
         obj.save()
+        messages.success(request, 'Upload Successful')
         return redirect(AddGenre)
 
 def DisplayGenre(request):
@@ -85,10 +86,31 @@ def DisplayGenre(request):
     context = {'genre': genre}
     return render(request, 'directory/genre/disp_genre.html', context)
 
+def EditGenre(request, genreId):
+    lang = LanguageDb.objects.all()
+    genre = GenreDb.objects.get(id=genreId)
+    context = {'genre': genre, 'lang': lang}
+    return render(request, 'directory/genre/edit_genre.html', context)
+
+def UpdateGenre(request, genreId):
+    if request.method == 'POST':
+        lan = request.POST.get('lang')
+        gnr = request.POST.get('genre')
+        try:
+            img = request.FILES['image']
+            fs = FileSystemStorage()
+            file = fs.save(img.name, img)
+        except MultiValueDictKeyError:
+            file = GenreDb.objects.get(id=genreId).GenreImg
+        GenreDb.objects.filter(id=genreId).update(LangName=lan, GenreName=gnr, GenreImg=file)
+        messages.success(request, 'Updation Successful')
+        return redirect(DisplayGenre)
+        
+
 def DeleteGenre(request, genreId):
     genre = GenreDb.objects.filter(id=genreId)
     genre.delete()
-    messages.success(request, 'Genre deleted successfully')
+    messages.success(request, 'Removal Successful')
     return redirect(DisplayGenre)
 
 # ==================== SUB GENRE ========================================================================
@@ -136,7 +158,7 @@ def UpdateSubGenre(request, subId):
             fs = FileSystemStorage()
             file = fs.save(img.name, img)
         except MultiValueDictKeyError:
-            SubGenreDb.objects.get(id=subId).SubImg=img
+            file = SubGenreDb.objects.get(id=subId).SubImg
         SubGenreDb.objects.filter(id=subId).update(GenreName=gnr,SubName=sub, SubImg=file)
         messages.success(request, 'Updation Successfully')
         return redirect(DisplaySubGenre)
@@ -154,7 +176,7 @@ def AddAudio(request):
     genre = GenreDb.objects.all()
     subgenre = SubGenreDb.objects.all()
     context = {'lang': lang, 'genre': genre, 'subgenre': subgenre}
-    return render(request, 'audio/add_audio.html', context)
+    return render(request, 'directory/audio/add_audio.html', context)
 
 def SaveAudio(request):
     if request.method == 'POST':
@@ -185,7 +207,7 @@ def DisplayAudio(request):
         if str != None:
             audio = SongsDb.objects.filter(Name__icontains=str)
     context = {'audio': audio}
-    return render(request, 'audio/disp_audio.html', context)
+    return render(request, 'directory/audio/disp_audio.html', context)
 
 def EditAudio(request, audioId):
     lang = LanguageDb.objects.all()
@@ -193,7 +215,7 @@ def EditAudio(request, audioId):
     subgenre = SubGenreDb.objects.all()
     audio = SongsDb.objects.get(id=audioId)
     context = {'lang': lang, 'genre': genre, 'audio': audio, 'subgenre': subgenre}
-    return render(request, 'audio/edit_audio.html', context)
+    return render(request, 'directory/audio/edit_audio.html', context)
 
 def UpdateAudio(request, audioId):
     if request.method == "POST":

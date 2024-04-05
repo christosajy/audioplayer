@@ -78,6 +78,25 @@
         </div>
 
         <div class="container">
+            <div class="tm-search-form-container" style="margin-bottom: 5rem;">
+				<form action="" method="GET" class="form-inline tm-search-form">
+					<div class="tm-new-release">
+						<span class="font-weight-bold text-uppercase">Audiocad</span>
+						<i class="fa-solid fa-music ml-2"></i>
+					</div>
+					<div class="form-group tm-search-box">
+						<input type="text" name="keyword" class="form-control tm-search-input" autocomplete="off"
+							placeholder="Type your keyword ...">
+						<button type="submit" class="form-control tm-search-submit">
+							<i class="fa-solid fa-magnifying-glass font-weight-bold mr-2"></i><span>Search</span>
+						</button>
+					</div>
+					<div class="form-group tm-advanced-box">
+						<a href="#" class="tm-text-white">Go Advanced ...</a>
+					</div>
+				</form>
+			</div>
+
             <div class="row tm-about-row tm-mb-medium load-box">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 
@@ -121,37 +140,17 @@
                 </div>
             </div>
 
-            <!-- Bottom links -->
-            <div class="row tm-about-row tm-mb-medium">
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 mb-4">
-                    <h4 class="mb-4 tm-font-300">Latest Albums</h4>
-                    <a href="#" class="tm-text-blue-dark d-block mb-2">Sed fringilla consectetur</a>
-                    <a href="#" class="tm-text-blue-dark d-block mb-2">Mauris porta nisl quis</a>
-                    <a href="#" class="tm-text-blue-dark d-block mb-2">Quisque maximus quam nec</a>
-                    <a href="#" class="tm-text-blue-dark d-block">Class aptent taciti sociosqu ad</a>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 mb-4">
-                    <h4 class="mb-4 tm-font-300">Our Pages</h4>
-                    <a href="#" class="tm-text-blue-dark d-block mb-2">Nam dapibus imperdiet</a>
-                    <a href="#" class="tm-text-blue-dark d-block mb-2">Primis in faucibus orci</a>
-                    <a href="#" class="tm-text-blue-dark d-block mb-2">Sed interdum blandit dictum</a>
-                    <a href="#" class="tm-text-blue-dark d-block">Donec non blandit nisl</a>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
-                    <h4 class="mb-4 tm-font-300">Quick Links</h4>
-                    <a href="#" class="tm-text-blue-dark d-block mb-2">Nullam scelerisque mauris</a>
-                    <a href="#" class="tm-text-blue-dark d-block mb-2">Vivamus tristique enim non orci</a>
-                    <a href="#" class="tm-text-blue-dark d-block mb-2">Luctus et ultrices posuere</a>
-                    <a href="#" class="tm-text-blue-dark d-block">Cubilia Curae</a>
-                </div>
-            </div>
-            <footer class="row tm-about-row">
-                <div class="col-xl-12">
-                    <p class="text-center p-4">Copyright &copy; <span class="tm-current-year">2018</span> Your Company
-                        Name - Web Design: <a href="http://tooplate.com" class="tm-text-gray">Tooplate</a></p>
-                </div>
-            </footer>
         </div>
+        <footer class="row footer-row">
+            <div class="col-xl-12">
+                <p class="text-center mt-3 font-weight-bold p-4">
+                    <span>Copyright &copy; </span><span class="tm-current-year"></span>
+                    <a href="{% url 'frontindex' %}"><span>AUDIOCAD <i class="fa-solid fa-music"></i> - </span></a>
+                    <span>Designed by <a href="https://christosajy.github.io/mywebsite/">CHRISTO</a></span>  
+                </p>
+            </div>
+        </footer>
+
     </div>
 
     <!-- static JS -->

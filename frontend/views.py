@@ -4,7 +4,6 @@ from frontend.models import UsersDb, PlaylistsDb
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 from django.utils.datastructures import MultiValueDictKeyError
-from django.urls import reverse
 
 ########################### HOME #############################################################################
 
@@ -49,6 +48,8 @@ def SongFiltered(request, song_flt):
     context = {'song': song}
     return render(request, 'directory/song_fltr.html', context)
    
+############ LIKED-SONGS-PLAYLIST ##########################################################################
+
 def AddtoPlaylist(request):
     if request.method == 'POST':
         snm = request.POST.get('song')
@@ -65,6 +66,10 @@ def AddtoPlaylist(request):
 
 def ShowPlaylist(request, user_flt):
     playlist = PlaylistsDb.objects.filter(UserName=user_flt)
+    if request.method == 'GET':
+        str = request.GET.get('keyword')
+        if str != None:
+            playlist = PlaylistsDb.objects.filter(SongName__icontains=str)
     context = {'playlist': playlist}
     return render(request, 'main/my_playlist.html', context)
 
@@ -74,10 +79,10 @@ def DeletePlaylist(request, song_flt):
     messages.success(request, 'Song removed Successfully.')
     return redirect(frontindex)
 
-def LikedSongFilter(requset, aud_flt):
+def LikedSongFilter(request, aud_flt):
     song = SongsDb.objects.filter(Name=aud_flt)
     context = {'song': song}
-    return render(requset, 'directory/song_fltr.html', context)
+    return render(request, 'directory/song_fltr.html', context)
 
 def FinalRedirect(request):
     return render(request, 'main/redirect.html')
@@ -104,7 +109,7 @@ def LoginUser(request):
             return redirect(frontindex)
         else:
             messages.warning(request, 'User not found. Create new?')
-            return redirect(LoginPage)
+            return redirect(SignupPage)
 
 def LogoutUser(request):
     del request.session['Username']
@@ -128,7 +133,7 @@ def SaveUser(request):
             obj = UsersDb(Name=nm, Email=em, Username=un, Password=ps)
             obj.save()
             messages.success(request, 'User Signup Successfull')
-            return redirect(SignupPage)
+            return redirect(LoginPage)
 
 def UpdateUser(request, user_flt):
     if request.method == 'POST':

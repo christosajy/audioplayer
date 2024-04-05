@@ -14,8 +14,36 @@
 </head>
 
 <body>
-
   <div class="tm-welcome-section hero">
+    <nav class="navbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="{% url 'frontindex' %}" class="nav-link tm-nav-link tm-text-white">
+            <i class="fa-solid fa-house"></i>
+          </a>
+        </li>
+        {% if request.session.Username %}
+        <li class="nav-item">
+          <a href="{% url 'ShowPlaylist' user_flt=request.session.Username %}"
+            class="nav-link tm-nav-link tm-text-white">
+            <i class="fa-solid fa-radio"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'frontabout' user_flt=request.session.Username %}" class="nav-link tm-nav-link tm-text-white">
+            <i class="fa-solid fa-user"></i>
+          </a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a href="{% url 'LoginPage' %}" class="nav-link tm-nav-link tm-text-white">
+            <i class="fa-solid fa-user-plus"></i>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+
     {% for i in song %}
     <div class="music">
       <img src="{{i.Image.url}}">
@@ -24,8 +52,9 @@
           {% csrf_token %}
 
           <h1>{{i.Name}}</h1>
-          <p>{{i.Film}}({{i.Year}}) - Starring {{i.Artist}} 
-            <a href="#" id="more" class="amor"> more</a><a href="#" id="less" class="amor"> less</a>
+          <p>{{i.Film}}({{i.Year}}) - Starring {{i.Artist}}
+            <span id="more" class="amor"> more</span>
+            <span id="less" class="amor"> less</span>
           </p>
           <p id="extra">{{i.Extra}}</p>
 
@@ -46,8 +75,9 @@
             <div><input type="range" value="50" min="0" max="99" id="vol" onchange="volCtrl()"></div>
             <div onclick="audioStop()"><i class="fa-solid fa-stop"></i></div>
             {% if request.session.Username %}
-            <div><button type="submit"><i class="fa-solid fa-folder-plus"></i></button></div>
+            <div><button type="submit"><i class="fa-solid fa-thumbs-up"></i></button></div>
             {% endif %}
+            <div><a href="#"><i class="fa-solid fa-folder-plus"></i></a></div>
             <div onclick="goBack()"><i class="fa-solid fa-angles-left"></i></div>
 
           </div>
@@ -62,6 +92,12 @@
 
     </div>
     {% endfor %}
+    <div class="footer">
+      <span>Copyright &copy; </span><span class="tm-current-year">2018</span>
+      <span><a href="{% url 'frontindex' %}" class="tm-text-white">AUDIOCAD <i class="fa-solid fa-music"></i>
+        </a> - Web Design &commat;</span>
+      <a href="https://christosajy.github.io/mywebsite/" class="tm-text-white"><span>CHRISTO</span></a>
+    </div>
   </div>
 
   <script src="{% static 'js/script.js' %}"></script>
@@ -71,14 +107,14 @@
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
   <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
       $("#extra").hide(); $("#less").hide(); $("#more").show();
 
-      $("#more").click(function(){
+      $("#more").click(function () {
         $("#extra").show(); $("#less").show(); $("#more").hide();
       })
 
-      $("#less").click(function(){
+      $("#less").click(function () {
         $("#extra").hide(); $("#less").hide(); $("#more").show();
       })
     })

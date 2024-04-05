@@ -13,6 +13,8 @@ urlpatterns = [
     path('Add_Genre/', views.AddGenre, name='AddGenre'),
     path('Save_Genre/', views.SaveGenre, name='SaveGenre'),
     path('Display_Genre/', views.DisplayGenre, name='DisplayGenre'),
+    path('Edit_Genre/<int:genreId>/', views.EditGenre, name='EditGenre'),
+    path('Update_Genre/<int:genreId>/', views.UpdateGenre, name='UpdateGenre'),
     path('Delete_Genre/<int:genreId>/', views.DeleteGenre, name='DeleteGenre'),
 
     path('Add_Sub_Genre/', views.AddSubGenre, name='AddSubGenre'),
