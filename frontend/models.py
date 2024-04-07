@@ -8,14 +8,14 @@ class UsersDb(models.Model):
     Mob_No=models.CharField(null=True, blank=True, max_length=255)
     Profile=models.ImageField(upload_to='profile', null=True, blank=True, default='profile')
 
-class PlaylistsDb(models.Model):
+# LIKED-SONGS
+class LikedSongs(models.Model):
     SongName=models.CharField(null=True, blank=True, max_length=255)
     UserName=models.CharField(null=True, blank=True, max_length=255)
     ArtistName=models.CharField(null=True, blank=True, max_length=255)
 
-class AddsongsDb(models.Model):
+# CREATE-PLAYLIST
+class CreatedPlaylist(models.Model):
     UserName=models.CharField(null=True, blank=True, max_length=255)
     PlaylistName=models.CharField(null=True, blank=True, max_length=255)
-    SongName=models.CharField(null=True, blank=True, max_length=255)
-    ArtistName=models.CharField(null=True, blank=True, max_length=255)
     Image=models.ImageField(upload_to='myplaylist', null=True, blank=True, default='myplaylist')

@@ -3,7 +3,7 @@ from django.core.files.storage import FileSystemStorage
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib import messages
 from backend.models import LanguageDb, SongsDb, GenreDb, SubGenreDb
-from frontend.models import UsersDb
+from frontend.models import UsersDb, CreatedPlaylist
 
 def backindex(request):
     return render(request, 'index.html')
@@ -263,3 +263,14 @@ def RemoveUser(request, userId):
     user.delete()
     messages.success(request, 'User Removal Successfull')
     return redirect(ViewUser)
+
+def userPlay(request):
+    list = CreatedPlaylist.objects.all()
+    context = {'list': list}
+    return render(request, 'directory/users/userplay.html', context)
+
+def RemoveuserPlay(request, userId):
+    list = CreatedPlaylist.objects.filter(id=userId)
+    list.delete()
+    messages.success(request, 'User Removal Successfull')
+    return redirect(userPlay)

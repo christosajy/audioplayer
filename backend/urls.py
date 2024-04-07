@@ -33,4 +33,6 @@ urlpatterns = [
 
     path('View_User/', views.ViewUser, name='ViewUser'),
     path('Remove_User/<int:userId>/', views.RemoveUser, name='RemoveUser'),
+    path('Playists_User/', views.userPlay, name='userPlay'),
+    path('RemoveuserPlay/<int:userId>/', views.RemoveuserPlay, name='RemoveuserPlay'),
 ]

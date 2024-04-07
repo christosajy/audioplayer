@@ -8,7 +8,7 @@
 .hero {
     width: 100%;
     height: 100vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), #002E48), url('../img/moosic.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), #002E48), url('../img/m1.jpg');
     background-position: center;
     background-size: cover;
     display: flex;
@@ -20,6 +20,7 @@
 .music img {
     width: 250px;
     height: 300px;
+    border-radius: 20px 20px 20px 20px;
 }
 
 .music {
@@ -27,6 +28,7 @@
     padding: 30px;
     box-sizing: border-box;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5), #000);
+    border-radius: 20px 20px 20px 20px;
     display: flex;
 }
 
@@ -119,6 +121,16 @@
     padding-right: 5px;
 }
 
+.aux-controls div:nth-child(5) {
+    color: #007BFF;
+    font-size: 25px;
+}
+
+.aux-controls div:nth-child(6) {
+    color: #007BFF;
+    font-size: 25px;
+}
+
 #vol {
     -webkit-appearance: none;
     background: #007BFF;
@@ -135,15 +147,53 @@
 }
 
 .aux-controls div button {
+    cursor: pointer;
     border: transparent;
     background: transparent;
     color: #007BFF;
     font-size: 25px;
 }
 
-.aux-controls div a {
-    color: #007BFF;
-    font-size: 25px;
+.aux-controls div button:focus {
+    outline: none;
+}
+
+.secondary-aux-controls {
+    margin-top: 100px;
+    width: 90%;
+    height: 20%;
+    background-color: transparent;
+}
+
+.secondary-aux-controls select {
+    margin: 20px;
+    width: 60%;
+    height: 40px;
+    border: 1px solid #FFF;
+    border-radius: 5px 0 0 5px;
+    border-right: 0px;
+}
+
+.secondary-aux-controls select:focus {
+    outline: none;
+}
+
+.secondary-aux-controls button{
+    margin-left: -25px;
+    margin-top: -1px;
+    height: 40px;
+    border: 1px solid #FFF;
+    border-radius: 0 5px 5px 0;
+    border-left: 0px;
+}
+
+.secondary-aux-controls button i {
+    font-size: 1.8rem;
+}
+
+.secondary-aux-controls a{
+    margin-left: 70px;
+    height: 40px;
 }
 
 .amor {

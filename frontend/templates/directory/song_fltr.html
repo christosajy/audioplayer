@@ -9,6 +9,7 @@
   <!-- load CSS  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <!-- static CSS -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/sng_fltr/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/tooplate-style.css' %}">
 </head>
@@ -76,10 +77,10 @@
             <div onclick="audioStop()"><i class="fa-solid fa-stop"></i></div>
             {% if request.session.Username %}
             <div><button type="submit"><i class="fa-solid fa-thumbs-up"></i></button></div>
+            <div id="Show-fldr"><i class="fa-solid fa-folder-plus"></i></div>
+            <div id="Hide-fldr"><i class="fa-solid fa-folder-plus"></i></div>
             {% endif %}
-            <div><a href="#"><i class="fa-solid fa-folder-plus"></i></a></div>
             <div onclick="goBack()"><i class="fa-solid fa-angles-left"></i></div>
-
           </div>
           {% if request.session.Username %}
           <input type="hidden" name="user" value="{{request.session.Username}}">
@@ -87,6 +88,22 @@
           <input type="hidden" name="artist" value="{{i.Artist}}">
           {% endif %}
         </form>
+
+        {% if request.session.Username %}
+        <div class="secondary-aux-controls" id="playlist">
+          <form action="" method="post">
+            {% csrf_token %}
+            <select class="form-select">
+              <option value="Select Playlist">Select Playlist</option>
+              {% for k in my_list %}
+              <option>{{k.PlaylistName}}</option>
+              {% endfor %}
+            </select>
+            <button class="btn btn-light"><i class="fa-solid fa-check"></i></button>
+            <a href="{% url 'PlaylistForm' %}" class="btn btn-primary" role="button">Create Playlist</a>
+          </form>
+        </div>
+        {% endif %}
 
       </div>
 
@@ -108,16 +125,37 @@
 
   <script>
     $(document).ready(function () {
-      $("#extra").hide(); $("#less").hide(); $("#more").show();
+      $("#extra").hide();
+      $("#less").hide();
+      $("#more").show();
+      $("#playlist").hide();
+      $("#Hide-fldr").hide();
 
       $("#more").click(function () {
-        $("#extra").show(); $("#less").show(); $("#more").hide();
+        $("#extra").show();
+        $("#less").show();
+        $("#more").hide();
       })
 
       $("#less").click(function () {
-        $("#extra").hide(); $("#less").hide(); $("#more").show();
+        $("#extra").hide();
+        $("#less").hide();
+        $("#more").show();
+      })
+
+      $("#Show-fldr").click(function () {
+        $("#playlist").show();
+        $("#Hide-fldr").show();
+        $("#Show-fldr").hide();
+      })
+
+      $("#Hide-fldr").click(function () {
+        $("#playlist").hide();
+        $("#Hide-fldr").hide();
+        $("#Show-fldr").show();
       })
     })
+
   </script>
 
   {% if messages %}

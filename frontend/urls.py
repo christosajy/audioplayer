@@ -15,6 +15,9 @@ urlpatterns = [
     path('LikedSongFilter/<aud_flt>/', views.LikedSongFilter, name='LikedSongFilter'),
     path('Redirect/', views.FinalRedirect, name='FinalRedirect'),
 
+    path('Form_To_Create_Playlist/', views.PlaylistForm, name='PlaylistForm'),
+    path('Create_Playlist/', views.CreatePlaylist, name='CreatePlaylist'),
+
     # LOGIN-PAGE 
     path('Login_Page/', views.LoginPage, name='LoginPage'),
     path('Login_User/', views.LoginUser, name='LoginUser'),

@@ -14,7 +14,7 @@
         <div class="card-body">
             <form action="" method="GET" class="forms-sample">
                 <div class="form-group mb-0">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-info">
                         <i class="fa-solid fa-magnifying-glass mr-2"></i><span>Search</span>
                     </button>
                     <input type="text" name="keyword" class="form-control display-search-box" autocomplete="off"
@@ -25,60 +25,37 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Display Songs</h4>
+            <h4 class="card-title">Display Users</h4>
 
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Language</th>
-                            <th>Genre</th>
-                            <th>Type</th>
-                            <th>Year</th>
-                            <th>Artists</th>
-                            <th>Album/Film</th>
-                            <th>Audio</th>
+                            <th>Profile Name</th>
+                            <th>Profile Email</th>
+                            <th>Username</th>
                             <th>Image</th>
-                            <th>Extra Data</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for i in audio %}
+                        {% for i in list %}
                         <tr>
-                            <td>{{i.Name}}</td>
-                            <td>{{i.Language}}</td>
-                            <td>{{i.Genre}}</td>
-                            <td>{{i.Type}}</td>
-                            <td>{{i.Year}}</td>
-                            <td>{{i.Artist}}</td>
-                            <td>{{i.Film}}</td>
+                            <td>{{i.UserName}}</td>
+                            <td>{{i.PlaylistName}}</td>
+                            
+                            <td><img src="{{i.Profile.url}}"></td>
                             <td>
-                                <audio controls controlslist="nodownload">
-                                    <source src="{{i.Audio.url}}" type="audio/mp3">
-                                </audio>
-                            </td>
-                            <td>
-                                <img src="{{i.Image.url}}" alt="Image">
-                            </td>
-                            <td style="white-space: pre-wrap; text-align: justify;">{{i.Extra}}</td>
-                            <td>
-                                <form action="{% url 'EditAudio' audioId=i.id %}">
-                                    <button type="submit" class="btn btn-dark">
-                                        <span>Edit</span>
-                                    </button>
-                                </form>
-                            </td>
-                            <td>
-                                <form action="{% url 'DeleteAudio' audioId=i.id %}">
+                                <form action="{% url 'RemoveuserPlay' userId=i.id %}">
                                     <button type="submit" class="btn btn-danger">
-                                        <span>Delete</span>
+                                        <span>Remove</span>
                                     </button>
                                 </form>
                             </td>
                         </tr>
+
                         {% empty %}
                         <span class="text-danger">No Records Found</span>
+
                         {% endfor %}
                     </tbody>
                 </table>
@@ -86,6 +63,7 @@
         </div>
     </div>
 
+    <!-- JQuery  -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

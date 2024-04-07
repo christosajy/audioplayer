@@ -27,14 +27,15 @@
 
     position: relative;
     counter-increment: list;
-    max-width: 70rem;
+    max-width: 74rem;
     margin: 2rem auto;
     padding: 2rem 1rem 1rem;
     box-shadow: 0.1rem 0.1rem 1.5rem rgba(0, 0, 0, 0.3);
-    border-radius: 0.25rem;
+    border-radius: 20px 20px 20px 20px;
     overflow: hidden;
     background-color: white;
 }
+
 
 .li::before {
     content: '';
@@ -103,6 +104,8 @@
 
 .load-box {
     margin-top: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .audio {
@@ -247,7 +250,7 @@ body {
 .bottom-card {
     height: 80px;
     width: 187vh;
-    margin-left: 40px;
+    margin-left: 90px;
     margin-top: 40px;
     margin-bottom: 20px;
     background-color: transparent;
@@ -263,18 +266,64 @@ body {
     margin-top: -50px;
     background-color: transparent;
     border: 1px solid transparent;
+    border-radius: 0px;
 }
 
-.profile-head span {
-    text-align: center;
+.profile-head span, .profile-head-sec span, .playlist-head span {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 30px 0;
     font-size: 1.8rem;
     font-weight: bold;
-    text-transform: uppercase;
     font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.profile-head-sec {
+    height: 100px;
+    width: 100%;
+    margin-top: -40px;
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+.profile-head-sec input {
+    width: 60%;
+    height: 50px;
+    margin: 20px 40px;
+    border: 1px solid #dc3545;
+    border-radius: 5px 0px 0px 5px;
+    padding: 0px 20px;
+    margin-right: 0;
+    margin-left: 15%;
+}
+
+.profile-head-sec input:focus {
+    outline: none;
+}
+
+.profile-head-sec button {
+    height: 50px;
+    margin-left: -5px;
+    margin-top: -1px;
+    border-radius: 0px 5px 5px 0px;
+    border: 2px solid #dc3545;
+}
+
+.playlist-head {
+    height: 100px;
+    width: 100%;
+    margin-top: -10px;
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+#playlist-grid {
+    margin-top: -10px;
+}
+
+#arial {
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .li form button {
@@ -282,3 +331,28 @@ body {
     margin-top: -90px;
 }
 
+.li-dlt-btn {
+    float: right;
+    margin-top: -90px;
+    z-index: 1;
+    position: relative;
+    margin-right: 100px;
+}
+
+.li-dlt-btn form button {
+    border: 1px solid transparent;
+    font-size: 1.5rem;
+}
+
+.logo-main-a1 {
+    color: #ffffff;
+    text-transform: lowercase;
+    font-weight: bold;
+}
+
+.logo-main-a2 {
+    background-color: #007BFFB9;
+    color: #FFF;
+    border-radius: 10px;
+    padding: 3px;
+}
