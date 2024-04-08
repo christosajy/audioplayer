@@ -83,24 +83,26 @@
             <div onclick="goBack()"><i class="fa-solid fa-angles-left"></i></div>
           </div>
           {% if request.session.Username %}
-          <input type="hidden" name="user" value="{{request.session.Username}}">
-          <input type="hidden" name="song" value="{{i.Name}}">
-          <input type="hidden" name="artist" value="{{i.Artist}}">
+          <input type="hidden" name="user" value="{{request.session.Username}}" required="required">
+          <input type="hidden" name="song" value="{{i.Name}}" required="required">
+          <input type="hidden" name="artist" value="{{i.Artist}}" required="required">
           {% endif %}
         </form>
 
         {% if request.session.Username %}
         <div class="secondary-aux-controls" id="playlist">
-          <form action="" method="post">
+          <form action="{% url 'AddtheSongs' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <select class="form-select">
+            <select class="form-select" name="playlist">
               <option value="Select Playlist">Select Playlist</option>
               {% for k in my_list %}
               <option>{{k.PlaylistName}}</option>
               {% endfor %}
             </select>
             <button class="btn btn-light"><i class="fa-solid fa-check"></i></button>
-            <a href="{% url 'PlaylistForm' %}" class="btn btn-primary" role="button">Create Playlist</a>
+            <a href="{% url 'PlaylistForm' user_flt=request.session.Username %}" class="btn btn-primary" role="button">Create Playlist</a>
+            <input type="hidden" value="{{i.Name}}" name="name">
+            <input type="hidden" value="{{request.session.Username}}" name="user">
           </form>
         </div>
         {% endif %}

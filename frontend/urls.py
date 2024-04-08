@@ -9,14 +9,19 @@ urlpatterns = [
     path('Sub_Genre_Filtered/<sub_flt>/', views.SubGenreFiltered, name='SubGenreFiltered'),
     path('Sub_Genre_Songs_Filtered/<aud_flt>/', views.AudioListFiltered, name='AudioListFiltered'),
     path('Single_Songs_Filtered/<song_flt>/', views.SongFiltered, name='SongFiltered'),
+    
     path('Add_To_Playlist/', views.AddtoPlaylist, name='AddtoPlaylist'),
     path('Show_Playlist/<user_flt>/', views.ShowPlaylist, name='ShowPlaylist'),
     path('Delete_Playlist/<song_flt>/', views.DeletePlaylist, name='DeletePlaylist'),
     path('LikedSongFilter/<aud_flt>/', views.LikedSongFilter, name='LikedSongFilter'),
     path('Redirect/', views.FinalRedirect, name='FinalRedirect'),
 
-    path('Form_To_Create_Playlist/', views.PlaylistForm, name='PlaylistForm'),
+    path('Form_To_Create_Playlist/<user_flt>/', views.PlaylistForm, name='PlaylistForm'),
     path('Create_Playlist/', views.CreatePlaylist, name='CreatePlaylist'),
+    path('Delete_Created_Playlist/<lst_flt>/', views.DeleteCreatedPlaylist, name='DeleteCreatedPlaylist'),
+    path('Add_Songs_To_Playlist/', views.AddtheSongs, name='AddtheSongs'),
+    path('View_Songs_In_Playlist/<lst_flt>/', views.ViewtheSongs, name='ViewtheSongs'),
+    path('Delete_Songs_From_Playlist/<lst_flt>/', views.DeletetheSongs, name='DeletetheSongs'),
 
     # LOGIN-PAGE 
     path('Login_Page/', views.LoginPage, name='LoginPage'),

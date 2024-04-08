@@ -19,3 +19,9 @@ class CreatedPlaylist(models.Model):
     UserName=models.CharField(null=True, blank=True, max_length=255)
     PlaylistName=models.CharField(null=True, blank=True, max_length=255)
     Image=models.ImageField(upload_to='myplaylist', null=True, blank=True, default='myplaylist')
+
+class AddSongs(models.Model):
+    UserName=models.CharField(null=True, blank=True, max_length=255)
+    PlaylistName=models.CharField(null=True, blank=True, max_length=255)
+    SongName=models.CharField(null=True, blank=True, max_length=255)
+    Image=models.ImageField(upload_to='added', null=True, blank=True, default='added')

@@ -26,3 +26,15 @@ function goBack() {
 function goNext() {
     window.history.forward();
 }
+
+// BUTTON-ACTIVE-CHANGE
+
+document.getElementById("grp-btn1").addEventListener("click", function () {
+    document.getElementById("grp-btn1").classList.add("active");
+    document.getElementById("grp-btn2").classList.remove("active");
+})
+
+document.getElementById("grp-btn2").addEventListener("click", function () {
+    document.getElementById("grp-btn2").classList.add("active");
+    document.getElementById("grp-btn1").classList.remove("active");
+})

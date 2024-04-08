@@ -86,14 +86,24 @@
           </div>
           <div class="form-group tm-search-box">
             <input type="text" name="keyword" class="form-control tm-search-input" autocomplete="off"
-              placeholder="Type your keyword ...">
+              placeholder="Find Playlists ...">
             <button type="submit" class="form-control tm-search-submit">
               <i class="fa-solid fa-magnifying-glass font-weight-bold mr-2"></i><span>Search</span>
             </button>
           </div>
+          
+          {% if request.session.Username %}
           <div class="form-group tm-advanced-box">
-            <a href="#" class="tm-text-white">Go Advanced ...</a>
+            <a href="{% url 'ShowPlaylist' user_flt=request.session.Username %}"
+              class="btn search-form-button my-button" id="grp-btn1" role="button">
+              <span>Liked Songs</span>
+            </a>
+            <a href="{% url 'PlaylistForm' user_flt=request.session.Username %}"
+              class="btn search-form-button my-button active" id="grp-btn2" role="button">
+              <span>My Playlists</span>
+            </a>
           </div>
+          {% endif %}
         </form>
       </div>
 
@@ -117,28 +127,40 @@
           </div>
 
           <div class="playlist-head">
-            <span>My Playlists</span>
+            <span>View My Playlists</span>
           </div>
 
           <div class="row tm-albums-container grid load-box" id="playlist-grid">
+            {% for i in user %}
             <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
               <figure class="effect-sadie">
                 <h6 class="text-center font-weight-bold">
-                  <span>{{i.Lang_Name}}</span>
+                  <span class="text-uppercase">{{i.PlaylistName}}</span>
                 </h6>
-                <img src="{% static 'img/insert2.jpg' %}" alt="Image" class="img-fluid">
+                <img src="{% static 'img/insert5.jpg' %}" alt="Image" class="img-fluid">
                 <figcaption>
                   <h2>
-                    <a href="#">
-                      <span class="tm-text-yellow">{{i.Lang_Name}}</span>
+                    <a href="{% url 'ViewtheSongs' lst_flt=i.PlaylistName %}">
+                      <span class="tm-text-yellow">{{i.PlaylistName}}</span>
                     </a>
                   </h2>
-                  <p>{{i.Lang_Sbtl}}</p>
+                  <p>created by: <span class="font-weight-bold">{{i.UserName}}</span>
+                  </p>
+                  <div class="add-playlist-form">
+                    <form action="{% url 'DeleteCreatedPlaylist' lst_flt=i.PlaylistName %}">
+                      <button type="submit" class="btn btn-primary large-btn">
+                        <span><i class="fa-solid fa-trash"></i></span>
+                      </button>
+                    </form>
+                  </div>
                 </figcaption>
               </figure>
             </div>
-
+            {% empty %}
+            <span class="text-danger empty-record">No Songs Found.</span>
+            {% endfor %}
           </div>
+
 
         </div>
       </div>
@@ -202,9 +224,15 @@
       $('.tm-current-year').text(new Date().getFullYear());
     });
 
-    function goBack() {
-      window.history.back();
-    }
+    document.getElementById("grp-btn1").addEventListener("click", function () {
+      document.getElementById("grp-btn1").classList.add("active");
+      document.getElementById("grp-btn2").classList.remove("active");
+    })
+
+    document.getElementById("grp-btn2").addEventListener("click", function () {
+      document.getElementById("grp-btn2").classList.add("active");
+      document.getElementById("grp-btn1").classList.remove("active");
+    })
 
   </script>
 

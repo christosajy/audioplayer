@@ -115,7 +115,7 @@
 
 .empty-record {
     font-size: 1.3rem;
-    margin-left: 40%;
+    margin-left: 34.3rem;
 }
 
 .half-navbar-top {
@@ -269,7 +269,9 @@ body {
     border-radius: 0px;
 }
 
-.profile-head span, .profile-head-sec span, .playlist-head span {
+.profile-head span,
+.profile-head-sec span,
+.playlist-head span {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -355,4 +357,52 @@ body {
     color: #FFF;
     border-radius: 10px;
     padding: 3px;
+}
+
+.add-playlist-form {
+    margin-top: 285px;
+    margin-left: -12px;
+    z-index: 1;
+    position: relative;
+}
+
+.large-btn {
+    font-size: 1.5rem;
+    background-color: #000;
+    border: none;
+    color: #fff;
+}
+
+.large-btn:hover {
+    background-color: #000;
+}
+
+.search-form-button {
+    padding: 10px 10px;
+    background: #000000;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    margin-left: -40px;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+}
+
+.search-form-button.active {
+    background: #FFFFFF;
+    color: #000000;
+}
+
+.search-form-button span {
+    padding: 0px 10px;
+}
+
+#grp-btn1 {
+    border-right: none;
+}
+
+#grp-btn2 {
+    margin-left: 0px;
+    border-left: none;
 }
