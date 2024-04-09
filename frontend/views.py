@@ -44,11 +44,16 @@ def AudioListFiltered(request, aud_flt):
     return render(request, 'directory/list_fltr.html', context)
 
 def SongFiltered(request, song_flt):
-    login_user = request.session['Username'] 
-    song = SongsDb.objects.filter(Name=song_flt)
-    my_list = CreatedPlaylist.objects.filter(UserName=login_user)
-    context = {'song': song, 'my_list': my_list}
-    return render(request, 'directory/song_fltr.html', context)
+    if 'Username' not in request.session:
+        song = SongsDb.objects.filter(Name=song_flt)
+        context = {'song': song}
+        return render(request, 'directory/song_fltr.html', context)
+    else:
+        login_user = request.session['Username'] 
+        song = SongsDb.objects.filter(Name=song_flt)
+        my_list = CreatedPlaylist.objects.filter(UserName=login_user)
+        context = {'song': song, 'my_list': my_list}
+        return render(request, 'directory/song_fltr.html', context)
    
 ############ LIKED-SONGS ######################################################################################
 
@@ -138,6 +143,11 @@ def ViewtheSongs(request, lst_flt):
     context =  {'playlist': playlist}
     return render(request, 'playlist/view_playlist.html', context)
 
+def PlaytheSong(request, aud_flt):
+    song = SongsDb.objects.filter(Name=aud_flt)
+    context = {'song': song}
+    return render(request, 'directory/song_fltr.html', context)
+
 def DeletetheSongs(request, lst_flt):
     playlist = AddSongs.objects.filter(SongName=lst_flt)
     playlist.delete()
@@ -159,7 +169,6 @@ def LoginUser(request):
         un = request.POST.get('uname')
         ps = request.POST.get('pass')
         if UsersDb.objects.filter(Username=un, Password=ps).exists():
-            # SETTING-UP-SESSION
             request.session['Username'] = un
             request.session['Password'] = ps
             messages.success(request, 'Login Successful. Welcome Home')
@@ -204,7 +213,6 @@ def UpdateUser(request, user_flt):
         except MultiValueDictKeyError:
             file = UsersDb.objects.get(Username=user_flt).Profile
         UsersDb.objects.filter(Username=user_flt).update(Name=nm, Email=em, Username=un, Password=ps, Profile=file)
-        # DELETING-SESSION-FOR-RESTARTING-WEBSITE-FOR-CHANGES-TO-TAKE-EFFECT
         del request.session['Username']
         del request.session['Password']
         messages.success(request, 'Data Updated Successfully. User Logged off. Re-Login again.')
