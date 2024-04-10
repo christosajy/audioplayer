@@ -91,7 +91,7 @@
               <i class="fa-solid fa-magnifying-glass font-weight-bold mr-2"></i><span>Search</span>
             </button>
           </div>
-          
+
           {% if request.session.Username %}
           <div class="form-group tm-advanced-box">
             <a href="{% url 'ShowPlaylist' user_flt=request.session.Username %}"
@@ -116,7 +116,7 @@
               <span>Create a new Playlist</span>
             </div>
             <div class="profile-head-sec">
-              <form action="{% url 'CreatePlaylist' %}" method="post" enctype="multipart/form-data">
+              <form action="{% url 'CreatePlaylist' %}" method="post">
                 {% csrf_token %}
                 <input type="text" name="name" placeholder="Playlist Name" required="required">
                 <input type="hidden" name="user" value="{{request.session.Username}}" required="required">
@@ -206,6 +206,15 @@
     </footer>
 
   </div>
+
+  {% if reload %}
+  <script>
+    setTimeout(function(){
+      location.reload();
+    }, 1000);
+
+  </script>
+  {% endif %}
 
   <!-- static JS -->
   <script src="{% static 'js/script.js' %}"></script>

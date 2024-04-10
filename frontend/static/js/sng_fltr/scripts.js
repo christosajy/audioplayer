@@ -9,6 +9,7 @@ song.onloadedmetadata = function () {
     progress.max = song.duration;
     progress.value = song.currentTime;
     song.pause();
+    song.currentTime= 0
 }
 
 function playPause() {

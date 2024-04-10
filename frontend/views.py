@@ -4,6 +4,7 @@ from frontend.models import UsersDb, LikedSongs, CreatedPlaylist, AddSongs
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 from django.utils.datastructures import MultiValueDictKeyError
+from django.urls import reverse
 
 ########################### HOME #############################################################################
 
@@ -65,11 +66,11 @@ def AddtoPlaylist(request):
         obj = LikedSongs(SongName=snm, UserName=usr, ArtistName=art)
         if LikedSongs.objects.filter(SongName=snm).exists():
             messages.warning(request, 'Song already Exists.')
-            return redirect(FinalRedirect)
+            return redirect(SongFiltered, user_flt = usr)
         else:
             obj.save()
             messages.success(request, 'Song added Successfully.')
-            return redirect(FinalRedirect)
+            return redirect(SongFiltered, user_flt = usr)
 
 def ShowPlaylist(request, user_flt):
     playlist = LikedSongs.objects.filter(UserName=user_flt)
@@ -94,7 +95,7 @@ def LikedSongFilter(request, aud_flt):
 def FinalRedirect(request):
     return render(request, 'main/redirect.html')
 
-###################################### PLAYLIST-PAGE #######################################################
+###################################### MY-PLAYLIST-PAGE #######################################################
 
 def PlaylistForm(request, user_flt):
     user = CreatedPlaylist.objects.filter(UserName=user_flt)
@@ -111,18 +112,21 @@ def CreatePlaylist(request):
         usr = request.POST.get('user')
         obj = CreatedPlaylist(PlaylistName=nam, UserName=usr)
         if CreatedPlaylist.objects.filter(PlaylistName=nam).exists():
-            messages.error(request, 'Playlist name error. Please re-enter playlist name with an extra charecter.')
-            return redirect(FinalRedirect)
+            messages.error(request, 'Please re-enter playlist name with an extra charecter.')
+            return redirect(PlaylistForm, user_flt=usr)
         else:
             obj.save()
-            messages.success(request, 'Playlist Creation Successful')
-            return redirect(FinalRedirect)    
+            messages.success(request, 'Playlist creation Successful')
+            return redirect(PlaylistForm, user_flt=usr)    
         
 def DeleteCreatedPlaylist(request, lst_flt):
     playlist = CreatedPlaylist.objects.filter(PlaylistName=lst_flt)
     playlist.delete()
-    messages.success(request, 'Song removed from Playlist')
+    messages.success(request, 'Playlist removal Successful')
     return redirect(FinalRedirect)
+
+
+###################################### ADD-TO-PLAYLIST #######################################################
 
 def AddtheSongs(request):
     if request.method == 'POST':
@@ -152,7 +156,7 @@ def DeletetheSongs(request, lst_flt):
     playlist = AddSongs.objects.filter(SongName=lst_flt)
     playlist.delete()
     messages.success(request, 'Song removed from Playlist')
-    return redirect(FinalRedirect)
+    return redirect(frontindex)
  
 ###################################### PROFILE-PAGE #########################################################
 

@@ -13,7 +13,7 @@ urlpatterns = [
     path('Add-Liked/', views.AddtoPlaylist, name='AddtoPlaylist'),
     path('Liked-Songs/<user_flt>/', views.ShowPlaylist, name='ShowPlaylist'),
     path('Delete-Likes/<song_flt>/', views.DeletePlaylist, name='DeletePlaylist'),
-    path('Media-Player/<aud_flt>/', views.LikedSongFilter, name='LikedSongFilter'),
+    path('Filter-Songs/<aud_flt>/', views.LikedSongFilter, name='LikedSongFilter'),
     path('Redirect/', views.FinalRedirect, name='FinalRedirect'),
 
     path('Form-Input/<user_flt>/', views.PlaylistForm, name='PlaylistForm'),
@@ -22,7 +22,7 @@ urlpatterns = [
     path('Add-Playlist/', views.AddtheSongs, name='AddtheSongs'),
     path('My-Playlist/<lst_flt>/', views.ViewtheSongs, name='ViewtheSongs'),
     path('Playlist/<aud_flt>/', views.PlaytheSong, name='PlaytheSong'),
-    path('Delete-Playlist/<lst_flt>/', views.DeletetheSongs, name='DeletetheSongs'),
+    path('Delete-Songs/<lst_flt>/', views.DeletetheSongs, name='DeletetheSongs'),
 
     # LOGIN-PAGE 
     path('Login/', views.LoginPage, name='LoginPage'),
