@@ -93,14 +93,16 @@
         <div class="secondary-aux-controls" id="playlist">
           <form action="{% url 'AddtheSongs' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <select class="form-select" name="playlist">
-              <option value="Select Playlist">Select Playlist</option>
+            <select class="form-select pl-3" name="playlist">
               {% for k in my_list %}
               <option>{{k.PlaylistName}}</option>
               {% endfor %}
             </select>
-            <button class="btn btn-light"><i class="fa-solid fa-check"></i></button>
-            <a href="{% url 'PlaylistForm' user_flt=request.session.Username %}" class="btn btn-primary" role="button">Create Playlist</a>
+            <button class="btn btn-light" type="submit"><i class="fa-solid fa-file-circle-plus"></i></button>
+            <a href="{% url 'PlaylistForm' user_flt=request.session.Username %}" class="btn" role="button">
+              <span class="font-weight-bold">Create Playlist</span>
+              <i class="fa-solid fa-file-circle-plus"></i>
+            </a>
             <input type="hidden" value="{{i.Name}}" name="name">
             <input type="hidden" value="{{request.session.Username}}" name="user">
           </form>
@@ -111,8 +113,9 @@
 
     </div>
     {% endfor %}
+
     <div class="footer">
-      <span>Copyright &copy; </span><span class="tm-current-year">2018</span>
+      <span>Copyright &copy; </span><span id="tm-current-year"></span>
       <span><a href="{% url 'frontindex' %}" class="tm-text-white">AUDIOCAD <i class="fa-solid fa-music"></i>
         </a> - Web Design &commat;</span>
       <a href="https://christosajy.github.io/mywebsite/" class="tm-text-white"><span>CHRISTO</span></a>
@@ -124,8 +127,15 @@
   <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
   <script>
+    $(function () {
+      if (renderPage) {
+        $('body').addClass('loaded');
+      }
+
+      $('#tm-current-year').text(new Date().getFullYear());
+    });
+
     $(document).ready(function () {
       $("#extra").hide();
       $("#less").hide();

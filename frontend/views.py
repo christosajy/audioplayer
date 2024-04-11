@@ -88,9 +88,16 @@ def DeletePlaylist(request, song_flt):
     return redirect(frontindex)
 
 def LikedSongFilter(request, aud_flt):
-    song = SongsDb.objects.filter(Name=aud_flt)
-    context = {'song': song}
-    return render(request, 'directory/song_fltr.html', context)
+    if 'Username' not in request.session:
+        song = SongsDb.objects.filter(Name=aud_flt)
+        context = {'song': song}
+        return render(request, 'directory/song_fltr.html', context)
+    else:
+        login_user = request.session['Username']
+        song = SongsDb.objects.filter(Name=aud_flt)
+        my_list = CreatedPlaylist.objects.filter(UserName=login_user)
+        context = {'song': song, 'my_list': my_list}
+        return render(request, 'directory/song_fltr.html', context)
 
 def FinalRedirect(request):
     return render(request, 'main/redirect.html')
@@ -148,9 +155,16 @@ def ViewtheSongs(request, lst_flt):
     return render(request, 'playlist/view_playlist.html', context)
 
 def PlaytheSong(request, aud_flt):
-    song = SongsDb.objects.filter(Name=aud_flt)
-    context = {'song': song}
-    return render(request, 'directory/song_fltr.html', context)
+    if 'Username' not in request.session:
+        song = SongsDb.objects.filter(Name=aud_flt)
+        context = {'song': song}
+        return render(request, 'directory/song_fltr.html', context)
+    else:
+        login_user = request.session['Username']
+        my_list = CreatedPlaylist.objects.filter(UserName = login_user)
+        song = SongsDb.objects.filter(Name=aud_flt)
+        context = {'song': song, 'my_list': my_list}
+        return render(request, 'directory/song_fltr.html', context)
 
 def DeletetheSongs(request, lst_flt):
     playlist = AddSongs.objects.filter(SongName=lst_flt)

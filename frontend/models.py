@@ -13,6 +13,7 @@ class LikedSongs(models.Model):
     SongName=models.CharField(null=True, blank=True, max_length=255)
     UserName=models.CharField(null=True, blank=True, max_length=255)
     ArtistName=models.CharField(null=True, blank=True, max_length=255)
+    PlaylistName=models.CharField(null=True, blank=True, max_length=255)
 
 # CREATE-PLAYLIST
 class CreatedPlaylist(models.Model):

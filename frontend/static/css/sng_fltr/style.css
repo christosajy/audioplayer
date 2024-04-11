@@ -167,11 +167,23 @@
 
 .secondary-aux-controls select {
     margin: 20px;
-    width: 60%;
+    width: 30%;
     height: 40px;
-    border: 1px solid #FFF;
+    border: 2px solid #FFF;
+    background-color: transparent;
+    color: #FFF;
     border-radius: 5px 0 0 5px;
     border-right: 0px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.secondary-aux-controls select option {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-transform: capitalize;
+    font-weight: bold;
+    color: #007BFF;
 }
 
 .secondary-aux-controls select:focus {
@@ -180,20 +192,36 @@
 
 .secondary-aux-controls button{
     margin-left: -25px;
-    margin-top: -1px;
+    margin-top: -2px;
     height: 40px;
-    border: 1px solid #FFF;
+    border: 2px solid #FFF;
+    color: #007BFF;
+    background-color: transparent;
     border-radius: 0 5px 5px 0;
-    border-left: 0px;
+    border-left: 2px;
 }
 
 .secondary-aux-controls button i {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    color: #007BFF;
 }
 
 .secondary-aux-controls a{
-    margin-left: 70px;
+    margin-top: -2px;
+    margin-left: 30px;
     height: 40px;
+    color: #FFF;
+    /* border: 2px solid #FFF; */
+    background-color: transparent;
+}
+
+.secondary-aux-controls a span {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-transform: uppercase;
+}
+
+.secondary-aux-controls a i {
+    color: #007BFF;
 }
 
 .amor {

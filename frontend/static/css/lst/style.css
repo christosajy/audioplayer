@@ -347,16 +347,24 @@ body {
 }
 
 .logo-main-a1 {
-    color: #ffffff;
+    color: #FFF;
     text-transform: lowercase;
     font-weight: bold;
+    border: 2px solid #007BFF;
+    padding: 1px 20px;
+    border-right: none;
+    border-radius: 10px 0 0 10px;
+    margin-right: -18px;
+    z-index: 9999;
+    position: relative;
 }
 
 .logo-main-a2 {
-    background-color: #007BFFB9;
+    background-color: #007BFF;
     color: #FFF;
     border-radius: 10px;
     padding: 3px;
+    padding-right: 15px;
 }
 
 .add-playlist-form {
